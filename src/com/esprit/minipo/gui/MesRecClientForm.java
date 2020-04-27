@@ -27,7 +27,9 @@ import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.animations.CommonTransitions;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BoxLayout;
@@ -47,6 +49,7 @@ import java.util.List;
  */
 public class MesRecClientForm extends BaseForm {
     ArrayList<ReclamationClient> recClt=new ArrayList<ReclamationClient>();
+    private int idRec;
 
     public MesRecClientForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -61,7 +64,7 @@ public class MesRecClientForm extends BaseForm {
     
     public MesRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
-        recClt=ServiceRecClient.getInstance().getAllRecClient();
+        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
@@ -214,13 +217,29 @@ public class MesRecClientForm extends BaseForm {
     private com.codename1.ui.TextArea gui_Text_Area_1_4;
     private com.codename1.ui.Label gui_Label_5 ;
 
+   
+        public int getIdRec() {
+        return idRec;
+    }
+
+    public void setIdRec(int idRec) {
+        this.idRec = idRec;
+    }
+    
+
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
+    
         
-        recClt=ServiceRecClient.getInstance().getAllRecClient();
+        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
         for(int i=0;i<recClt.size();i++){
             
+            int idr=recClt.get(i).getIdR();
+            String Categorie=recClt.get(i).getNom();
+            String Objet=recClt.get(i).getObjet();
+            String description=recClt.get(i).getDescription();
+            String image=recClt.get(i).getImage();
          //creation
         gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -260,11 +279,25 @@ public class MesRecClientForm extends BaseForm {
         gui_Label_4.setUIID("Padding2");
         gui_Label_4.setName("Label_4");
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
+        gui_Label_3.addPointerPressedListener(new ActionListener() {
+                @Override
+               
+                public void actionPerformed(ActionEvent evt) {
+                //com.codename1.ui.util.Resources resourceObjectInstance = null;
+                    //this
+                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description).show();}
+                
+
+            
+        });
+        gui_Container_3.setLeadComponent(gui_Label_3);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
         gui_Container_3.setName("Container_3");
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_9);
         gui_Container_3.addComponent(gui_Label_2);
+        gui_Container_3.addComponent(gui_Text_Area_1);
+        //gui_Container_3.addComponent(gui_Label_8);
         gui_Container_3.addComponent(gui_Label_6);
         gui_Container_3.setName("Container_3");
         //addComponent(gui_Label_6);
@@ -284,7 +317,7 @@ public class MesRecClientForm extends BaseForm {
         //gui_Label_6.setText("------------------------------------------------------------------------------------------");
         gui_Label_6.setUIID("separator");
         gui_Label_6.setName("Label_6");
-        gui_Text_Area_1.setText(recClt.get(i).getDescription());
+        gui_Text_Area_1.setText(String.valueOf(recClt.get(i).getIdR()));
         gui_Text_Area_1.setUIID("SmallFontLabel");
         //gui_Text_Area_1.setUIID("");
         gui_Text_Area_1.setName("Text_Area_1");

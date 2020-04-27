@@ -45,7 +45,14 @@ public class CalendarForm extends BaseForm {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
     
+     public CalendarForm(int idr) {
+        this(com.codename1.ui.util.Resources.getGlobalResources());
+         System.out.println(idr);
+         
+    }
+    
     public CalendarForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        
         initGuiBuilderComponents(resourceObjectInstance);
         setLayout(BoxLayout.y());
         setScrollableY(true);
@@ -85,6 +92,8 @@ public class CalendarForm extends BaseForm {
         add(createEntry(resourceObjectInstance, true, "12:20", "13:20", "Taco Bell", "Lunch", "Detra Mcmunn, Ami Koehler", "contact-b.png", "contact-c.png"));
         add(createEntry(resourceObjectInstance, false, "16:15", "17:10", "3B, 2nd Floor", "Design Meeting", "Bryant Ford, Ami Koehler, Detra Mcmunn", "contact-a.png"));
     }
+
+    
 
     private Container createEntry(Resources res, boolean selected, String startTime, String endTime, String location, String title, String attendance, String... images) {
         Component time = new Label(startTime, "CalendarHourUnselected");

@@ -23,7 +23,7 @@ public class ListRecForm1 extends Form{
         
         SpanLabel sp = new SpanLabel();
         //sp.setText(ServiceTask.getInstance().getAllTasks().toString());
-        sp.setText(ServiceRecClient.getInstance().getAllRecClient().toString());
+        sp.setText(ServiceRecClient.getInstance().getAllRecClient(45).toString());
         add(sp);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }

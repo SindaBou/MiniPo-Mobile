@@ -94,9 +94,41 @@ public class ServiceRecClient {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+   public boolean ModifierRec(int idr, String description ) {
+        String url = Statics.BASE_URL + "recupdate/"+idr+"?description=" + description ;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
   
-  public ArrayList<ReclamationClient> getAllRecClient(){
-        String url = Statics.BASE_URL+"rec/all/";
+  public ArrayList<ReclamationClient> getAllRecClient(int id){
+        ReclamationClient r=new ReclamationClient();
+         //id=45;
+        String url = Statics.BASE_URL+"rec/all/"+id;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                tasks = parseTasks(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(tasks);
+        return tasks;
+    }
+  public ArrayList<ReclamationClient> getRecClientBYidr(int idr){
+        ReclamationClient r=new ReclamationClient();
+         //id=45;
+        String url = Statics.BASE_URL+"rec/all/"+idr;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
