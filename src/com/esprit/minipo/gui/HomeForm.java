@@ -25,9 +25,9 @@ Form current;
         Button btnAddTask = new Button("Add Task");
         Button btnListTasks = new Button("List Tasks");
         
-        //btnAddTask.addActionListener(e-> new AddTaskForm(current).show());
+        btnAddTask.addActionListener(e-> new AjouterEmpForm(current).show());
         //btnListTasks.addActionListener(e-> new ListTasksForm(current).show());
-        btnListTasks.addActionListener(e-> new ListCmdForm(current).show());
+        btnListTasks.addActionListener(e-> new ListeEmployeForm(current).show());
         addAll(btnAddTask,btnListTasks);
         
         

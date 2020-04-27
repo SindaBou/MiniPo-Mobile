@@ -1,54 +1,29 @@
 /*
- * Copyright (c) 2016, Codename One
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions 
- * of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.esprit.minipo.gui;
 
 import com.codename1.components.FloatingActionButton;
-import com.codename1.ui.Button;
-import com.codename1.ui.Component;
-import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.animations.CommonTransitions;
-import com.codename1.ui.events.ActionListener;
-import com.codename1.ui.geom.Rectangle;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
-import com.codename1.ui.plaf.Style;
+import com.esprit.minipo.entites.Conge;
 import com.esprit.minipo.entites.Employe;
+import com.esprit.minipo.services.ServiceConge;
 import com.esprit.minipo.services.ServiceEmploye;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * GUI builder created Form
  *
- * @author shai
+ * @author hafed
  */
-public class AgentRHForm extends BaseAgentRHForm11 {
+public class DemandecongeRHForm extends BaseAgentRHForm11{
     Form current;
-    public AgentRHForm() {
+    public DemandecongeRHForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
 
@@ -59,12 +34,12 @@ public class AgentRHForm extends BaseAgentRHForm11 {
     
     
     //constructeur contenu
-    public AgentRHForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public DemandecongeRHForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Espace Agent RH", "Title")
+                        new Label("Demande conge", "Title")
 //                        new Label("19", "InboxNumber")
                 )
         );
@@ -217,9 +192,10 @@ public class AgentRHForm extends BaseAgentRHForm11 {
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
-        ArrayList<Employe> emp=new ArrayList<Employe>();
-        emp=ServiceEmploye.getInstance().getAllEmp();
+        ArrayList<Conge> emp=new ArrayList<Conge>();
+        emp=ServiceConge.getInstance().getAllConge();
         for(int i=0;i<emp.size();i++){
+            if(emp.get(i).getEtatc() == "false"){
             
          //creation
           gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
@@ -251,7 +227,7 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText(emp.get(i).getSalaire()+"TND");
+        gui_Label_1.setText(emp.get(i).getNbrjrs()+"");
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
@@ -267,25 +243,25 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Label_20);
         gui_Container_3.addComponent(gui_Text_Area_1);
-        gui_Label_3.setText(emp.get(i).getNom()+" "+ emp.get(i).getPrenom());
+        gui_Label_3.setText(emp.get(i).getFirstname()+" "+emp.get(i).getLastname());
         gui_Label_3.setName("Label_3");
-        gui_Label_2.setText(emp.get(i).getTel());
-        gui_Label_2.setUIID("RedLabel");
+        gui_Label_2.setText("Date de debut :  " + emp.get(i).getDatedebut());
+//        gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
         
-        gui_Label_20.setText(emp.get(i).getEmail());
-        gui_Label_20.setUIID("RedLabel");
+        gui_Label_20.setText("Date de fin :  " + emp.get(i).getDatefin());
+//        gui_Label_20.setUIID("RedLabel");
         gui_Label_20.setName("Label_2");
         
-        gui_Text_Area_1.setText(emp.get(i).getAdresse());
-        gui_Text_Area_1.setUIID("SmallFontLabel");
+        gui_Text_Area_1.setText(emp.get(i).getDescription());
+//        gui_Text_Area_1.setUIID("SmallFontLabel");
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
         gui_Container_4.setName("Container_4");
         ((com.codename1.ui.layouts.FlowLayout)gui_Container_4.getLayout()).setAlign(com.codename1.ui.Component.CENTER);
         gui_Container_3.setName("Container_3");
          addComponent(gui_Label_6);
-        
+        }
         }
 //      
 //       addComponent(gui_Container_1_1);

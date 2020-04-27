@@ -166,6 +166,7 @@ public class SignInForm extends com.codename1.ui.Form {
             UIManager.getInstance().setThemeProps(themeData);
             //Display.getInstance().getCurrent().refreshTheme();
             new AgentRHForm().show();
+//            new HomeForm().show();
             
         }
         
