@@ -64,8 +64,10 @@ public class BaseForm extends Form {
         getToolbar().addCommandToSideMenu("Produits", null, e -> {});
         getToolbar().addCommandToSideMenu("Commandes", null, e -> {});
         getToolbar().addCommandToSideMenu("Factures", null, e -> {});
-        getToolbar().addCommandToSideMenu("Reclamations", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Mes Reclamations", trendingImage, e -> new TrendingForm(res).show());
+        getToolbar().addCommandToSideMenu("Reclamations", null, e -> {new AjoutRecForm1(res).show();});
+        getToolbar().addCommandToSideMenu("Mes Reclamations", null, e -> {new MesRecClientForm(res).show();});
+        //getToolbar().addCommandToSideMenu("Reclamations", trendingImage, e -> new AjoutRecForm1(res).show());
+        //getToolbar().addCommandToSideMenu("Mes Reclamations", trendingImage, e -> new MesRecClientForm(res).show());
         getToolbar().addCommandToSideMenu("Blog", null, e -> {});
         
         // spacer
