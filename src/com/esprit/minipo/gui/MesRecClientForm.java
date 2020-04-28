@@ -24,6 +24,7 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -50,6 +51,7 @@ import java.util.List;
 public class MesRecClientForm extends BaseForm {
     ArrayList<ReclamationClient> recClt=new ArrayList<ReclamationClient>();
     private int idRec;
+    
 
     public MesRecClientForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -285,7 +287,7 @@ public class MesRecClientForm extends BaseForm {
                 public void actionPerformed(ActionEvent evt) {
                 //com.codename1.ui.util.Resources resourceObjectInstance = null;
                     //this
-                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description).show();}
+                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description,image).show();}
                 
 
             

@@ -23,16 +23,20 @@ import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
@@ -49,7 +53,8 @@ final String pc="probleme de compte";
         final String autre="autre";
         public int idcatrec=0;
         public int id=45;
-    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String description,String objet) {
+        private EncodedImage placeHolder;
+    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String description,String objet,String image) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -57,6 +62,7 @@ final String pc="probleme de compte";
         System.out.println(categorie);
         System.out.println(description);
         System.out.println(objet);
+        System.out.println(image);
         installSidemenu(resourceObjectInstance);
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
@@ -65,7 +71,10 @@ final String pc="probleme de compte";
         tCategorie.setText(categorie);
          tfObjet.setText(objet);
          taDescription.setText(description);
-          image = new TextField();
+         
+            //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
+            //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
+          //image = new TextField();
          imgBtn = new Button("parcourir image");
         Button btnValider = new Button("Add task");
        
@@ -94,8 +103,22 @@ final String pc="probleme de compte";
                 
             }
         });
-        
-        addAll(tCategorie,tfObjet,taDescription,image,imgBtn,btnValider);
+       
+           
+           placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+                         
+        //gui_Container_1.add(tCategorie);
+        //gui_Container_1.add(tfObjet);
+        //gui_Container_1.add(taDescription);
+       //gui_Container_1.add(image1)
+       Container c =new Container(new FlowLayout(CENTER,CENTER));
+        //gui_Container_1.add(btnValider);
+        c.add(image1);
+        addAll(tCategorie,tfObjet,taDescription,c,btnValider);
+        //c.add(c)
+        //c.add(image1);
         
     }
     
@@ -197,4 +220,6 @@ final String pc="probleme de compte";
     protected boolean isCurrentTrending() {
         return true;
     }
+
+    
 }

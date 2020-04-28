@@ -71,6 +71,7 @@ public class ServiceRecClient {
                 c.setDescription(obj.get("description").toString());
                 //c.setReponse(obj.get("reponse").toString());
                 c.setEtatr(obj.get("etatr").toString());
+                c.setImage(obj.get("image").toString());
                 
                 tasks.add(c);
             }

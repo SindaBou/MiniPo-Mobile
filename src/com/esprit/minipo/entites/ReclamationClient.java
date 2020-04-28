@@ -211,7 +211,7 @@ public class ReclamationClient {
     @Override
     public String toString() {
         return "ReclamationClient{" + "idR=" + idR +  ", idcatrec=" + idcatrec + ", objet =" + objet + ", description =" + description + ", etatr=" + etatr 
-        +",nom: "+nom+",id : "+id        //+ ", dateR=" + dateR
+        +",nom: "+nom+",id : "+id+"image="+image       //+ ", dateR=" + dateR
                 + '}';
     }
    
