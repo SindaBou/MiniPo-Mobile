@@ -29,6 +29,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.animations.CommonTransitions;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BoxLayout;
@@ -62,10 +63,19 @@ public class AgentRHForm extends BaseAgentRHForm11 {
     public AgentRHForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         
+        ArrayList<Employe> emp=new ArrayList<Employe>();
+        emp=ServiceEmploye.getInstance().getAllEmp();
+        int sum= 0;
+        
+        for(int i=0;i<emp.size();i++){
+            
+            sum=sum+ Integer.parseInt(emp.get(i).getSalaire());
+        }
+        
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Espace Agent RH", "Title")
-//                        new Label("19", "InboxNumber")
+                        new Label("Espace Agent RH", "Title"),
+                        new Label(sum+"", "InboxNumber")
                 )
         );
         
@@ -221,6 +231,13 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         emp=ServiceEmploye.getInstance().getAllEmp();
         for(int i=0;i<emp.size();i++){
             
+            String nom=emp.get(i).getNom();
+            String prenom=emp.get(i).getPrenom();
+            String adresse=emp.get(i).getAdresse();
+            String phone=emp.get(i).getTel();
+            String email=emp.get(i).getEmail();
+            String salaire=emp.get(i).getSalaire();
+            
          //creation
           gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -272,7 +289,26 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         gui_Label_2.setText(emp.get(i).getTel());
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
+       int id = emp.get(i).getIdemp();
+//        Button myBtn = new Button();
+//            myBtn.addActionListener(e -> {
+//               new ModifierEmployeForm(current,id,nom).show();
+//            });
+//            gui_Container_3.setLeadComponent(myBtn);
         
+            gui_Label_3.addPointerPressedListener(new ActionListener() {
+                @Override
+               
+                public void actionPerformed(ActionEvent evt) {
+                //com.codename1.ui.util.Resources resourceObjectInstance = null;
+                    //this
+                   new ModifierEmployeForm(current,id,nom,prenom,adresse,phone,email,salaire).show();
+                }
+                
+
+            
+        });
+        gui_Container_3.setLeadComponent(gui_Label_3);
         gui_Label_20.setText(emp.get(i).getEmail());
         gui_Label_20.setUIID("RedLabel");
         gui_Label_20.setName("Label_2");

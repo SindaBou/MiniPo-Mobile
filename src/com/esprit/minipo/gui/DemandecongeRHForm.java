@@ -36,11 +36,18 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
     //constructeur contenu
     public DemandecongeRHForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
-        
+        int sum=0 ;
+        ArrayList<Conge> emp=new ArrayList<Conge>();
+        emp=ServiceConge.getInstance().getAllConge();
+        for(int i=0;i<emp.size();i++){
+            if(emp.get(i).getEtatc() == "false"){
+            sum++;
+            }
+        }
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Demande conge", "Title")
-//                        new Label("19", "InboxNumber")
+                        new Label("Demande conge", "Title"),
+                        new Label(sum+"", "InboxNumber")
                 )
         );
         
@@ -246,15 +253,19 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
         gui_Label_3.setText(emp.get(i).getFirstname()+" "+emp.get(i).getLastname());
         gui_Label_3.setName("Label_3");
         gui_Label_2.setText("Date de debut :  " + emp.get(i).getDatedebut());
-//        gui_Label_2.setUIID("RedLabel");
+        gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
         
         gui_Label_20.setText("Date de fin :  " + emp.get(i).getDatefin());
-//        gui_Label_20.setUIID("RedLabel");
+        gui_Label_20.setUIID("RedLabel");
         gui_Label_20.setName("Label_2");
         
+//        gui_Label_6.setText("");
+//        gui_Label_6.setUIID("Separator");
+//        gui_Label_6.setName("Label_6");
+        
         gui_Text_Area_1.setText(emp.get(i).getDescription());
-//        gui_Text_Area_1.setUIID("SmallFontLabel");
+        gui_Text_Area_1.setUIID("SmallFontLabel");
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
         gui_Container_4.setName("Container_4");

@@ -9,6 +9,8 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.esprit.minipo.entites.Employe;
@@ -196,6 +198,10 @@ public class EquipeForm extends BaseAgentRHForm11 {
         emp=ServiceEquipe.getInstance().getAllEq();
         for(int i=0;i<emp.size();i++){
             
+            String nomeq = emp.get(i).getNomeq();
+            int nombre = emp.get(i).getNombre();
+            int id = emp.get(i).getIdeq();
+            
          //creation
           gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -252,6 +258,15 @@ public class EquipeForm extends BaseAgentRHForm11 {
         gui_Label_20.setUIID("RedLabel");
         gui_Label_20.setName("Label_2");
         
+        gui_Label_3.addPointerPressedListener(new ActionListener() {
+                @Override
+               
+                public void actionPerformed(ActionEvent evt) {
+                //com.codename1.ui.util.Resources resourceObjectInstance = null;
+                    //this
+                   new ModifierEquipeForm(current,id,nomeq,nombre).show();
+                }
+        });
         gui_Text_Area_1.setText("");
         gui_Text_Area_1.setUIID("SmallFontLabel");
         gui_Text_Area_1.setName("Text_Area_1");

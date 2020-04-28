@@ -54,6 +54,19 @@ public class ServiceEquipe {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    public boolean updateEquipe(int id, String nomeq , int nbreq ) {
+        String url = Statics.BASE_URL + "/updateEquipe/" + id + "?nomeq="+ nomeq + "&nombre=" + nbreq;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
     
     public ArrayList<Equipe> parseTasks(String jsonText){
         try {

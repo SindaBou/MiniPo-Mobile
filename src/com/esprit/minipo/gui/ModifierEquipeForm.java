@@ -14,39 +14,36 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
-import com.esprit.minipo.entites.Employe;
+import com.esprit.minipo.entites.Equipe;
 import com.esprit.minipo.services.ServiceEmploye;
-
+import com.esprit.minipo.services.ServiceEquipe;
 
 /**
  *
  * @author hafed
  */
-public class AjouterEmpForm extends Form {
+public class ModifierEquipeForm extends Form{
     
-    public AjouterEmpForm(Form previous) {
+    public ModifierEquipeForm(Form previous,int id, String nom, int nbr) {
         
-        setTitle("Ajouter un nouveau employe");
+        setTitle("Ajouter Equipe");
         setLayout(BoxLayout.y());
         
-        TextField tfnom = new TextField("","Nom");
-        TextField tfprenom = new TextField("","Prenom");
-        TextField tfadresse = new TextField("","Adresse");
-        TextField tftel = new TextField("","phone");
-        TextField tfemail = new TextField("","email");
-        TextField tfsalaire= new TextField("", "salaire");
-        Button btnValider = new Button("Enregistrer");
+        TextField tfnom = new TextField(nom,"Nom equipe");
+        TextField tfnombre = new TextField(""+nbr,"Nombre");
+        
+        Button btnValider = new Button("Add task");
         
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((tfnom.getText().length()==0)||(tfprenom.getText().length()==0)||(tfadresse.getText().length()==0)||(tftel.getText().length()==0)||(tfemail.getText().length()==0)||(tfsalaire.getText().length()==0))
+                if ((tfnom.getText().length()==0)||(tfnombre.getText().length()==0))
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 else
                 {
                     try {
-                        Employe t = new Employe(tfnom.getText(),tfprenom.getText(),tfadresse.getText(),tftel.getText(),tfemail.getText(),tfsalaire.getText());
-                        if( ServiceEmploye.getInstance().addEmploye(t))
+                        
+                        if( ServiceEquipe.getInstance().updateEquipe(id , tfnom.getText(),Integer.parseInt(tfnombre.getText())))
                             Dialog.show("Success","Connection accepted",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -60,9 +57,7 @@ public class AjouterEmpForm extends Form {
             }
         });
         
-        addAll(tfnom,tfprenom,tfadresse,tftel,tfemail,tfsalaire,btnValider);
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new AgentRHForm().showBack());
-                
-    }
-    
+        addAll(tfnom,tfnombre,btnValider);
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new EquipeForm().showBack());
+}
 }

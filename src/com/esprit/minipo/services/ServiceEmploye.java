@@ -41,7 +41,20 @@ public class ServiceEmploye {
     }
     
     public boolean addEmploye(Employe e) {
-        String url = Statics.BASE_URL + "/ajoutEmp?nom="+ e.getNom() + "&prenom=" + e.getPrenom()+ "&adresse=" + e.getAdresse()+ "&email=" + e.getEmail()+ "&tel=" + e.getSalaire()+ "&salaire=s" + e.getTel();
+        String url = Statics.BASE_URL + "/ajoutEmp?nom="+ e.getNom() + "&prenom=" + e.getPrenom()+ "&adresse=" + e.getAdresse()+ "&email=" + e.getEmail()+ "&tel=" + e.getTel()+ "&salaire=" + e.getSalaire();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    public boolean updateEmploye(int id, String nomemp , String prenomemp , String adresseemp , String adresse ,String email , String tel , String salaire) {
+        String url = Statics.BASE_URL + "/updateEmp/" + id + "?nom="+ nomemp + "&prenom=" + prenomemp + "&adresse=" + adresseemp + "&email=" + email + "&tel=" + tel + "&salaire=s" + salaire ;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -89,6 +102,24 @@ public class ServiceEmploye {
         } catch (IOException ex) {
             
         }
+        return tasks;
+    }
+  
+  
+  
+  public ArrayList<Employe> getEmpID(int id){
+        String url = Statics.BASE_URL+"/Emp/EmpId/"+id+"";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                tasks = parseTasks(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(tasks);
         return tasks;
     }
   
