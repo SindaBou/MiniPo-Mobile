@@ -119,16 +119,16 @@ public class User {
          
     }*/
 
-    public User( String username, String email, String password, String roles, String firstname, String lastname, String genre, String Tel) {
+    public User( String lastname, String firstname, String adresse, String tel, String username, String email, String password) {
 
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roles = roles;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.genre = genre;
-        this.Tel = Tel;
+        this.Tel = tel;
+        this.adresse= adresse;
+        
     }
     
     
@@ -150,17 +150,7 @@ public class User {
         this.roles = roles;
        
     }*/
-      public User(String username,  String email,String password, String roles,String firstname,String lastname,   String genre) {
-        
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-         this.genre = genre;
-        this.roles = roles;
-       
-    }
+  
 
     public String getAdresse() {
         return adresse;
@@ -288,6 +278,14 @@ public class User {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getTel() {
+        return Tel;
+    }
+
+    public void setTel(String Tel) {
+        this.Tel = Tel;
     }
 
    

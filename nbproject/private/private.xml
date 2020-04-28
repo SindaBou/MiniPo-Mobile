@@ -4,8 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Esprit/3A7/Semestre_2/PI/Sprint_mobile/minipoMobile/src/com/esprit/minipo/gui/HomeForm.java</file>
-            <file>file:/D:/Esprit/3A7/Semestre_2/PI/Sprint_mobile/minipoMobile/src/com/esprit/minipo/myapp/MyApplication.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/ListUsersForm.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/SignInForm.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/services/ServiceUser.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/entites/User.java</file>
         </group>
     </open-files>
 </project-private>
