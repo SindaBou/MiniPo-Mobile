@@ -51,7 +51,7 @@ import java.util.List;
 public class MesRecClientForm extends BaseForm {
     ArrayList<ReclamationClient> recClt=new ArrayList<ReclamationClient>();
     private int idRec;
-    
+    private int id=45;
 
     public MesRecClientForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -66,7 +66,7 @@ public class MesRecClientForm extends BaseForm {
     
     public MesRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
-        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
+        recClt=ServiceRecClient.getInstance().getAllRecClient(id);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
@@ -234,7 +234,7 @@ public class MesRecClientForm extends BaseForm {
    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
     
         
-        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
+        recClt=ServiceRecClient.getInstance().getAllRecClient(id);
         for(int i=0;i<recClt.size();i++){
             
             int idr=recClt.get(i).getIdR();

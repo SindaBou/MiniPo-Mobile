@@ -69,8 +69,9 @@ public class ServiceRecEmploye {
                 c.setNom(obj.get("nom").toString());
                 c.setObjet(obj.get("objet").toString());
                 c.setDescription(obj.get("description").toString());
-                //c.setReponse(obj.get("reponse").toString());
+                c.setReponse(obj.get("reponse").toString());
                 c.setEtatRemp(obj.get("etatremp").toString());
+                c.setImage(obj.get("image").toString());
                 
                 tasks.add(c);
             }
@@ -95,8 +96,8 @@ public class ServiceRecEmploye {
         return resultOK;
     }
   
-  public ArrayList<ReclamationsEmploye> getAllCmd(){
-        String url = Statics.BASE_URL+"recemp/all/";
+  public ArrayList<ReclamationsEmploye> getAllRecEmploye(int id){
+        String url = Statics.BASE_URL+"recemp/all/"+id;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {

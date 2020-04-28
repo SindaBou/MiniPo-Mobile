@@ -41,6 +41,7 @@ import com.codename1.ui.plaf.Style;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.entites.ReclamationsEmploye;
 import com.esprit.minipo.services.ServiceRecClient;
+import com.esprit.minipo.services.ServiceRecEmploye;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ import java.util.List;
 public class MesRecEmpForm extends BaseEmployeForm1 {
     ArrayList<ReclamationsEmploye> recEmp=new ArrayList<ReclamationsEmploye>();
     private int idRec;
-    
+    private int id=44;
 
     public MesRecEmpForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -67,12 +68,12 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
     
     public MesRecEmpForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
-        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
+        recEmp=ServiceRecEmploye.getInstance().getAllRecEmploye(id);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
                         new Label("Mes Reclamations", "Title"),
-                        new Label(String.valueOf(recClt.size()), "InboxNumber")
+                        new Label(String.valueOf(recEmp.size()), "InboxNumber")
                 )
         );
         
@@ -235,14 +236,27 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
     
         
-        recClt=ServiceRecClient.getInstance().getAllRecClient(45);
-        for(int i=0;i<recClt.size();i++){
+        recEmp=ServiceRecEmploye.getInstance().getAllRecEmploye(id);
+        for(int i=0;i<recEmp.size();i++){
+            if(recEmp.get(i).getReponse()==null){
+               String reponse="Pas de reponse";
+            }
+            else{
+                String reponse=recEmp.get(i).getReponse();
+            }
+            if(recEmp.get(i).getImage()==null){
+               String image="";
+            }
+            else{
+                String image=recEmp.get(i).getImage();
+            }
             
-            int idr=recClt.get(i).getIdR();
-            String Categorie=recClt.get(i).getNom();
-            String Objet=recClt.get(i).getObjet();
-            String description=recClt.get(i).getDescription();
-            String image=recClt.get(i).getImage();
+            int idr=recEmp.get(i).getIdRemp();
+            String Categorie=recEmp.get(i).getNom();
+            String Objet=recEmp.get(i).getObjet();
+            String description=recEmp.get(i).getDescription();
+            //String reponse=recEmp.get(i).getReponse();
+            String image=recEmp.get(i).getImage();
          //creation
         gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -307,12 +321,12 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         //gui_Container_3.addComponent(gui_Label_6);
         //gui_Container_3.addComponent(gui_Text_Area_1);
         
-        gui_Label_3.setText(recClt.get(i).getNom());
+        gui_Label_3.setText(recEmp.get(i).getNom());
         gui_Label_3.setUIID("BlackLabel");
         gui_Label_3.setName("Label_3");
-        gui_Label_9.setText(recClt.get(i).getObjet());
+        gui_Label_9.setText(recEmp.get(i).getObjet());
         gui_Label_9.setName("Label_2");
-        gui_Label_2.setText(recClt.get(i).getEtatr());
+        gui_Label_2.setText(recEmp.get(i).getEtatRemp());
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
         gui_Label_6.setText("");
@@ -320,7 +334,8 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         //gui_Label_6.setText("------------------------------------------------------------------------------------------");
         gui_Label_6.setUIID("separator");
         gui_Label_6.setName("Label_6");
-        gui_Text_Area_1.setText(String.valueOf(recClt.get(i).getIdR()));
+        //gui_Label_6.setConstraint
+        gui_Text_Area_1.setText(String.valueOf(recEmp.get(i).getIdRemp()));
         gui_Text_Area_1.setUIID("SmallFontLabel");
         //gui_Text_Area_1.setUIID("");
         gui_Text_Area_1.setName("Text_Area_1");

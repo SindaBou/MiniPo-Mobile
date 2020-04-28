@@ -24,6 +24,7 @@ public class ReclamationsEmploye {
     private String firstname;
     private String lastname ;
     private String reponse;
+    private String image;
 
     /*public ReclamationsEmploye(int idRemp, int id, int idcatrecemp, String objet, String description, Date dateRemp, String etatRemp, String firstname, String lastname, String reponse) {
         this.idRemp = idRemp;
@@ -200,6 +201,19 @@ public class ReclamationsEmploye {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "ReclamationsEmploye{" + "idRemp=" + idRemp + ", id=" + id + ", idcatrecemp=" + idcatrecemp + ", nom=" + nom + ", objet=" + objet + ", description=" + description + ", etatRemp=" + etatRemp + ", reponse=" + reponse + ", image=" + image + '}';
     }
 
     

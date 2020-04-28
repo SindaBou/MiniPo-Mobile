@@ -67,7 +67,7 @@ public class BaseEmployeForm1 extends Form {
         getToolbar().addCommandToSideMenu("Demande ", null, e -> {});
         getToolbar().addCommandToSideMenu("Demande Conge", null, e -> {});
         getToolbar().addCommandToSideMenu("Reclamation", null, e -> new AjoutRecEmpForm(res).show());
-        getToolbar().addCommandToSideMenu("Mes Reclamation", trendingImage, e -> new TrendingForm(res).show());
+        getToolbar().addCommandToSideMenu("Mes Reclamation", null, e -> new MesRecEmpForm(res).show());
         //getToolbar().addCommandToSideMenu("Blog", null, e -> {});
         
         // spacer

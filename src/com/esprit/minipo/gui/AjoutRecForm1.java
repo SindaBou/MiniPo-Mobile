@@ -79,7 +79,7 @@ final String pc="probleme de compte";
                        String path = (String) ev.getSource();
                         System.out.println(path.substring(7));
                         Image img = null;
-                        image.setText(path.substring(7));//image heya just label nsob feha fel path
+                        image.setText(path.substring(2));//image heya just label nsob feha fel path
                         try {
                             img = Image.createImage(FileSystemStorage.getInstance().openInputStream(path));
                             System.out.println(img);

@@ -18,13 +18,13 @@ import com.esprit.minipo.services.ServiceRecEmploye;
  * @author bhk
  */
 public class ListRecEmpForm extends Form{
-
+        private int id=44;
     public ListRecEmpForm(Form previous) {
         setTitle("List reclamation");
         
         SpanLabel sp = new SpanLabel();
         //sp.setText(ServiceTask.getInstance().getAllTasks().toString());
-        sp.setText(ServiceRecEmploye.getInstance().getAllCmd().toString());
+        sp.setText(ServiceRecEmploye.getInstance().getAllRecEmploye(id).toString());
         add(sp);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
