@@ -42,7 +42,7 @@ import java.util.List;
  *
  * @author shai
  */
-public class AgentRHForm extends BaseAgentRHForm11 {
+public class AgentRHForm extends BaseForm {
 
     public AgentRHForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());

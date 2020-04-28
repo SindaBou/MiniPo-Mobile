@@ -68,8 +68,8 @@ public class ClientForm extends BaseForm {
         installSidemenu(resourceObjectInstance);
         
        // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-       getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
-         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
+       getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();});  
+       getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();}); 
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);
