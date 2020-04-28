@@ -26,19 +26,21 @@ import com.esprit.minipo.services.ServiceRecEmploye;
  *
  * @author bhk
  */
-public class AjoutRecEmpForm extends Form{
+public class AjoutRecEmpForm extends BaseEmployeForm1{
         final String pc="probleme de compte";
         //final String pcmd="probleme de commande";
         final String autre="autre";
         public int idcatrec=0;
         public int id=44;
-    public AjoutRecEmpForm(Form previous) {
-        
-        setTitle("Add a new task");
+    public AjoutRecEmpForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        installSidemenu(resourceObjectInstance);
+        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
+         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
+        setTitle("Envoyer une Reclamation");
         setLayout(BoxLayout.y());
-        TextField tfObjet = new TextField("","TaskName");
-        TextArea taDescription= new TextField("", "Status: 0 - 1");
-        Button btnValider = new Button("Add task");
+        TextField tfObjet = new TextField("","Objet");
+        TextArea taDescription= new TextField("", "Description");
+        Button btnValider = new Button("Envoyer");
          ComboBox c= new ComboBox();
         c.addItem(pc);
         //c.addItem(pcmd);
@@ -48,7 +50,7 @@ public class AjoutRecEmpForm extends Form{
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if ((tfObjet.getText().length()==0)||(taDescription.getText().length()==0))
-                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                    Dialog.show("Alert", "Veuillez remplir tous les champs", new Command("OK"));
                 else
                 {
                     try {
@@ -63,9 +65,11 @@ public class AjoutRecEmpForm extends Form{
                         idcatrec=3;
                          break;}
                         
-                        ReclamationsEmploye r = new ReclamationsEmploye(45,idcatrec, tfObjet.getText(),taDescription.getText());
-                        if( ServiceRecEmploye.getInstance().addRec(r))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                        ReclamationsEmploye r = new ReclamationsEmploye(id,idcatrec, tfObjet.getText(),taDescription.getText());
+                        if( ServiceRecEmploye.getInstance().addRec(r)){
+                            Dialog.show("Success","Reclamation Envoyée",new Command("OK"));
+                           new MesRecEmpForm().show();
+                        }
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -79,7 +83,7 @@ public class AjoutRecEmpForm extends Form{
         });
         
         addAll(c,tfObjet,taDescription,btnValider);
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+        //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
                 
     }
     
