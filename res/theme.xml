@@ -23,6 +23,15 @@
         <val key="ButtonSupp.margin" value="1.0,1.0,1.0,1.0" />
         <val key="ButtonSupp.padUnit" value="2,2,2,2" />
         <val key="ButtonSupp.padding" value="4.0,4.0,4.0,4.0" />
+        <val key="ButtonValiderConge.align" value="4" />
+        <gradient key="ButtonValiderConge.bgGradient" color1="6400120" color2="10539946" posX="0.5" posY="0.5" radius="0.5" />
+        <val key="ButtonValiderConge.bgType" value="7" />
+        <val key="ButtonValiderConge.fgColor" value="ffffff" />
+        <font key="ButtonValiderConge.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <val key="ButtonValiderConge.marUnit" value="2,2,2,2" />
+        <val key="ButtonValiderConge.margin" value="1.0,1.0,1.0,1.0" />
+        <val key="ButtonValiderConge.padUnit" value="2,2,2,2" />
+        <val key="ButtonValiderConge.padding" value="4.0,4.0,4.0,4.0" />
         <val key="Calendar.bgImage" value="calendar-background.jpg" />
         <val key="Calendar.bgType" value="33" />
         <val key="Calendar.margin" value="0.0,0.0,0.0,0.0" />
@@ -426,8 +435,8 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="Calendar.Friday" value="Fri" />
             <entry key="select" value="Select" />
+            <entry key="Calendar.Friday" value="Fri" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />

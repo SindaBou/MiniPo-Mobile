@@ -97,4 +97,17 @@ public class ServiceConge {
         System.out.println(tasks);
         return tasks;
     }
+      public boolean AccepterConge(int id) {
+        String url = Statics.BASE_URL + "/Accepterconge/" + id  ;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 }

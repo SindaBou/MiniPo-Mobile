@@ -6,15 +6,22 @@
 package com.esprit.minipo.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.ui.Button;
+import com.codename1.ui.Command;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.esprit.minipo.entites.Conge;
 import com.esprit.minipo.entites.Employe;
+import com.esprit.minipo.entites.Equipe;
 import com.esprit.minipo.services.ServiceConge;
 import com.esprit.minipo.services.ServiceEmploye;
+import com.esprit.minipo.services.ServiceEquipe;
 import java.util.ArrayList;
 
 /**
@@ -195,13 +202,16 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
 //    private com.codename1.ui.Label gui_Label_2_4 = new com.codename1.ui.Label();
     private com.codename1.ui.TextArea gui_Text_Area_1_4;
     private com.codename1.ui.Label gui_Label_5 ;
+    private com.codename1.ui.Button btnValider ;
 
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
+//        Button btnValider = new Button("Accepter");
         ArrayList<Conge> emp=new ArrayList<Conge>();
         emp=ServiceConge.getInstance().getAllConge();
         for(int i=0;i<emp.size();i++){
+            int id = emp.get(i).getIdcon();
             if(emp.get(i).getEtatc() == "false"){
             
          //creation
@@ -224,6 +234,7 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
         gui_Label_9 = new com.codename1.ui.Label();
         gui_Text_Area_1_4 = new com.codename1.ui.TextArea();
         gui_Label_5 = new com.codename1.ui.Label();
+        btnValider = new com.codename1.ui.Button();
          //remplisage   
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
@@ -250,6 +261,8 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Label_20);
         gui_Container_3.addComponent(gui_Text_Area_1);
+        gui_Container_3.addComponent(btnValider);
+        
         gui_Label_3.setText(emp.get(i).getFirstname()+" "+emp.get(i).getLastname());
         gui_Label_3.setName("Label_3");
         gui_Label_2.setText("Date de debut :  " + emp.get(i).getDatedebut());
@@ -263,6 +276,24 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
 //        gui_Label_6.setText("");
 //        gui_Label_6.setUIID("Separator");
 //        gui_Label_6.setName("Label_6");
+        btnValider.setText("Accepter");
+        btnValider.setUIID("ButtonValiderConge");
+        
+        btnValider.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent evt) {
+                  try {
+                        
+                        if( ServiceConge.getInstance().AccepterConge(id))
+                            Dialog.show("Success","La demande a été accepté",new Command("OK"));
+                        
+                        else
+                            Dialog.show("ERROR", "Server error", new Command("OK"));
+                    } catch (NumberFormatException e) {
+                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    }
+              }
+        });
         
         gui_Text_Area_1.setText(emp.get(i).getDescription());
         gui_Text_Area_1.setUIID("SmallFontLabel");
