@@ -18,15 +18,26 @@
  */
 package com.esprit.minipo.gui;
 
+import com.codename1.capture.Capture;
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.io.ConnectionRequest;
 import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Log;
+import com.codename1.io.NetworkManager;
+import com.codename1.io.Util;
+import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.media.Media;
+import com.codename1.media.MediaManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
@@ -34,9 +45,23 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.ImageIO;
+import com.codename1.util.Base64;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
+import com.nexmo.client.NexmoClient;
+import com.nexmo.client.NexmoClientException;
+import com.nexmo.client.auth.AuthMethod;
+import com.nexmo.client.auth.TokenAuthMethod;
+import com.nexmo.client.sms.SmsSubmissionResult;
+import com.nexmo.client.sms.messages.TextMessage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+
+
 
 /**
  * GUI builder created Form
@@ -49,6 +74,7 @@ final String pc="probleme de compte";
         final String autre="autre";
         public int idcatrec=0;
         public int id=45;
+        String Imagecode ;
     public AjoutRecForm1() {
         
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -90,6 +116,38 @@ final String pc="probleme de compte";
                 }
             }, Display.GALLERY_IMAGE);
         });*/
+              Container imageC = new Container(new BoxLayout(BoxLayout.X_AXIS));
+       Label  imageL= new Label("Image:");
+       TextField  imageT= new TextField("",13);
+         imageT.setEditable(false);
+       Button  addImage= new Button("...");
+         addImage.addActionListener(e->{
+             String filePath = Capture.capturePhoto();
+             Image img = null;
+             if (filePath != null) {
+            try {
+                img = Image.createImage(filePath);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+         
+            ImageIO imgIO = ImageIO.getImageIO();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+                 try {
+                     imgIO.save(img, out, ImageIO.FORMAT_JPEG, 1);
+                 } catch (IOException ex) {
+                     System.out.println(ex.getMessage());
+                 }
+            byte[] ba = out.toByteArray();
+             Imagecode = Base64.encode(ba);
+                imageT.setText(Imagecode);
+             //imageT.setText((new  ArticleService()).uploadImage(Imagecode));
+                }
+        
+         });
+         imageC.add(imageL);
+         imageC.add(imageT);
+         imageC.add(addImage);
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -98,7 +156,7 @@ final String pc="probleme de compte";
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 else
                 {
-                    try {
+                    
                          switch (c.getSelectedItem().toString()) {
                     case pc:
                         idcatrec=1;
@@ -110,22 +168,38 @@ final String pc="probleme de compte";
                         idcatrec=3;
                          break;}
                         
-                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,image.getText());
-                        if( ServiceRecClient.getInstance().addRec(r))
+                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45);
+                        if( ServiceRecClient.getInstance().addRec(r)){
                             Dialog.show("Success","Connection accepted",new Command("OK"));
+                         String myURL = "https://rest.nexmo.com/sms/json?api_key=4f3be2fc&api_secret=9ipalAypbzNudeVl&to=21698327784" + "&from=Minipo&text=Reclamation Envoyee avec succés";
+                ConnectionRequest cntRqst = new ConnectionRequest() {
+                    protected void readResponse(InputStream in) throws IOException {
+                    }
+
+                    @Override
+                    protected void postResponse() {
+                        Dialog.show("SMS", "sms successfully sent", "OK", null);
+
+                    }
+                };
+                cntRqst.setUrl(myURL);
+                NetworkManager.getInstance().addToQueue(cntRqst);
+            }
+            
+                        
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
-                    } catch (NumberFormatException e) {
-                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                    }
+                    
                     
                 }
                 
                 
             }
         });
+ 
+         
         
-        addAll(c,tfObjet,taDescription,btnValider);
+        addAll(c,tfObjet,taDescription,btnValider,imageC);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
 
@@ -147,6 +221,8 @@ final String pc="probleme de compte";
     private com.codename1.ui.TextArea gui_Text_Area_2 = new com.codename1.ui.TextArea();
     private com.codename1.ui.Button gui_Button_2 = new com.codename1.ui.Button();
     private com.codename1.ui.Label gui_Label_1_1_1 = new com.codename1.ui.Label();
+   private com.codename1.ui.Container gui_audio = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+
 
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          

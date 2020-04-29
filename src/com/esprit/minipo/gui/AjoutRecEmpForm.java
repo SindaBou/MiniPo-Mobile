@@ -20,6 +20,15 @@ import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.entites.ReclamationsEmploye;
 import com.esprit.minipo.services.ServiceRecClient;
 import com.esprit.minipo.services.ServiceRecEmploye;
+import com.codename1.capture.Capture;
+import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Log;
+import com.codename1.io.Util;
+import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.media.Media;
+import com.codename1.media.MediaManager;
+import java.io.IOException;
+import java.util.Date;
 
 
 /**

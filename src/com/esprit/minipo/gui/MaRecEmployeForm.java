@@ -19,7 +19,17 @@
 package com.esprit.minipo.gui;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
+import com.codename1.location.Geofence;
+import com.codename1.location.LocationManager;
+import com.codename1.notifications.LocalNotification;
+import com.codename1.notifications.LocalNotificationCallback;
+import com.codename1.push.Push;
+import com.codename1.push.PushAction;
+import com.codename1.push.PushActionCategory;
+import com.codename1.push.PushActionsProvider;
+import com.codename1.push.PushCallback;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
@@ -42,20 +52,24 @@ import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
 import com.esprit.minipo.services.ServiceRecEmploye;
 import java.io.IOException;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * GUI builder created Form
  *
  * @author shai
  */
-public class MaRecEmployeForm extends BaseEmployeForm1 {
+public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificationCallback {
 //final String pc="probleme de compte";
         //final String pcmd="probleme de commande";
         //final String autre="autre";
         //public int idcatrec=0;
         public int id=44;
+        String notif="demo-notification";
         private EncodedImage placeHolder;
-    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idremp,String categorie,String description,String objet,String image) {
+    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idremp,String categorie,String objet,String description,String image,String etat,String reponse) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -69,55 +83,74 @@ public class MaRecEmployeForm extends BaseEmployeForm1 {
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());
+        LabelEtat.setText(etat);
+        LabelEtat.setUIID("RedLabel");
+        LabelEtat.setHeight(30);
+        LabelEtat.setWidth(100);
+        LabelCategorie.setText("Categorie");
+        LabelDescription.setText("Description");
+        LabelObjet.setText("Objet");
         tCategorie.setText(categorie);
+        tCategorie.setUIID("BlackLabel");
          tfObjet.setText(objet);
+         tfObjet.setUIID("BlackLabel");
+         taDescription.setUIID("BlackLabel");
          taDescription.setText(description);
-         
+         Ldescription.setText(description);
+         Ldescription.setUIID("BlackLabel");
             //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
             //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
           //image = new TextField();
          //imgBtn = new Button("parcourir image");
         Button btnValider = new Button("Modifier");
-       
-        
-        
+        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+        Container c =new Container(new FlowLayout(CENTER,CENTER));
+        //gui_Container_1.add(btnValider);
+        c.add(image1);
+        if(etat.equals("non traiter")){
+        addAll(LabelEtat,LabelCategorie,tCategorie,LabelObjet,tfObjet,LabelDescription,taDescription,c,btnValider);}
+        if(etat.equals("traiter")){
+        addAll(LabelEtat,LabelCategorie,tCategorie,LabelObjet,tfObjet,LabelDescription,Ldescription,c);}
         btnValider.addActionListener(new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((tfObjet.getText().length()==0)||(taDescription.getText().length()==0))
-                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-                else
-                {
-                    try {
-                       
-                        //ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,image.getText());
-                        if( ServiceRecEmploye.getInstance().ModifierRecEmploye(idremp,taDescription.getText()))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                        else
-                            Dialog.show("ERROR", "Server error", new Command("OK"));
-                    } catch (NumberFormatException e) {
-                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                    }
-                    
+                //getPushActionCategories();
+                if( ServiceRecEmploye.getInstance().ModifierRecEmploye(idremp,taDescription.getText())){
+                           LocalNotification n = new LocalNotification();
+                          n.setId("demo-notification");
+                          n.setAlertBody("It's time to take a break and look at me");
+                          n.setAlertTitle("Break Time!");
+                          n.setAlertSound("/notification_sound_beep-01a.mp3");
+    // alert sound file name must begin with notification_sound
+                         /* ToastBar.Status status = ToastBar.getInstance().createStatus();
+                          status.setMessage("Hello world");
+                          status.show();*/
+                         
+                          Display.getInstance().scheduleLocalNotification(
+                                n,
+                            System.currentTimeMillis() + 10 * 1000, // fire date/time
+                            LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
+);
+                           new MesRecEmpForm( resourceObjectInstance).show();
+                
                 }
+               
                 
                 
             }
         });
        
            
-           placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
-           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
-           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+          
                          
         //gui_Container_1.add(tCategorie);
         //gui_Container_1.add(tfObjet);
         //gui_Container_1.add(taDescription);
        //gui_Container_1.add(image1)
-       Container c =new Container(new FlowLayout(CENTER,CENTER));
-        //gui_Container_1.add(btnValider);
-        c.add(image1);
-        addAll(tCategorie,tfObjet,taDescription,c,btnValider);
+       
         //c.add(c)
         //c.add(image1);
         
@@ -129,13 +162,22 @@ public class MaRecEmployeForm extends BaseEmployeForm1 {
        
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
-
+ public void localNotificationReceived(String notif) {
+        System.out.println("Received local notification "+notif);
+            }
 //-- DON'T EDIT BELOW THIS LINE!!!
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
-    private com.codename1.ui.TextField tCategorie = new com.codename1.ui.TextField();
-    private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
+    private com.codename1.ui.Label LabelEtat = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelCategorie = new com.codename1.ui.Label();
+    private com.codename1.ui.Label tCategorie = new com.codename1.ui.Label();
+    private com.codename1.ui.Label tfObjet = new com.codename1.ui.Label();
+    private com.codename1.ui.Label Ldescription = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelObjet = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelDescription = new com.codename1.ui.Label();
+   // private com.codename1.ui.TextField tCategorie = new com.codename1.ui.TextField();
+    //private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
     private com.codename1.ui.TextField image=new com.codename1.ui.TextField();
     private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();
@@ -221,6 +263,10 @@ public class MaRecEmployeForm extends BaseEmployeForm1 {
     protected boolean isCurrentTrending() {
         return true;
     }
+
+   
+
+ 
 
     
 }

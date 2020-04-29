@@ -54,7 +54,7 @@ final String pc="probleme de compte";
         public int idcatrec=0;
         public int id=45;
         private EncodedImage placeHolder;
-    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String description,String objet,String image) {
+    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String objet,String description,String image) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -71,6 +71,8 @@ final String pc="probleme de compte";
         tCategorie.setText(categorie);
          tfObjet.setText(objet);
          taDescription.setText(description);
+         Lcategorie.setText("categorie");
+         
          
             //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
             //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
@@ -78,7 +80,18 @@ final String pc="probleme de compte";
          imgBtn = new Button("parcourir image");
         Button btnValider = new Button("Add task");
        
-        
+        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+                         
+        //gui_Container_1.add(tCategorie);
+        //gui_Container_1.add(tfObjet);
+        //gui_Container_1.add(taDescription);
+       //gui_Container_1.add(image1)
+       Container c =new Container(new FlowLayout(CENTER,CENTER));
+        //gui_Container_1.add(btnValider);
+        c.add(image1);
+        addAll(Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,taDescription,c,btnValider);
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -105,18 +118,7 @@ final String pc="probleme de compte";
         });
        
            
-           placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
-           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
-           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
-                         
-        //gui_Container_1.add(tCategorie);
-        //gui_Container_1.add(tfObjet);
-        //gui_Container_1.add(taDescription);
-       //gui_Container_1.add(image1)
-       Container c =new Container(new FlowLayout(CENTER,CENTER));
-        //gui_Container_1.add(btnValider);
-        c.add(image1);
-        addAll(tCategorie,tfObjet,taDescription,c,btnValider);
+           
         //c.add(c)
         //c.add(image1);
         
@@ -133,6 +135,9 @@ final String pc="probleme de compte";
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
+     private com.codename1.ui.Label Lcategorie = new com.codename1.ui.Label("categorie");
+      private com.codename1.ui.Label Lobjet = new com.codename1.ui.Label("objet");
+       private com.codename1.ui.Label Ldescription = new com.codename1.ui.Label("description");
     private com.codename1.ui.TextField tCategorie = new com.codename1.ui.TextField();
     private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();

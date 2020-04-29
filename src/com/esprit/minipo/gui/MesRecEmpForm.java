@@ -238,24 +238,17 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         
         recEmp=ServiceRecEmploye.getInstance().getAllRecEmploye(id);
         for(int i=0;i<recEmp.size();i++){
-            if(recEmp.get(i).getReponse()==null){
-               String reponse="Pas de reponse";
-            }
-            else{
-                String reponse=recEmp.get(i).getReponse();
-            }
-            if(recEmp.get(i).getImage()==null){
-               String image="";
-            }
-            else{
-                String image=recEmp.get(i).getImage();
-            }
             
+                
+            
+                //String image=recEmp.get(i).getImage();
+            
+            String reponse=recEmp.get(i).getReponse();
             int idremp=recEmp.get(i).getIdRemp();
             String Categorie=recEmp.get(i).getNom();
             String Objet=recEmp.get(i).getObjet();
             String description=recEmp.get(i).getDescription();
-            //String reponse=recEmp.get(i).getReponse();
+            String etat=recEmp.get(i).getEtatRemp();
             String image=recEmp.get(i).getImage();
          //creation
         gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
@@ -302,7 +295,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
                 public void actionPerformed(ActionEvent evt) {
                 //com.codename1.ui.util.Resources resourceObjectInstance = null;
                     //this
-                    new MaRecEmployeForm(resourceObjectInstance,idremp,Categorie,Objet,description,image).show();}
+                    new MaRecEmployeForm(resourceObjectInstance,idremp,Categorie,Objet,description,image,etat,reponse).show();}
                 
 
             
