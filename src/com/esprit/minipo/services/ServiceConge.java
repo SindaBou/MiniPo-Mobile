@@ -94,7 +94,7 @@ public class ServiceConge {
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
-        System.out.println(tasks);
+        
         return tasks;
     }
       public boolean AccepterConge(int id) {

@@ -65,6 +65,10 @@ public class BaseAgentRHForm11 extends Form {
         getToolbar().addCommandToSideMenu("Gerer equipe ", null, e -> {new EquipeForm().show();});
         getToolbar().addCommandToSideMenu("Affecter Employe", null, e -> {new AffectationForm().show();});
         getToolbar().addCommandToSideMenu("Les demandes congés", null, e -> {new DemandecongeRHForm().show();});
+        getToolbar().addCommandToSideMenu("Bilan", null, e -> {
+        new Barchartform().show();
+        //new piechart().createPieChartForm().show();
+        });
 //        getToolbar().addCommandToSideMenu("Les demandes congés", trendingImage, e -> new TrendingForm(res).show());
         //getToolbar().addCommandToSideMenu("Mes Reclamation", trendingImage, e -> new TrendingForm(res).show());
         //getToolbar().addCommandToSideMenu("Blog", null, e -> {});
