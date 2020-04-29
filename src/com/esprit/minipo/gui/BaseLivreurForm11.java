@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package com.esprit.minipo.gui;
 
 import com.codename1.ui.Button;
@@ -34,36 +33,44 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseLivreurForm11 extends Form {
+
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
-        
+
         Image inboxImage = null;
-        if(isCurrentInbox()) inboxImage = selection;
+        if (isCurrentInbox()) {
+            inboxImage = selection;
+        }
 
         Image trendingImage = null;
-        if(isCurrentTrending()) trendingImage = selection;
-        
+        if (isCurrentTrending()) {
+            trendingImage = selection;
+        }
+
         Image calendarImage = null;
-        if(isCurrentCalendar()) calendarImage = selection;
-        
+        if (isCurrentCalendar()) {
+            calendarImage = selection;
+        }
+
         Image statsImage = null;
-        if(isCurrentStats()) statsImage = selection;
-        
+        if (isCurrentStats()) {
+            statsImage = selection;
+        }
+
         Button inboxButton = new Button("Inbox", inboxImage);
         inboxButton.setUIID("SideCommand");
         inboxButton.getAllStyles().setPaddingBottom(0);
-        Container inbox = FlowLayout.encloseMiddle(inboxButton, 
+        Container inbox = FlowLayout.encloseMiddle(inboxButton,
                 new Label("18", "SideCommandNumber"));
         inbox.setLeadComponent(inboxButton);
         inbox.setUIID("SideCommand");
         inboxButton.addActionListener(e -> new InboxForm().show());
         getToolbar().addComponentToSideMenu(inbox);
-        
-        //getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
+
+        getToolbar().addCommandToSideMenu("Mes livraisons", null, e -> new LivreurForm().show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
-        
+
         //getToolbar().addCommandToSideMenu("Blog", null, e -> {});
-        
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
         getToolbar().addComponentToSideMenu(new Label(res.getImage("profile_image.png"), "Container"));
@@ -71,11 +78,10 @@ public class BaseLivreurForm11 extends Form {
         getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
     }
 
-        
     protected boolean isCurrentInbox() {
         return false;
     }
-    
+
     protected boolean isCurrentTrending() {
         return false;
     }

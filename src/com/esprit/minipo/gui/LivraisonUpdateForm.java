@@ -22,6 +22,7 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -32,10 +33,12 @@ import com.codename1.ui.Label;
 import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
@@ -49,10 +52,14 @@ import java.util.List;
  *
  * @author shai
  */
-public class LivreurForm extends BaseLivreurForm11 {
+public class LivraisonUpdateForm extends BaseLivreurForm11 {
 
-    public LivreurForm() {
-        this(com.codename1.ui.util.Resources.getGlobalResources());
+    public LivraisonUpdateForm(int id) {
+        this(com.codename1.ui.util.Resources.getGlobalResources(), id);
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -60,50 +67,35 @@ public class LivreurForm extends BaseLivreurForm11 {
         return true;
     }
 
-    public LivreurForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public LivraisonUpdateForm(com.codename1.ui.util.Resources resourceObjectInstance, int id) {
         initGuiBuilderComponents(resourceObjectInstance);
         gui_separator1.setShowEvenIfBlank(true);
         gui_Label_1_1_1.setShowEvenIfBlank(true);
-
-        livraisons = ServiceLivraison.getInstance().getListLivraison();
+        livraison = ServiceLivraison.getInstance().getLivraison(id);
+        System.out.println(livraison);
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("Livraison");
         setName("LivraisonForm");
         Container list = new Container(BoxLayout.y());
         list.setScrollableY(true);
-        for (int i = 0; i < livraisons.size(); i++) {
-            MultiButton mb = new MultiButton();
-            int index = i;
-            mb.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ev) {
-                    System.out.println(livraisons.get(index).getIdliv());
-                    LivraisonUpdateForm formToShow = new LivraisonUpdateForm(livraisons.get(index).getIdliv());
-                    formToShow.setId(livraisons.get(index).getIdliv());
-                    formToShow.show();
-                }
-            });
-            mb.setUIID("Label");
-            mb.setName("Multi_Button_1");
-            if (livraisons.get(i).getEtatl().equals("livree")) {
-                mb.setIcon(resourceObjectInstance.getImage("livimg.png"));
-            } else if (livraisons.get(i).getEtatl().equals("refusee")) {
-                mb.setIcon(resourceObjectInstance.getImage("livImgRefuse.png"));} 
-            else {
-                mb.setIcon(resourceObjectInstance.getImage("livImgEncours.png"));
+        Label matricule = new Label("Matricule:");
+        Label matriculeText = new Label(livraison.getMatriculeL());
+        Container matriculeLayout = GridLayout.encloseIn(matricule, matriculeText);
+        Label destination = new Label("Destination:  " + "  " + livraison.getDestination());
+        Label date = new Label("Date:  " + "  " + livraison.getDateliv());
+        Label etatt = new Label("Etat :");
+        ComboBox etat = new ComboBox("livree", "refusee", "en cours");
+        etat.setSelectedItem(livraison.getEtatl());
+        etat.addSelectionListener((oldSelected, newSelected) -> {
+            System.out.println(newSelected);
+            if (newSelected == 0) {
+                ServiceLivraison.getInstance().updateEtat(id, "livree");
+            } else if (newSelected == 1) {
+                ServiceLivraison.getInstance().updateEtat(id, "refusee");
             }
-            mb.setPropertyValue("line1", livraisons.get(i).getMatriculeL());
-            mb.setPropertyValue("line2", livraisons.get(i).getDateliv());
-            mb.setPropertyValue("uiid1", "Label");
-            mb.setPropertyValue("uiid2", "RedLabel");
-            //gui_LA.setUIID("Label");
-            //gui_LA.setName("LA");
-            //gui_LA.setPropertyValue("line1", "3 minutes ago");
-            //gui_LA.setPropertyValue("line2", "in Los Angeles");
-            //gui_LA.setPropertyValue("uiid1", "SlightlySmallerFontLabel");
-            //gui_LA.setPropertyValue("uiid2", "RedLabelRight");
-            list.add(mb);
-        }
-
+        });
+        Container etatLayout = GridLayout.encloseIn(etatt, etat);
+        list.add(matriculeLayout).add(destination).add(date).add(etatLayout);
         addComponent(gui_Container_1);
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, list);
@@ -115,7 +107,8 @@ public class LivreurForm extends BaseLivreurForm11 {
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
-    private ArrayList<Livraison> livraisons;
+    private int id;
+    private Livraison livraison;
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.components.MultiButton gui_LA = new com.codename1.components.MultiButton();
@@ -135,7 +128,7 @@ public class LivreurForm extends BaseLivreurForm11 {
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
-
+        System.out.println("test update:" + id);
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
