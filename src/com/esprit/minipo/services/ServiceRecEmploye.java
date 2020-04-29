@@ -95,6 +95,19 @@ public class ServiceRecEmploye {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+   public boolean ModifierRecEmploye(int idremp, String description ) {
+        String url = Statics.BASE_URL + "recupdateemp/"+idremp+"?description=" + description ;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
   
   public ArrayList<ReclamationsEmploye> getAllRecEmploye(int id){
         String url = Statics.BASE_URL+"recemp/all/"+id;

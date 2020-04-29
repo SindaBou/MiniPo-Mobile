@@ -251,7 +251,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
                 String image=recEmp.get(i).getImage();
             }
             
-            int idr=recEmp.get(i).getIdRemp();
+            int idremp=recEmp.get(i).getIdRemp();
             String Categorie=recEmp.get(i).getNom();
             String Objet=recEmp.get(i).getObjet();
             String description=recEmp.get(i).getDescription();
@@ -270,12 +270,12 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
          gui_Label_6 = new com.codename1.ui.Label();
          gui_Text_Area_1_1 = new com.codename1.ui.TextArea();
          gui_Label_7 = new com.codename1.ui.Label();
-          gui_Text_Area_1_2 = new com.codename1.ui.TextArea();
+         gui_Text_Area_1_2 = new com.codename1.ui.TextArea();
          gui_Label_8 = new com.codename1.ui.Label();
-        gui_Text_Area_1_3 = new com.codename1.ui.TextArea();
-        gui_Label_9 = new com.codename1.ui.Label();
-        gui_Text_Area_1_4 = new com.codename1.ui.TextArea();
-        gui_Label_5 = new com.codename1.ui.Label();
+         gui_Text_Area_1_3 = new com.codename1.ui.TextArea();
+         gui_Label_9 = new com.codename1.ui.Label();
+         gui_Text_Area_1_4 = new com.codename1.ui.TextArea();
+         gui_Label_5 = new com.codename1.ui.Label();
          //remplisage   
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
@@ -302,7 +302,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
                 public void actionPerformed(ActionEvent evt) {
                 //com.codename1.ui.util.Resources resourceObjectInstance = null;
                     //this
-                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description,image).show();}
+                    new MaRecEmployeForm(resourceObjectInstance,idremp,Categorie,Objet,description,image).show();}
                 
 
             

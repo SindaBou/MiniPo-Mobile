@@ -23,19 +23,24 @@ import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
+import com.esprit.minipo.services.ServiceRecEmploye;
 import java.io.IOException;
 
 /**
@@ -43,53 +48,38 @@ import java.io.IOException;
  *
  * @author shai
  */
-public class AjoutRecForm1 extends BaseForm {
-final String pc="probleme de compte";
-        final String pcmd="probleme de commande";
-        final String autre="autre";
-        public int idcatrec=0;
-        public int id=45;
-    public AjoutRecForm1() {
-        
+public class MaRecEmployeForm extends BaseEmployeForm1 {
+//final String pc="probleme de compte";
+        //final String pcmd="probleme de commande";
+        //final String autre="autre";
+        //public int idcatrec=0;
+        public int id=44;
+        private EncodedImage placeHolder;
+    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idremp,String categorie,String description,String objet,String image) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
-    }
-    
-    public AjoutRecForm1(com.codename1.ui.util.Resources resourceObjectInstance) {
         
-        //getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {});
+        
+        System.out.println(idremp);
+        System.out.println(categorie);
+        System.out.println(description);
+        System.out.println(objet);
+        System.out.println(image);
         installSidemenu(resourceObjectInstance);
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
-        setTitle("Envoyer Une Reclamation");
+        setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());
-         tfObjet = new TextField("","Objet");
-         taDescription= new TextArea(10, 15);
-          image = new TextField();
-         imgBtn = new Button("parcourir image");
-        Button btnValider = new Button("Add task");
-        ComboBox c= new ComboBox("categorie");
-        c.addItem(pc);
-        c.addItem(pcmd);
-        c.addItem(autre);
-        /*imgBtn.addActionListener(e -> {
-            Display.getInstance().openGallery(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ev) {
-                    if (ev != null && ev.getSource() != null) {
-                       String path = (String) ev.getSource();
-                        System.out.println(path.substring(7));
-                        Image img = null;
-                        image.setText(path.substring(7));//image heya just label nsob feha fel path
-                        try {
-                            img = Image.createImage(FileSystemStorage.getInstance().openInputStream(path));
-                            System.out.println(img);
-                        } catch (IOException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                }
-            }, Display.GALLERY_IMAGE);
-        });*/
+        tCategorie.setText(categorie);
+         tfObjet.setText(objet);
+         taDescription.setText(description);
+         
+            //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
+            //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
+          //image = new TextField();
+         //imgBtn = new Button("parcourir image");
+        Button btnValider = new Button("Modifier");
+       
+        
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -99,19 +89,9 @@ final String pc="probleme de compte";
                 else
                 {
                     try {
-                         switch (c.getSelectedItem().toString()) {
-                    case pc:
-                        idcatrec=1;
-                         break;
-                    case pcmd:
-                        idcatrec=2;
-                        break;
-                    case autre:
-                        idcatrec=3;
-                         break;}
-                        
-                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,image.getText());
-                        if( ServiceRecClient.getInstance().addRec(r))
+                       
+                        //ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,image.getText());
+                        if( ServiceRecEmploye.getInstance().ModifierRecEmploye(idremp,taDescription.getText()))
                             Dialog.show("Success","Connection accepted",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -124,8 +104,29 @@ final String pc="probleme de compte";
                 
             }
         });
+       
+           
+           placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+                         
+        //gui_Container_1.add(tCategorie);
+        //gui_Container_1.add(tfObjet);
+        //gui_Container_1.add(taDescription);
+       //gui_Container_1.add(image1)
+       Container c =new Container(new FlowLayout(CENTER,CENTER));
+        //gui_Container_1.add(btnValider);
+        c.add(image1);
+        addAll(tCategorie,tfObjet,taDescription,c,btnValider);
+        //c.add(c)
+        //c.add(image1);
         
-        addAll(c,tfObjet,taDescription,btnValider);
+    }
+    
+    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        
+        //getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {});
+       
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
 
@@ -133,6 +134,7 @@ final String pc="probleme de compte";
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
+    private com.codename1.ui.TextField tCategorie = new com.codename1.ui.TextField();
     private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
     private com.codename1.ui.TextField image=new com.codename1.ui.TextField();
@@ -219,4 +221,6 @@ final String pc="probleme de compte";
     protected boolean isCurrentTrending() {
         return true;
     }
+
+    
 }
