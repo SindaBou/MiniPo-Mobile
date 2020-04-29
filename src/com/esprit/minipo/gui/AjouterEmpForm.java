@@ -47,7 +47,7 @@ public class AjouterEmpForm extends Form {
                     try {
                         Employe t = new Employe(tfnom.getText(),tfprenom.getText(),tfadresse.getText(),tftel.getText(),tfemail.getText(),tfsalaire.getText());
                         if( ServiceEmploye.getInstance().addEmploye(t))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success",tfnom.getText()+" a été ajouté avec succès",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {

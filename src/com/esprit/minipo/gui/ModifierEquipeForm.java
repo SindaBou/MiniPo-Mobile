@@ -32,7 +32,8 @@ public class ModifierEquipeForm extends Form{
         TextField tfnom = new TextField(nom,"Nom equipe");
         TextField tfnombre = new TextField(""+nbr,"Nombre");
         
-        Button btnValider = new Button("Add task");
+        Button btnValider = new Button("Enregistrer");
+        Button btnSupp = new Button("Supprimer");
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -44,7 +45,7 @@ public class ModifierEquipeForm extends Form{
                     try {
                         
                         if( ServiceEquipe.getInstance().updateEquipe(id , tfnom.getText(),Integer.parseInt(tfnombre.getText())))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success","La modification a été effectuée avec succès",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -57,7 +58,26 @@ public class ModifierEquipeForm extends Form{
             }
         });
         
-        addAll(tfnom,tfnombre,btnValider);
+        btnSupp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                
+                try {
+                        
+                        if( ServiceEquipe.getInstance().deleteEmploye(id))
+                            
+                            Dialog.show("Success",nom+" est supprimé",new Command("OK"));
+                            
+                        else
+                            Dialog.show("ERROR", "Server error", new Command("OK"));
+                    } catch (NumberFormatException e) {
+                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    }
+            }
+        });
+        btnSupp.setUIID("ButtonSupp");
+        
+        addAll(tfnom,tfnombre,btnValider,btnSupp);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new EquipeForm().showBack());
 }
 }

@@ -39,6 +39,7 @@ public class ModifierEmployeForm extends Form{
         TextField tfsalaire= new TextField(salaire,"Salaire");
         
         Button btnValider = new Button("Enregistrer");
+        Button btnSupp = new Button("Supprimer");
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +51,8 @@ public class ModifierEmployeForm extends Form{
                     try {
                         
                         if( ServiceEmploye.getInstance().updateEmploye(id ,tfnom.getText(),tfprenom.getText(),tftel.getText() , tfadresse.getText(),tfemail.getText(),tftel.getText(),tfsalaire.getText() ))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success","La modification a été effectuée avec succès",new Command("OK"));
+                            
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -62,8 +64,26 @@ public class ModifierEmployeForm extends Form{
                 
             }
         });
+        btnSupp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                
+                try {
+                        
+                        if( ServiceEmploye.getInstance().deleteEmploye(id))
+                            
+                            Dialog.show("Success","l'employe"+ nom +" est supprimé",new Command("OK"));
+                            
+                        else
+                            Dialog.show("ERROR", "Server error", new Command("OK"));
+                    } catch (NumberFormatException e) {
+                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    }
+            }
+        });
+        btnSupp.setUIID("ButtonSupp");
         
-        addAll(tfnom,tfprenom,tfadresse,tftel,tfemail,tfsalaire,btnValider);
+        addAll(tfnom,tfprenom,tfadresse,tftel,tfemail,tfsalaire,btnValider,btnSupp);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new AgentRHForm().showBack());
 //        }     
     }

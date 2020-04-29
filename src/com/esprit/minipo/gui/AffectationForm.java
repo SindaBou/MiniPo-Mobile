@@ -38,10 +38,16 @@ public class AffectationForm extends BaseAgentRHForm11{
     public AffectationForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         
+        ArrayList<Affectation> emp=new ArrayList<Affectation>();
+        emp=ServiceAffectation.getInstance().getAllAff();
+        int sum= 0;
+        for(int i=0;i<emp.size();i++){
+            sum++;
+        }
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Affectation", "Title")
-//                        new Label("19", "InboxNumber")
+                        new Label("Affectation", "Title"),
+                        new Label(sum+"", "InboxNumber")
                 )
         );
         

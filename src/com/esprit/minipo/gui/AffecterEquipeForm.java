@@ -58,7 +58,7 @@ public class AffecterEquipeForm extends Form{
                     try {
                         Affectation t = new Affectation(cnom.getSelectedItem().toString(),cequipe.getSelectedItem().toString());
                         if( ServiceAffectation.getInstance().addAff(t))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success",cnom.getSelectedItem().toString() + " a été ajouté avec succès",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {

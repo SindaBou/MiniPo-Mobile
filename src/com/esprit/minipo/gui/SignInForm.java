@@ -20,6 +20,7 @@ package com.esprit.minipo.gui;
 
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.TextField;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.esprit.minipo.MyApplication;
@@ -56,8 +57,8 @@ public class SignInForm extends com.codename1.ui.Form {
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
     private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
     private com.codename1.ui.ComponentGroup gui_Component_Group_1 = new com.codename1.ui.ComponentGroup();
-    private com.codename1.ui.TextField gui_Text_Field_2 = new com.codename1.ui.TextField();
-    private com.codename1.ui.TextField gui_Text_Field_1 = new com.codename1.ui.TextField();
+    private com.codename1.ui.TextField gui_Text_Field_2 = new com.codename1.ui.TextField("","username");
+    private com.codename1.ui.TextField gui_Text_Field_1 = new com.codename1.ui.TextField("", "Password", 20, TextField.PASSWORD);
     private com.codename1.ui.Button gui_Button_2 = new com.codename1.ui.Button();
     private com.codename1.ui.Button gui_Button_3 = new com.codename1.ui.Button();
     private com.codename1.ui.Button gui_Button_1 = new com.codename1.ui.Button();
@@ -105,9 +106,9 @@ public class SignInForm extends com.codename1.ui.Form {
         gui_Component_Group_1.setName("Component_Group_1");
         gui_Component_Group_1.addComponent(gui_Text_Field_2);
         gui_Component_Group_1.addComponent(gui_Text_Field_1);
-        gui_Text_Field_2.setText("TextField");
+//        gui_Text_Field_2.setText("TextField");
         gui_Text_Field_2.setName("Text_Field_2");
-        gui_Text_Field_1.setText("TextField");
+//        gui_Text_Field_1.setText("TextField");
         gui_Text_Field_1.setName("Text_Field_1");
         gui_Container_1.addComponent(gui_Button_2);
         gui_Container_1.addComponent(gui_Button_3);

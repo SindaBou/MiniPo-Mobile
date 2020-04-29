@@ -39,10 +39,17 @@ public class EquipeForm extends BaseAgentRHForm11 {
     public EquipeForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         
+        ArrayList<Equipe> emp=new ArrayList<Equipe>();
+        emp=ServiceEquipe.getInstance().getAllEq();
+        int sum=0;
+        for(int i=0;i<emp.size();i++){
+            sum++;
+        }
+        
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Gerer Equipe", "Title")
-//                        new Label("19", "InboxNumber")
+                        new Label("Gerer Equipe", "Title"),
+                        new Label(sum+"", "InboxNumber")
                 )
         );
         

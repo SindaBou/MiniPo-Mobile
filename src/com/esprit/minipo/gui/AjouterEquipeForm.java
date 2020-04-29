@@ -44,7 +44,7 @@ public class AjouterEquipeForm extends Form{
                     try {
                         Equipe t = new Equipe(tfnom.getText(),Integer.parseInt(tfnombre.getText()));
                         if( ServiceEquipe.getInstance().addEquipe(t))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success",tfnom.getText()+" a été ajouté avec succès",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {

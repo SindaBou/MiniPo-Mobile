@@ -66,6 +66,19 @@ public class ServiceEmploye {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    public boolean deleteEmploye(int id) {
+        String url = Statics.BASE_URL + "/DeleteEmp/" + id  ;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
     
     
     

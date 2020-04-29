@@ -77,12 +77,12 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
         gui_Text_Area_1_4.setColumns(100);
         gui_Text_Area_1_4.setEditable(false);
         
-        FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
-        RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
-        rb.uiid(true);
-        fab.bindFabToContainer(getContentPane());
-        fab.addActionListener(e -> {
-            new AjouterEmpForm(current).show();
+//        FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+//        RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
+//        rb.uiid(true);
+//        fab.bindFabToContainer(getContentPane());
+//        fab.addActionListener(e -> {
+//            new AjouterEmpForm(current).show();
 //            fab.setUIID("FloatingActionButtonClose");
 //            Image oldImage = fab.getIcon();
 //            FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
@@ -140,7 +140,7 @@ public class DemandecongeRHForm extends BaseAgentRHForm11{
 //            AgentRHForm.this.setTintColor(t);
 //            fab.setUIID("FloatingActionButton");
 //            fab.setIcon(oldImage);
-        });
+//        });
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
