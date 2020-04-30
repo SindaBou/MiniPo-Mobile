@@ -54,7 +54,7 @@ final String pc="probleme de compte";
         public int idcatrec=0;
         public int id=45;
         private EncodedImage placeHolder;
-    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String objet,String description,String image) {
+    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String objet,String description,String image,String etat,String reponse) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -69,16 +69,25 @@ final String pc="probleme de compte";
         setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());
         tCategorie.setText(categorie);
+        tCategorie.setUIID("BlackLabel");
          tfObjet.setText(objet);
+         tfObjet.setUIID("LabelBlack");
          taDescription.setText(description);
-         Lcategorie.setText("categorie");
+         LEtat.setText(etat);
+         LEtat.setUIID("RedLabel");
+         LabelDescription.setText(description);
+         LabelDescription.setUIID("LabelBlack");
+         LabelReponse.setText(reponse);
+         LabelReponse.setUIID("RedLabel");
+         //Lcategorie.setText("categorie");
+         
          
          
             //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
             //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
           //image = new TextField();
          imgBtn = new Button("parcourir image");
-        Button btnValider = new Button("Add task");
+        Button btnValider = new Button("Modifier");
        
         placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
            String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
@@ -91,8 +100,10 @@ final String pc="probleme de compte";
        Container c =new Container(new FlowLayout(CENTER,CENTER));
         //gui_Container_1.add(btnValider);
         c.add(image1);
-        addAll(Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,taDescription,c,btnValider);
-        
+        if(LEtat.getText().equals("traiter"))
+        addAll(LEtat,Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,LabelDescription,c,Lreponse,LabelReponse);
+        if(LEtat.getText().equals("non traiter"))
+        addAll(LEtat,Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,taDescription,c,btnValider);
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -103,8 +114,9 @@ final String pc="probleme de compte";
                     try {
                        
                         //ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,image.getText());
-                        if( ServiceRecClient.getInstance().ModifierRec(idr,taDescription.getText()))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                        if( ServiceRecClient.getInstance().ModifierRec(idr,taDescription.getText())){
+                            Dialog.show("Success","Reclamation modifiée",new Command("OK"));
+                          new  MesRecClientForm().show();}
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -138,8 +150,12 @@ final String pc="probleme de compte";
      private com.codename1.ui.Label Lcategorie = new com.codename1.ui.Label("categorie");
       private com.codename1.ui.Label Lobjet = new com.codename1.ui.Label("objet");
        private com.codename1.ui.Label Ldescription = new com.codename1.ui.Label("description");
-    private com.codename1.ui.TextField tCategorie = new com.codename1.ui.TextField();
-    private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
+    private com.codename1.ui.Label tCategorie = new com.codename1.ui.Label();
+    private com.codename1.ui.Label tfObjet = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LEtat = new com.codename1.ui.Label();
+    private com.codename1.ui.Label Lreponse = new com.codename1.ui.Label("Reponse");
+    private com.codename1.ui.Label LabelReponse = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelDescription = new com.codename1.ui.Label();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
     private com.codename1.ui.TextField image=new com.codename1.ui.TextField();
     private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();

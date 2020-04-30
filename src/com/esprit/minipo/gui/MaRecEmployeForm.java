@@ -98,6 +98,8 @@ public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificat
          taDescription.setText(description);
          Ldescription.setText(description);
          Ldescription.setUIID("BlackLabel");
+         LReponse.setText(reponse);
+         LReponse.setUIID("RedLabel");
             //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
             //Image img1=URLImage.createToStorage(placeHolder,url, url,URLImage.RESIZE_SCALE);
           //image = new TextField();
@@ -112,14 +114,14 @@ public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificat
         if(etat.equals("non traiter")){
         addAll(LabelEtat,LabelCategorie,tCategorie,LabelObjet,tfObjet,LabelDescription,taDescription,c,btnValider);}
         if(etat.equals("traiter")){
-        addAll(LabelEtat,LabelCategorie,tCategorie,LabelObjet,tfObjet,LabelDescription,Ldescription,c);}
+        addAll(LabelEtat,LabelCategorie,tCategorie,LabelObjet,tfObjet,LabelDescription,Ldescription,c,LabelReponse,LReponse);}
         btnValider.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent evt) {
                 //getPushActionCategories();
                 if( ServiceRecEmploye.getInstance().ModifierRecEmploye(idremp,taDescription.getText())){
-                           LocalNotification n = new LocalNotification();
+                       /*    LocalNotification n = new LocalNotification();
                           n.setId("demo-notification");
                           n.setAlertBody("It's time to take a break and look at me");
                           n.setAlertTitle("Break Time!");
@@ -129,11 +131,11 @@ public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificat
                           status.setMessage("Hello world");
                           status.show();*/
                          
-                          Display.getInstance().scheduleLocalNotification(
+                         /* Display.getInstance().scheduleLocalNotification(
                                 n,
                             System.currentTimeMillis() + 10 * 1000, // fire date/time
-                            LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
-);
+                            LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency);*/
+
                            new MesRecEmpForm( resourceObjectInstance).show();
                 
                 }
@@ -170,6 +172,8 @@ public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificat
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
     private com.codename1.ui.Label LabelEtat = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelReponse = new com.codename1.ui.Label("Reponse");
+    private com.codename1.ui.Label LReponse = new com.codename1.ui.Label();
     private com.codename1.ui.Label LabelCategorie = new com.codename1.ui.Label();
     private com.codename1.ui.Label tCategorie = new com.codename1.ui.Label();
     private com.codename1.ui.Label tfObjet = new com.codename1.ui.Label();

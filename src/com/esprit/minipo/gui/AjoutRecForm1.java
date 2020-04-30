@@ -90,9 +90,10 @@ final String pc="probleme de compte";
         setLayout(BoxLayout.y());
          tfObjet = new TextField("","Objet");
          taDescription= new TextArea(10, 15);
+         taDescription.setHint("Description");
           image = new TextField();
-         imgBtn = new Button("parcourir image");
-        Button btnValider = new Button("Add task");
+         //imgBtn = new Button("parcourir image");
+        Button btnValider = new Button("Envoyer");
         ComboBox c= new ComboBox("categorie");
         c.addItem(pc);
         c.addItem(pcmd);
@@ -116,7 +117,7 @@ final String pc="probleme de compte";
                 }
             }, Display.GALLERY_IMAGE);
         });*/
-              Container imageC = new Container(new BoxLayout(BoxLayout.X_AXIS));
+           /*   Container imageC = new Container(new BoxLayout(BoxLayout.X_AXIS));
        Label  imageL= new Label("Image:");
        TextField  imageT= new TextField("",13);
          imageT.setEditable(false);
@@ -148,7 +149,7 @@ final String pc="probleme de compte";
          imageC.add(imageL);
          imageC.add(imageT);
          imageC.add(addImage);
-        
+        */
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -170,7 +171,7 @@ final String pc="probleme de compte";
                         
                         ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45);
                         if( ServiceRecClient.getInstance().addRec(r)){
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success","Reclamation envoyee avec succés",new Command("OK"));
                          String myURL = "https://rest.nexmo.com/sms/json?api_key=4f3be2fc&api_secret=9ipalAypbzNudeVl&to=21698327784" + "&from=Minipo&text=Reclamation Envoyee avec succés";
                 ConnectionRequest cntRqst = new ConnectionRequest() {
                     protected void readResponse(InputStream in) throws IOException {
@@ -178,12 +179,13 @@ final String pc="probleme de compte";
 
                     @Override
                     protected void postResponse() {
-                        Dialog.show("SMS", "sms successfully sent", "OK", null);
+                        Dialog.show("SMS", "Un SMS vous a été envoyé ", "OK", null);
 
                     }
                 };
                 cntRqst.setUrl(myURL);
                 NetworkManager.getInstance().addToQueue(cntRqst);
+                new MesRecClientForm().show();
             }
             
                         
@@ -199,7 +201,7 @@ final String pc="probleme de compte";
  
          
         
-        addAll(c,tfObjet,taDescription,btnValider,imageC);
+        addAll(c,tfObjet,taDescription,btnValider);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
 

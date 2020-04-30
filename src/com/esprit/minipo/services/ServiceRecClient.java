@@ -69,7 +69,7 @@ public class ServiceRecClient {
                 c.setNom(obj.get("nom").toString());
                 c.setObjet(obj.get("objet").toString());
                 c.setDescription(obj.get("description").toString());
-                //c.setReponse(obj.get("reponse").toString());
+                c.setReponse(obj.get("reponse").toString());
                 c.setEtatr(obj.get("etatr").toString());
                 c.setImage(obj.get("image").toString());
                 

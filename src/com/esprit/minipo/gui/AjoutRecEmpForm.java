@@ -21,6 +21,7 @@ import com.esprit.minipo.entites.ReclamationsEmploye;
 import com.esprit.minipo.services.ServiceRecClient;
 import com.esprit.minipo.services.ServiceRecEmploye;
 import com.codename1.capture.Capture;
+import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.io.Util;
@@ -48,7 +49,8 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
         setTitle("Envoyer une Reclamation");
         setLayout(BoxLayout.y());
         TextField tfObjet = new TextField("","Objet");
-        TextArea taDescription= new TextField("", "Description");
+        TextArea taDescription= new TextArea(10, 10);
+        taDescription.setHint("Description");
         Button btnValider = new Button("Envoyer");
          ComboBox c= new ComboBox();
         c.addItem(pc);
@@ -77,6 +79,9 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
                         ReclamationsEmploye r = new ReclamationsEmploye(id,idcatrec, tfObjet.getText(),taDescription.getText());
                         if( ServiceRecEmploye.getInstance().addRec(r)){
                             Dialog.show("Success","Reclamation Envoyée",new Command("OK"));
+                             ToastBar.Status status = ToastBar.getInstance().createStatus();
+                             status.setMessage("Reclamation envoyée");
+                             status.show();
                            new MesRecEmpForm().show();
                         }
                         else

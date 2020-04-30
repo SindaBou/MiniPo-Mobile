@@ -242,6 +242,8 @@ public class MesRecClientForm extends BaseForm {
             String Objet=recClt.get(i).getObjet();
             String description=recClt.get(i).getDescription();
             String image=recClt.get(i).getImage();
+            String etat=recClt.get(i).getEtatr();
+            String reponse=recClt.get(i).getReponse();
          //creation
         gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -287,7 +289,7 @@ public class MesRecClientForm extends BaseForm {
                 public void actionPerformed(ActionEvent evt) {
                 //com.codename1.ui.util.Resources resourceObjectInstance = null;
                     //this
-                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description,image).show();}
+                    new MaRecClientForm(resourceObjectInstance,idr,Categorie,Objet,description,image,etat,reponse).show();}
                 
 
             
@@ -316,7 +318,7 @@ public class MesRecClientForm extends BaseForm {
         gui_Label_2.setName("Label_2");
         gui_Label_6.setText("");
 
-        //gui_Label_6.setText("------------------------------------------------------------------------------------------");
+        gui_Label_6.setText("------------------------------------------------------------------------------------------");
         gui_Label_6.setUIID("separator");
         gui_Label_6.setName("Label_6");
         gui_Text_Area_1.setText(String.valueOf(recClt.get(i).getIdR()));
