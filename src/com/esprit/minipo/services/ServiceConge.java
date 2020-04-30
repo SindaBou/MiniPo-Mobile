@@ -81,6 +81,19 @@ public class ServiceConge {
         }
         return tasks;
     }
+    public boolean addConge(Conge e) {
+        String url = Statics.BASE_URL + "/ajoutConge?type="+ e.getType()+ "&date_debut=" + e.getDatedebut()+ "&date_fin=" + e.getDatefin()+ "&nbrjrs=" + e.getNbrjrs()+ "&info_comp="+e.getDescription() ;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
   
   public ArrayList<Conge> getAllConge(){
         String url = Statics.BASE_URL+"/con/conge";

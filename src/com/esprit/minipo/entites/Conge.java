@@ -65,6 +65,18 @@ public class Conge {
         
     }
 
+    public Conge(String type, String datedebut, String datefin, int nbrjrs, String description) {
+        this.type = type;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.nbrjrs = nbrjrs;
+        this.description = description;
+    }
+
+   
+
+   
+
 
 
    
