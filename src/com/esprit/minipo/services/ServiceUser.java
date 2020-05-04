@@ -29,7 +29,7 @@ public class ServiceUser {
     public boolean resultOK;
     private ConnectionRequest req;
 
-    private ServiceUser() {
+    public ServiceUser() {
          req = new ConnectionRequest();
     }
 
@@ -68,11 +68,12 @@ public class ServiceUser {
             List<Map<String,Object>> list = (List<Map<String,Object>>)tasksListJson.get("root");
             for(Map<String,Object> obj : list){
                 User t = new User();
-               // float id = Float.parseFloat(obj.get("id").toString());
-               // t.setId((int)id);
+                float id = Float.parseFloat(obj.get("id").toString());
+                t.setId((int)id);
                // t.setStatus(((int)Float.parseFloat(obj.get("status").toString())));
                // t.setName(obj.get("name").toString());
                t.setUsername(obj.get("username").toString());
+               
                t.setPassword(obj.get("password").toString());
                t.setRoles(obj.get("roles").toString());
                 User.add(t);
@@ -100,6 +101,22 @@ public class ServiceUser {
         return User;
     }
     
+   public boolean UpdateUser(User u,int id){
+        
+        String url = Statics.BASE_URL + "/user/updateuserJson/" + id + "?username=" + u.getUsername() + "&email=" + u.getEmail() + "&password=" +u.getPassword()+ "&tel" + u.getTel() +"&adresse=" +u.getAdresse()+ "&firstname=" + u.getFirstname()+ "&lastname=" + u.getLastname();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>()
+        {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);            }
+            
+        }
+        ); 
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
    
     
    

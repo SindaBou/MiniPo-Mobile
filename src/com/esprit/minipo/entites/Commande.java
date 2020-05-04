@@ -24,7 +24,11 @@ public class Commande {
     private String etatc;
     private User client;
     private String refC;
+    private int id;
+    private String nom;
+    private String prenom;  
 
+    
     public Commande(int idcmd, float total, String etatc, User client, String refC) {
         this.idcmd = idcmd;
         this.total = total;
@@ -157,13 +161,44 @@ public class Commande {
         return true;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     @Override
     public String toString() {
-        return "\nid commande= " + idcmd +
-                //"\tdate du commande=" + datec +
-                "\ttotal=" + total +
-                "\tetat du commande=" + etatc +
-                "\nClient=" + client ;
+        return  "commande {"+"idcmd= " + idcmd 
+                + ", total= " + total 
+                + ", etatc= " + etatc 
+                + ", refC= " + refC 
+                + ", id= " + id 
+                + ", nom= " + nom 
+                + ", prenom= " + prenom 
+                +"}\n";
+    }
+    
+
+   
                 
     }
 
@@ -174,5 +209,5 @@ public class Commande {
     
     
     
-}
+
  

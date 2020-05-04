@@ -41,6 +41,7 @@ import java.util.Hashtable;
 public class SignInForm extends com.codename1.ui.Form {
      public ArrayList<User> users;
      private Resources theme=UIManager.initFirstTheme("/theme");
+      public static int idUser ;
 
     public SignInForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -165,6 +166,8 @@ public class SignInForm extends com.codename1.ui.Form {
             if(users.get(i).getPassword().equals(this.gui_Text_Field_1.getText()) && 
                 users.get(i).getUsername().equals(this.gui_Text_Field_2.getText())){
                    res=true;
+                   idUser=users.get(i).getId();
+                   System.out.println(idUser);
             }
             else {
                 i++;

@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.esprit.minipo.entites.Commande;
+import com.esprit.minipo.gui.SignInForm;
 import com.esprit.minipo.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,14 +55,19 @@ public class ServiceCommande {
                // Task t = new Task();
                 Commande c= new Commande();
                 
-                /*float id = Float.parseFloat(obj.get("id").toString());
-                t.setId((int)id);
-                t.setStatus(((int)Float.parseFloat(obj.get("status").toString())));
-                t.setName(obj.get("name").toString());*/
+               float idcmd = Float.parseFloat(obj.get("idcmd").toString());
+                c.setIdcmd((int)idcmd);
                 
-                float id = Float.parseFloat(obj.get("idcmd").toString());
-                c.setIdcmd((int)id);
+                c.setRefC(obj.get("refc").toString());
+                
+                c.setTotal(Float.parseFloat(obj.get("total").toString()));
+                
                 c.setEtatcmd(obj.get("etatc").toString());
+                
+                float id = Float.parseFloat(obj.get("id").toString());
+                c.setIdcmd((int)id);
+                
+               
                 
                 tasks.add(c);
             }
@@ -74,7 +80,9 @@ public class ServiceCommande {
     }
   
   public ArrayList<Commande> getAllCmd(){
-        String url = Statics.BASE_URL+"/cmd/allcmd";
+       int idUser = SignInForm.idUser;
+        
+        String url = Statics.BASE_URL+"/mobile/client/MesCommandes/"+idUser;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
