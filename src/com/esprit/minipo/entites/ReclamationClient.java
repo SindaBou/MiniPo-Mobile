@@ -72,12 +72,12 @@ public class ReclamationClient {
     
     
 
-    public ReclamationClient(int idcatrec, String objet, String description, int id) {
+    public ReclamationClient(int idcatrec, String objet, String description, int id,String image) {
         this.idcatrec =idcatrec;
         this.objet = objet;
         this.description = description;
         this.id=id;
-        //this.image=image;
+        this.image=image;
         
     }
 

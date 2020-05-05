@@ -61,6 +61,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
+import rest.file.uploader.tn.FileUploader;
+
 
 
 /**
@@ -75,6 +77,9 @@ final String pc="probleme de compte";
         public int idcatrec=0;
         public int id=45;
         String Imagecode ;
+        private FileUploader file;
+        String fileNameInServer;
+        private String imgPath;
     public AjoutRecForm1() {
         
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -91,13 +96,32 @@ final String pc="probleme de compte";
          tfObjet = new TextField("","Objet");
          taDescription= new TextArea(10, 15);
          taDescription.setHint("Description");
-          image = new TextField();
-         //imgBtn = new Button("parcourir image");
+          path = new TextField();
+         imgBtn = new Button("parcourir ");
+         imgBtn.setMaterialIcon(FontImage.MATERIAL_CLOUD_UPLOAD);
         Button btnValider = new Button("Envoyer");
         ComboBox c= new ComboBox("categorie");
         c.addItem(pc);
         c.addItem(pcmd);
         c.addItem(autre);
+        imgBtn.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    imgPath = Capture.capturePhoto();
+                    System.out.println(imgPath);
+                    String link=imgPath.toString();
+                    int pod=link.indexOf("/",2);
+                    String news=link.substring(pod + 2, link.length());
+                    System.out.println(""+news);
+                    FileUploader fu = new FileUploader("http://localhost:82/MiniPo-web/web/uploads/");
+                    fileNameInServer = fu.upload(news);
+                    path.setText(fileNameInServer);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         /*imgBtn.addActionListener(e -> {
             Display.getInstance().openGallery(new ActionListener() {
                 @Override
@@ -169,10 +193,10 @@ final String pc="probleme de compte";
                         idcatrec=3;
                          break;}
                         
-                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45);
+                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),id,fileNameInServer);
                         if( ServiceRecClient.getInstance().addRec(r)){
                             Dialog.show("Success","Reclamation envoyee avec succés",new Command("OK"));
-                         String myURL = "https://rest.nexmo.com/sms/json?api_key=4f3be2fc&api_secret=9ipalAypbzNudeVl&to=21698327784" + "&from=Minipo&text=Reclamation Envoyee avec succés";
+                         /*String myURL = "https://rest.nexmo.com/sms/json?api_key=4f3be2fc&api_secret=9ipalAypbzNudeVl&to=21698327784" + "&from=Minipo&text=Reclamation Envoyee avec succés";
                 ConnectionRequest cntRqst = new ConnectionRequest() {
                     protected void readResponse(InputStream in) throws IOException {
                     }
@@ -184,7 +208,7 @@ final String pc="probleme de compte";
                     }
                 };
                 cntRqst.setUrl(myURL);
-                NetworkManager.getInstance().addToQueue(cntRqst);
+                NetworkManager.getInstance().addToQueue(cntRqst);*/
                 new MesRecClientForm().show();
             }
             
@@ -201,8 +225,10 @@ final String pc="probleme de compte";
  
          
         
-        addAll(c,tfObjet,taDescription,btnValider);
+        addAll(c,tfObjet,taDescription,path,imgBtn,btnValider);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+
+            
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
@@ -211,7 +237,7 @@ final String pc="probleme de compte";
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
     private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
-    private com.codename1.ui.TextField image=new com.codename1.ui.TextField();
+    private com.codename1.ui.TextField path=new com.codename1.ui.TextField();
     private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();
     private com.codename1.ui.Button btnValider= new com.codename1.ui.Button();
     private com.codename1.ui.Label gui_separator1 = new com.codename1.ui.Label();
@@ -237,7 +263,7 @@ final String pc="probleme de compte";
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, c);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, tfObjet);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, taDescription);
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, image);
+        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, path);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, imgBtn);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, btnValider);
         gui_Multi_Button_1.setUIID("Label");

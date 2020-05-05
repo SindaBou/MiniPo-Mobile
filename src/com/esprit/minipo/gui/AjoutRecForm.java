@@ -34,6 +34,7 @@ public class AjoutRecForm  extends BaseForm{
         final String autre="autre";
         public int idcatrec=0;
         public int id=45;
+        String img;
     public AjoutRecForm(Form previous) {
         
         setTitle("Envoyer Une Reclamation");
@@ -86,7 +87,7 @@ public class AjoutRecForm  extends BaseForm{
                         idcatrec=3;
                          break;}
                         
-                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45);
+                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),45,img);
                         if( ServiceRecClient.getInstance().addRec(r))
                             Dialog.show("Success","Connection accepted",new Command("OK"));
                         else
