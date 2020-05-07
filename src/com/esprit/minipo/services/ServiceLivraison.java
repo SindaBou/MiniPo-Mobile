@@ -90,6 +90,7 @@ public class ServiceLivraison {
 
     public Livraison getLivraison(int id) {
         String url = Statics.BASE_URL + "/api/livraison/detail";
+        req.removeAllArguments();
         req.addArgument("id", "" + id);
         req.setUrl(url);
         req.setPost(false);
