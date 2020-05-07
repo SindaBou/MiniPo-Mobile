@@ -9,6 +9,7 @@ import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.esprit.minipo.MyApplication;
@@ -22,11 +23,33 @@ import java.util.Hashtable;
  */
 public class EditProfil extends com.codename1.ui.Form {
     private Resources theme=UIManager.initFirstTheme("/theme");
+    private User user;
 
-    public EditProfil() {
+    public EditProfil(com.codename1.ui.util.Resources resourceObjectInstance, String firstname,String lastname,String adresse,String Tel,String username,String email) {
+        
+        
         this(com.codename1.ui.util.Resources.getGlobalResources());
+        System.out.println(firstname);
+        System.out.println(lastname);
+        System.out.println(adresse);
+        System.out.println(Tel);
+        System.out.println(username);
+        System.out.println(email);
+        user=ServiceUser.getInstance().getUserProfil();
+        System.out.println(user.getFirstname());
+        gui_Text_Field_1.setText(user.getFirstname());
+        gui_Text_Field_2.setText(lastname);
+        gui_Text_Field_3.setText(adresse);
+        gui_Text_Field_4.setText(Tel);
+        gui_Text_Field_5.setText(username);
+        gui_Text_Field_6.setText(email);
+        
            
     }
+    
+    
+    
+    
   public EditProfil(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
@@ -38,7 +61,20 @@ public class EditProfil extends com.codename1.ui.Form {
          //Display.getInstance().getCurrent().refreshTheme();
         getToolbar().addCommandToLeftBar("", mat, e -> new SplashForm().show());
         getContentPane().setUIID(" Modifier profil");
+        user=ServiceUser.getInstance().getUserProfil();
+        System.out.println(user.getFirstname());
+        gui_Text_Field_1.setText(user.getFirstname());
+        gui_Text_Field_2.setText(user.getLastname());
+        gui_Text_Field_3.setText(user.getAdresse());
+        gui_Text_Field_4.setText(user.getTel());
+        gui_Text_Field_5.setText(user.getUsername());
+        gui_Text_Field_6.setText(user.getEmail());
+        gui_Text_Field_7.setText(user.getPassword());
+      
     }
+  
+  
+  
   //-- DON'T EDIT BELOW THIS LINE!!!
    private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
     private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
@@ -137,15 +173,21 @@ public class EditProfil extends com.codename1.ui.Form {
        
        public void onButton_1ActionEvent(com.codename1.ui.events.ActionEvent ev) {
         
-          User u = new User( gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText(),gui_Text_Field_7.getText());
+        User u = new User( gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText(),gui_Text_Field_7.getText());
         
-                        if( ServiceUser.getInstance().addUser(u))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                        else
-                            Dialog.show("ERROR", "Server error", new Command("OK"));
-         new RegistrationForm().show();
+        //if( ServiceUser.getInstance().UpdateUser(id, gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText()))
+        if( ServiceUser.getInstance().UpdateUser(u)) {                   
+        Dialog.show("Success","Connection accepted",new Command("OK"));
+        }else{
+             Dialog.show("ERROR", "Server error", new Command("OK"));}
+            // new RegistrationForm().show();}
      }
        
+       
+    
+           
+           
+        
     
     
 }

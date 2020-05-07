@@ -33,6 +33,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseForm extends Form {
+    
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
         
@@ -58,6 +59,7 @@ public class BaseForm extends Form {
         inboxButton.addActionListener(e -> new InboxForm().show());
         getToolbar().addComponentToSideMenu(inbox);
         
+        getToolbar().addCommandToSideMenu("Editer Profil", null, e -> new EditProfil(res).show());
         //getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
       //  getToolbar().addCommandToSideMenu("Produits", null, e -> {new AllProduitsForm(res).show();});
@@ -65,7 +67,7 @@ public class BaseForm extends Form {
       //  getToolbar().addCommandToSideMenu("Factures", null, e -> {new MesFacturesForm(res).show();});
         getToolbar().addCommandToSideMenu("Reclamations", trendingImage, e -> new TrendingForm(res).show());
         getToolbar().addCommandToSideMenu("Mes Reclamations", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Blog", null, e -> {});
+        getToolbar().addCommandToSideMenu("Blog", null, e -> new ListBlogForm(res).show());
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));

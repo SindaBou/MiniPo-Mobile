@@ -26,9 +26,14 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.esprit.minipo.MyApplication;
 import com.esprit.minipo.entites.User;
+import com.esprit.minipo.services.BCrypt;
 import com.esprit.minipo.services.ServiceUser;
+import com.esprit.minipo.utils.StaticVariables;
+
+//import com.esprit.minipo.services.service_bcrypt;
 
 import java.util.Hashtable;
+
 
 
 
@@ -44,6 +49,7 @@ public class RegistrationForm extends com.codename1.ui.Form {
         this(com.codename1.ui.util.Resources.getGlobalResources());
            
     }
+    
   public RegistrationForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
@@ -56,6 +62,7 @@ public class RegistrationForm extends com.codename1.ui.Form {
         getToolbar().addCommandToLeftBar("", mat, e -> new SplashForm().show());
         getContentPane().setUIID(" RegistrationForm");
     }
+  
   //-- DON'T EDIT BELOW THIS LINE!!!
    private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
     private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
@@ -69,6 +76,7 @@ public class RegistrationForm extends com.codename1.ui.Form {
     private com.codename1.ui.TextField gui_Text_Field_7 = new com.codename1.ui.TextField();
     private com.codename1.ui.TextField gui_Text_Field_8 = new com.codename1.ui.TextField();
     private com.codename1.ui.Button gui_Button_1 = new com.codename1.ui.Button();
+    
     
     
    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -152,8 +160,14 @@ public class RegistrationForm extends com.codename1.ui.Form {
     }
        
        public void onButton_1ActionEvent(com.codename1.ui.events.ActionEvent ev) {
-        
-          User u = new User( gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText(),gui_Text_Field_7.getText());
+          
+        //BCrypt
+           //String pIcrypt = service_bcrypt.hashpw(pass,service_bcrypt.gensalt());
+          String pass = gui_Text_Field_7.getText();
+          
+          String hashed = BCrypt.hashpw(pass, StaticVariables.SALT);
+        //  String hashed = BCrypt.hashpw(pass,BCrypt.gensalt(pass,BCrypt.gensalt()));
+          User u = new User( gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText(),hashed);
         
                         if( ServiceUser.getInstance().addUser(u))
                             Dialog.show("Success","Connection accepted",new Command("OK"));

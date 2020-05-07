@@ -84,12 +84,13 @@ public class MyApplication {
        Hashtable themeData = theme.getTheme("Theme");
        UIManager.getInstance().setThemeProps(themeData);
       
-       new SplashForm().show();
+ //  new SplashForm().show();
+    new ListBlogForm().show();
       //new StatsForm(theme).show();
       //new InboxForm(theme).show();
       //new DetailsForm(theme).show(); 
       //new WalkthruForm(theme).show();
-      //new TrendingForm(theme).show();
+      //new TestTrendForm(theme).show();
       //new InboxForm(theme).show();
       //new BaseAgentRHForm11().show();
       //new EmployerForm(baseEmp).show();

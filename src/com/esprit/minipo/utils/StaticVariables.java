@@ -7,12 +7,8 @@ package com.esprit.minipo.utils;
 
 /**
  *
- * @author bhk
+ * @author ASUS
  */
-public class Statics {
-    //public static final String BASE_URL="http://41.226.11.252:11300";
-    
-    public static final String BASE_URL="http://localhost/Minipo/web/app_dev.php";
-    
-
+public class StaticVariables {
+    public static String SALT ="$2a$10$OYty/sJuxGPcgxtIKQHiWe";
 }
