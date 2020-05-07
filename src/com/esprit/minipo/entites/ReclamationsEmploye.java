@@ -111,6 +111,15 @@ public class ReclamationsEmploye {
         this.description = description;
     }
 
+    public ReclamationsEmploye(int id, int idcatrecemp, String objet, String description, String image) {
+         this.id = id;
+        this.idcatrecemp = idcatrecemp;
+        this.objet = objet;
+        this.description = description;
+        this.image=image;
+        
+    }
+
     public String getNom() {
         return nom;
     }

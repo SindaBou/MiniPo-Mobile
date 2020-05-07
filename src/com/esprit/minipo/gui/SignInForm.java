@@ -117,6 +117,7 @@ public class SignInForm extends com.codename1.ui.Form {
         gui_Component_Group_1.setName("Component_Group_1");
         gui_Button_2.setText("Sign In");
         gui_Button_2.setName("Button_2");
+        //gui_Button_2.setUIID("CenterLabel");
         gui_Button_3.setText("Forgot Your Password");
         gui_Button_3.setUIID("CenterLabelSmall");
         gui_Button_3.setName("Button_3");

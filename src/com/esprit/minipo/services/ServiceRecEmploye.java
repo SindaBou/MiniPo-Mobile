@@ -83,7 +83,7 @@ public class ServiceRecEmploye {
         return tasks;
     }
    public boolean addRec(ReclamationsEmploye r ) {
-        String url = Statics.BASE_URL + "recemp?idcatrecemp=" + r.getIdcatrecemp() + "&objet=" + r.getObjet()+ "&description=" + r.getDescription() + "&id=" + r.getId();
+        String url = Statics.BASE_URL + "recemp?idcatrecemp=" + r.getIdcatrecemp() + "&objet=" + r.getObjet()+ "&description=" + r.getDescription() + "&id=" + r.getId()+"&image="+r.getImage();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

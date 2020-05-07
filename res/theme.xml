@@ -364,6 +364,78 @@
     <image name="calendar-background.jpg"  />
     <image name="calendar-separator.png" type="multi"  />
     <image name="card.png" type="multi"  />
+    <image name="ComboBox.borderBottom_1.png" type="multi"  />
+    <image name="ComboBox.borderBottom_2.png" type="multi"  />
+    <image name="ComboBox.borderBottom_3.png" type="multi"  />
+    <image name="ComboBox.borderBottom_4.png" type="multi"  />
+    <image name="ComboBox.borderBottom_5.png" type="multi"  />
+    <image name="ComboBox.borderBottom_6.png" type="multi"  />
+    <image name="ComboBox.borderBottom_7.png" type="multi"  />
+    <image name="ComboBox.borderBottom_8.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_1.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_2.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_3.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_4.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_5.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_6.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_7.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_8.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_1.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_2.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_3.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_4.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_5.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_6.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_7.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_8.png" type="multi"  />
+    <image name="ComboBox.borderCenter_1.png" type="multi"  />
+    <image name="ComboBox.borderCenter_2.png" type="multi"  />
+    <image name="ComboBox.borderCenter_3.png" type="multi"  />
+    <image name="ComboBox.borderCenter_4.png" type="multi"  />
+    <image name="ComboBox.borderCenter_5.png" type="multi"  />
+    <image name="ComboBox.borderCenter_6.png" type="multi"  />
+    <image name="ComboBox.borderCenter_7.png" type="multi"  />
+    <image name="ComboBox.borderCenter_8.png" type="multi"  />
+    <image name="ComboBox.borderLeft_1.png" type="multi"  />
+    <image name="ComboBox.borderLeft_2.png" type="multi"  />
+    <image name="ComboBox.borderLeft_3.png" type="multi"  />
+    <image name="ComboBox.borderLeft_4.png" type="multi"  />
+    <image name="ComboBox.borderLeft_5.png" type="multi"  />
+    <image name="ComboBox.borderLeft_6.png" type="multi"  />
+    <image name="ComboBox.borderLeft_7.png" type="multi"  />
+    <image name="ComboBox.borderLeft_8.png" type="multi"  />
+    <image name="ComboBox.borderRight_1.png" type="multi"  />
+    <image name="ComboBox.borderRight_2.png" type="multi"  />
+    <image name="ComboBox.borderRight_3.png" type="multi"  />
+    <image name="ComboBox.borderRight_4.png" type="multi"  />
+    <image name="ComboBox.borderRight_5.png" type="multi"  />
+    <image name="ComboBox.borderRight_6.png" type="multi"  />
+    <image name="ComboBox.borderRight_7.png" type="multi"  />
+    <image name="ComboBox.borderRight_8.png" type="multi"  />
+    <image name="ComboBox.borderTop_1.png" type="multi"  />
+    <image name="ComboBox.borderTop_2.png" type="multi"  />
+    <image name="ComboBox.borderTop_3.png" type="multi"  />
+    <image name="ComboBox.borderTop_4.png" type="multi"  />
+    <image name="ComboBox.borderTop_5.png" type="multi"  />
+    <image name="ComboBox.borderTop_6.png" type="multi"  />
+    <image name="ComboBox.borderTop_7.png" type="multi"  />
+    <image name="ComboBox.borderTop_8.png" type="multi"  />
+    <image name="ComboBox.borderTopL_1.png" type="multi"  />
+    <image name="ComboBox.borderTopL_2.png" type="multi"  />
+    <image name="ComboBox.borderTopL_3.png" type="multi"  />
+    <image name="ComboBox.borderTopL_4.png" type="multi"  />
+    <image name="ComboBox.borderTopL_5.png" type="multi"  />
+    <image name="ComboBox.borderTopL_6.png" type="multi"  />
+    <image name="ComboBox.borderTopL_7.png" type="multi"  />
+    <image name="ComboBox.borderTopL_8.png" type="multi"  />
+    <image name="ComboBox.borderTopR_1.png" type="multi"  />
+    <image name="ComboBox.borderTopR_2.png" type="multi"  />
+    <image name="ComboBox.borderTopR_3.png" type="multi"  />
+    <image name="ComboBox.borderTopR_4.png" type="multi"  />
+    <image name="ComboBox.borderTopR_5.png" type="multi"  />
+    <image name="ComboBox.borderTopR_6.png" type="multi"  />
+    <image name="ComboBox.borderTopR_7.png" type="multi"  />
+    <image name="ComboBox.borderTopR_8.png" type="multi"  />
     <image name="contact-a.png" type="multi"  />
     <image name="contact-b.png" type="multi"  />
     <image name="contact-c.png" type="multi"  />
@@ -416,8 +488,8 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="select" value="Select" />
             <entry key="Calendar.Friday" value="Fri" />
+            <entry key="select" value="Select" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
@@ -571,6 +643,9 @@
         <val key="CenterWhite.sel#margin" value="1.0,1.0,1.0,1.0" />
         <val key="CenterWhite.sel#padUnit" value="2,2,2,2" />
         <val key="CenterWhite.sel#padding" value="1.0,1.0,3.0,3.0" />
+        <border key="ComboBox.border" type="image" i1="ComboBox.borderTop_8.png" i2="ComboBox.borderBottom_8.png" i3="ComboBox.borderLeft_8.png" i4="ComboBox.borderRight_8.png" i5="ComboBox.borderTopL_8.png" i6="ComboBox.borderTopR_8.png" i7="ComboBox.borderBottomL_8.png" i8="ComboBox.borderBottomR_8.png" i9="ComboBox.borderCenter_8.png" />
+        <val key="ComboBox.fgColor" value="f4753f" />
+        <font key="ComboBox.font" type="system" face="0" style="0" size="0" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />

@@ -78,6 +78,7 @@ public class MesRecClientForm extends BaseForm {
         installSidemenu(resourceObjectInstance);
         
       // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
+      
       getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();});
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         /*gui_Label_5.setShowEvenIfBlank(true);
@@ -107,7 +108,8 @@ public class MesRecClientForm extends BaseForm {
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
         fab.addActionListener(e -> {
-            fab.setUIID("FloatingActionButtonClose");
+            new AjoutRecForm1().show();
+            /* fab.setUIID("FloatingActionButtonClose");
             Image oldImage = fab.getIcon();
             FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
             fab.setIcon(image);
@@ -163,7 +165,7 @@ public class MesRecClientForm extends BaseForm {
             popup.showPopupDialog(new Rectangle(MesRecClientForm.this.getWidth() - 10, MesRecClientForm.this.getHeight() - 10, 10, 10));
             MesRecClientForm.this.setTintColor(t);
             fab.setUIID("FloatingActionButton");
-            fab.setIcon(oldImage);
+            fab.setIcon(oldImage);*/
         });
     }
 

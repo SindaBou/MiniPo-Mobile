@@ -96,7 +96,10 @@ public class EmployeForm extends BaseEmployeForm1 {
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
         fab.addActionListener(e -> {
-            fab.setUIID("FloatingActionButtonClose");
+            //new AjoutRecForm1().show();
+        });
+                    
+            /*fab.setUIID("FloatingActionButtonClose");
             Image oldImage = fab.getIcon();
             FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
             fab.setIcon(image);
@@ -152,8 +155,8 @@ public class EmployeForm extends BaseEmployeForm1 {
             popup.showPopupDialog(new Rectangle(EmployeForm.this.getWidth() - 10, EmployeForm.this.getHeight() - 10, 10, 10));
             EmployeForm.this.setTintColor(t);
             fab.setUIID("FloatingActionButton");
-            fab.setIcon(oldImage);
-        });
+            fab.setIcon(oldImage);*/
+       // });
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!

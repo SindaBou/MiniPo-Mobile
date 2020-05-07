@@ -61,7 +61,7 @@ import tray.notification.TrayNotification;
  *
  * @author shai
  */
-public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificationCallback {
+public class MaRecEmployeForm extends BaseEmployeForm1  {
 //final String pc="probleme de compte";
         //final String pcmd="probleme de commande";
         //final String autre="autre";
@@ -79,7 +79,7 @@ public class MaRecEmployeForm extends BaseEmployeForm1 implements LocalNotificat
         System.out.println(objet);
         System.out.println(image);
         installSidemenu(resourceObjectInstance);
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
+        //getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());

@@ -30,6 +30,7 @@ import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import java.io.IOException;
 import java.util.Date;
+import rest.file.uploader.tn.FileUploader;
 
 
 /**
@@ -42,6 +43,9 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
         final String autre="autre";
         public int idcatrec=0;
         public int id=44;
+        private FileUploader file;
+        String fileNameInServer;
+        private String imgPath;
     public AjoutRecEmpForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         installSidemenu(resourceObjectInstance);
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
@@ -52,11 +56,31 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
         TextArea taDescription= new TextArea(10, 10);
         taDescription.setHint("Description");
         Button btnValider = new Button("Envoyer");
-         ComboBox c= new ComboBox();
+        path = new TextField();
+        imgBtn = new Button("parcourir ");
+        imgBtn.setMaterialIcon(FontImage.MATERIAL_CLOUD_UPLOAD);
+        ComboBox c= new ComboBox();
         c.addItem(pc);
         //c.addItem(pcmd);
         c.addItem(autre);
-        
+         imgBtn.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    imgPath = Capture.capturePhoto();
+                    System.out.println(imgPath);
+                    String link=imgPath.toString();
+                    int pod=link.indexOf("/",2);
+                    String news=link.substring(pod + 2, link.length());
+                    System.out.println(""+news);
+                    FileUploader fu = new FileUploader("http://localhost:82/MiniPo-web/web/uploads/");
+                    fileNameInServer = fu.upload(news);
+                    path.setText(fileNameInServer);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -76,7 +100,7 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
                         idcatrec=3;
                          break;}
                         
-                        ReclamationsEmploye r = new ReclamationsEmploye(id,idcatrec, tfObjet.getText(),taDescription.getText());
+                        ReclamationsEmploye r = new ReclamationsEmploye(id,idcatrec, tfObjet.getText(),taDescription.getText(),fileNameInServer);
                         if( ServiceRecEmploye.getInstance().addRec(r)){
                             Dialog.show("Success","Reclamation Envoyée",new Command("OK"));
                              ToastBar.Status status = ToastBar.getInstance().createStatus();
@@ -96,10 +120,12 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
             }
         });
         
-        addAll(c,tfObjet,taDescription,btnValider);
+        addAll(c,tfObjet,taDescription,path ,imgBtn,btnValider);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
                 
     }
+    private com.codename1.ui.TextField path=new com.codename1.ui.TextField();
+    private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();
     
     
 }
