@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.validation.Constraint;
 import com.esprit.minipo.entites.Commande;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.utils.Statics;
@@ -19,17 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  *
  * @author bhk
  */
-public class ServiceRecClient {
+public class ServiceRecClient implements Constraint {
 
     public ArrayList<ReclamationClient> tasks;
     
     public static ServiceRecClient instance=null;
     public boolean resultOK;
     private ConnectionRequest req;
+    private int length;
+    private String errorMessage;
 
     private ServiceRecClient() {
          req = new ConnectionRequest();
@@ -142,5 +146,42 @@ public class ServiceRecClient {
         NetworkManager.getInstance().addToQueueAndWait(req);
         System.out.println(tasks);
         return tasks;
+    }
+
+    public ServiceRecClient(int length, String errorMessage) {
+        this.length = length;
+        this.errorMessage = errorMessage;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+    
+    @Override
+    public boolean isValid(Object value) {
+        return value != null && value.toString().length() <= length;
+    }
+
+    @Override
+    public String getDefaultFailMessage() {
+         if(errorMessage == null) {
+            if(length == 1) {
+                return "A value is required"; 
+            }
+            return "Input must be at least " + length + " characters";
+        }
+        return errorMessage;
     }
 }

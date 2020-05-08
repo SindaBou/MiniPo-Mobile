@@ -28,6 +28,22 @@ import com.codename1.io.Util;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
+import com.codename1.ui.Component;
+import com.codename1.ui.Container;
+import com.codename1.ui.Label;
+import com.codename1.ui.Stroke;
+import com.codename1.ui.TextComponent;
+import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.layouts.TextModeLayout;
+import com.codename1.ui.plaf.RoundRectBorder;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.table.TableLayout;
+import com.codename1.ui.validation.GroupConstraint;
+import com.codename1.ui.validation.LengthConstraint;
+import com.codename1.ui.validation.Validator;
 import java.io.IOException;
 import java.util.Date;
 import rest.file.uploader.tn.FileUploader;
@@ -46,23 +62,116 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
         private FileUploader file;
         String fileNameInServer;
         private String imgPath;
+         public AjoutRecEmpForm() {
+        
+        this(com.codename1.ui.util.Resources.getGlobalResources());
+    }
     public AjoutRecEmpForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         installSidemenu(resourceObjectInstance);
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
+       // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         setTitle("Envoyer une Reclamation");
         setLayout(BoxLayout.y());
-        TextField tfObjet = new TextField("","Objet");
-        TextArea taDescription= new TextArea(10, 10);
-        taDescription.setHint("Description");
+        TextModeLayout tl = new TextModeLayout(2, 2);
+        TextComponent tfObjet = new TextComponent().label("objet");
+        TextComponent taDescription = new TextComponent().label("Description").multiline(true);
+        taDescription.rows(4);
+        TableLayout fullNameLayout = new TableLayout(2, 2);
+        Container CONTAINER=new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
+        Container container=new Container(tl);
+        Container containerImage=new Container(fullNameLayout);
         Button btnValider = new Button("Envoyer");
-        path = new TextField();
-        imgBtn = new Button("parcourir ");
-        imgBtn.setMaterialIcon(FontImage.MATERIAL_CLOUD_UPLOAD);
-        ComboBox c= new ComboBox();
+        btnValider.setPreferredSize(new Dimension(50,110));
+        path = new Label(".");
+        imgBtn = new Button();
+        imgBtn.setUIID("btnImage");
+        imgBtn.setMaterialIcon(FontImage.MATERIAL_ADD_A_PHOTO);
+        imgBtn.setPreferredSize(new Dimension(150,150));
+        Button cancel = new Button("Cancel"); 
+         //fullNameLayout.setWidthPercentage(20);
+          containerImage.add(fullNameLayout.createConstraint().widthPercentage(85),path)
+                        .add(fullNameLayout.createConstraint().widthPercentage(15),imgBtn);
+        ComboBox c= new ComboBox("Categorie");
         c.addItem(pc);
         //c.addItem(pcmd);
         c.addItem(autre);
+        //c.setUIID("ComboBoxItem");
+        Validator val = new Validator();
+        //val.addConstraint(tfObjet, new ServiceRecClient(5,"trop long"));
+        //val.addConstraint(tfObjet, new LengthConstraint(2,"trop court"));
+        val.addConstraint(tfObjet,new GroupConstraint(new LengthConstraint(2,"trop court"),new ServiceRecClient(5,"trop long")));
+        val.addConstraint(taDescription, new LengthConstraint(2,"trop court"));
+        //***************************************************************************
+        container.add(c).add(tl.createConstraint().widthPercentage(49), tfObjet).
+        add(tl.createConstraint().widthPercentage(1), createSeparator()).
+        add(tl.createConstraint().horizontalSpan(50), taDescription)
+        .add(containerImage).add(btnValider);
+ //************************
+/* Style btnImageStyle = imgBtn.getAllStyles();
+Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+btnImageStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0).
+        strokeOpacity(50).
+        stroke(borderStroke));*/
+//*********************
+         Style btnStyle = btnValider.getAllStyles();
+         Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+         btnStyle.setBorder(RoundRectBorder.create().
+         strokeColor(0).
+         strokeOpacity(50).
+         stroke(borderStroke));
+//*******************
+//CONTAINER.add(container);
+      Style cStyle = c.getAllStyles();
+//Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+        cStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0).
+        strokeOpacity(50).
+        stroke(borderStroke));
+        cStyle.setBgColor(0xccff);
+        cStyle.setBgTransparency(255);
+        cStyle.setBackgroundGradientRelativeX(0xf4753f);
+        cStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        cStyle.setMargin(Component.BOTTOM, 3);
+//******************
+        Style loginStyle = tfObjet.getAllStyles();
+//Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+        loginStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0).
+        strokeOpacity(120).
+        stroke(borderStroke));
+        loginStyle.setBgColor(0xffffff);
+        loginStyle.setBgTransparency(255);
+        loginStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        loginStyle.setMargin(Component.BOTTOM, 3);
+//**********************************
+         Style passwordStyle = taDescription.getAllStyles();
+         passwordStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0).
+        strokeOpacity(120).
+        stroke(borderStroke));
+        passwordStyle.setBgColor(0xffffff);
+        passwordStyle.setBgTransparency(255);
+
+        Button closeButton = new Button();
+        closeButton.setPreferredSize(new Dimension(40,40));
+        Style closeStyle = closeButton.getAllStyles();
+        closeStyle.setFgColor(0xffffff);
+        closeStyle.setBgTransparency(0);
+        closeStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        closeStyle.setPadding(3, 3, 3, 3);
+//closeStyle.setBorder(RoundBorder.create().shadowOpacity(100));
+        FontImage.setMaterialIcon(closeButton, FontImage.MATERIAL_CANCEL);
+
+        Container layers = LayeredLayout.encloseIn(container, FlowLayout.encloseRight());
+        Style boxStyle = container.getUnselectedStyle();
+        boxStyle.setBgTransparency(255);
+//boxStyle.setBgColor(0xeeeeee);
+        boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        boxStyle.setMargin(4, 3, 3, 3);
+        boxStyle.setPadding(2, 2, 2, 2);
+        //***************************************************************************
          imgBtn.addPointerPressedListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -119,13 +228,34 @@ public class AjoutRecEmpForm extends BaseEmployeForm1{
                 
             }
         });
-        
-        addAll(c,tfObjet,taDescription,path ,imgBtn,btnValider);
+         Container entetec=new Container(BoxLayout.x());
+        entetec.setUIID("DesignEnTete");
+        Label back=new Label();
+        FontImage iconB = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, "Supprimer", 4.9f);
+        back.setIcon(iconB);
+        Label title=new Label("Reclamation");
+        entetec.add(back).add(title);
+        add(entetec);
+        add( layers);
+         back.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new MesRecEmpForm().show();
+            }
+        });
+        //addAll(c,tfObjet,taDescription,path ,imgBtn,btnValider);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
                 
     }
-    private com.codename1.ui.TextField path=new com.codename1.ui.TextField();
+    private com.codename1.ui.Label path=new com.codename1.ui.Label();
     private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();
-    
+     private Label createSeparator() {
+    Label sep = new Label();
+    sep.setUIID("Separator");
+    // the separator line  is implemented in the theme using padding and background color, by default labels
+    // are hidden when they have no content, this method disables that behavior
+    sep.setShowEvenIfBlank(true);
+    return sep;
+}
     
 }

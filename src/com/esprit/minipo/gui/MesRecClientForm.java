@@ -108,7 +108,7 @@ public class MesRecClientForm extends BaseForm {
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
         fab.addActionListener(e -> {
-            new AjoutRecForm1().show();
+            new AjoutRecForm1().show();});
             /* fab.setUIID("FloatingActionButtonClose");
             Image oldImage = fab.getIcon();
             FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
@@ -166,7 +166,7 @@ public class MesRecClientForm extends BaseForm {
             MesRecClientForm.this.setTintColor(t);
             fab.setUIID("FloatingActionButton");
             fab.setIcon(oldImage);*/
-        });
+       // });
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!

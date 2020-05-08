@@ -103,13 +103,15 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         gui_Text_Area_1_4.setRows(2);
         gui_Text_Area_1_4.setColumns(100);
         gui_Text_Area_1_4.setEditable(false);
+       
         
         FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
         RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
         fab.addActionListener(e -> {
-            fab.setUIID("FloatingActionButtonClose");
+            new AjoutRecEmpForm().show();
+           /* fab.setUIID("FloatingActionButtonClose");
             Image oldImage = fab.getIcon();
             FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
             fab.setIcon(image);
@@ -165,7 +167,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
             popup.showPopupDialog(new Rectangle(MesRecEmpForm.this.getWidth() - 10, MesRecEmpForm.this.getHeight() - 10, 10, 10));
             MesRecEmpForm.this.setTintColor(t);
             fab.setUIID("FloatingActionButton");
-            fab.setIcon(oldImage);
+            fab.setIcon(oldImage);*/
         });
     }
 

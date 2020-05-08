@@ -75,6 +75,7 @@
         <val key="CenterWhite.margin" value="1.0,1.0,1.0,1.0" />
         <val key="CenterWhite.padUnit" value="2,2,2,2" />
         <val key="CenterWhite.padding" value="1.0,1.0,3.0,3.0" />
+        <val key="ComboBoxItem.fgColor" value="ffffff" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -83,6 +84,10 @@
         <val key="DarkRect.padUnit" value="2,2,0,2" />
         <val key="DarkRect.padding" value="0.0,0.0,5.0,5.0" />
         <val key="DarkRect.transparency" value="0" />
+        <val key="DesignEnTete.bgColor" value="ffffff" />
+        <gradient key="DesignEnTete.bgGradient" color1="16777215" color2="16777215" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="DesignEnTete.bgType" value="6" />
+        <val key="DesignEnTete.margin" value="0.0,35.0,0.0,0.0" />
         <val key="FloatingActionButton.align" value="4" />
         <val key="FloatingActionButton.bgColor" value="3366ff" />
         <gradient key="FloatingActionButton.bgGradient" color1="3368703" color2="52479" posX="0.5" posY="0.5" radius="1.0" />
@@ -358,6 +363,20 @@
         <val key="WelcomeTitle.padUnit" value="2,2,2,2" />
         <val key="WelcomeTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="WelcomeTitle.transparency" value="0" />
+        <val key="btnImage.align" value="4" />
+        <val key="btnImage.bgColor" value="3366ff" />
+        <gradient key="btnImage.bgGradient" color1="52479" color2="3368703" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="btnImage.bgType" value="6" />
+        <border key="btnImage.border" type="round" roundBorderColor="3368703" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="20.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="50.0" shadowMM="false" rectangle="false" />
+        <val key="btnImage.fgColor" value="ffffff" />
+        <val key="btnImage.margin" value="30.0,0.0,0.0,0.0" />
+        <val key="btnImage.sel#align" value="4" />
+        <val key="btnImage.sel#bgColor" value="3366ff" />
+        <gradient key="btnImage.sel#bgGradient" color1="52479" color2="3368703" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="btnImage.sel#bgType" value="6" />
+        <border key="btnImage.sel#border" type="round" roundBorderColor="3368703" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="20.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="50.0" shadowMM="false" rectangle="false" />
+        <val key="btnImage.sel#fgColor" value="ffffff" />
+        <val key="btnImage.sel#margin" value="30.0,0.0,0.0,0.0" />
     </theme>
     <image name="bla.jpg"  />
     <image name="bridge.jpg"  />
@@ -436,6 +455,15 @@
     <image name="ComboBox.borderTopR_6.png" type="multi"  />
     <image name="ComboBox.borderTopR_7.png" type="multi"  />
     <image name="ComboBox.borderTopR_8.png" type="multi"  />
+    <image name="ComboBox.press#borderBottom_1.png" type="multi"  />
+    <image name="ComboBox.press#borderBottomL_1.png" type="multi"  />
+    <image name="ComboBox.press#borderBottomR_1.png" type="multi"  />
+    <image name="ComboBox.press#borderCenter_1.png" type="multi"  />
+    <image name="ComboBox.press#borderLeft_1.png" type="multi"  />
+    <image name="ComboBox.press#borderRight_1.png" type="multi"  />
+    <image name="ComboBox.press#borderTop_1.png" type="multi"  />
+    <image name="ComboBox.press#borderTopL_1.png" type="multi"  />
+    <image name="ComboBox.press#borderTopR_1.png" type="multi"  />
     <image name="contact-a.png" type="multi"  />
     <image name="contact-b.png" type="multi"  />
     <image name="contact-c.png" type="multi"  />
@@ -643,9 +671,7 @@
         <val key="CenterWhite.sel#margin" value="1.0,1.0,1.0,1.0" />
         <val key="CenterWhite.sel#padUnit" value="2,2,2,2" />
         <val key="CenterWhite.sel#padding" value="1.0,1.0,3.0,3.0" />
-        <border key="ComboBox.border" type="image" i1="ComboBox.borderTop_8.png" i2="ComboBox.borderBottom_8.png" i3="ComboBox.borderLeft_8.png" i4="ComboBox.borderRight_8.png" i5="ComboBox.borderTopL_8.png" i6="ComboBox.borderTopR_8.png" i7="ComboBox.borderBottomL_8.png" i8="ComboBox.borderBottomR_8.png" i9="ComboBox.borderCenter_8.png" />
-        <val key="ComboBox.fgColor" value="f4753f" />
-        <font key="ComboBox.font" type="system" face="0" style="0" size="0" />
+        <val key="ComboBoxItem.fgColor" value="ffffff" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -654,6 +680,10 @@
         <val key="DarkRect.padUnit" value="2,2,0,2" />
         <val key="DarkRect.padding" value="0.0,0.0,5.0,5.0" />
         <val key="DarkRect.transparency" value="0" />
+        <val key="DesignEnTete.bgColor" value="ffffff" />
+        <gradient key="DesignEnTete.bgGradient" color1="16777215" color2="16777215" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="DesignEnTete.bgType" value="6" />
+        <val key="DesignEnTete.margin" value="0.0,35.0,0.0,0.0" />
         <val key="FloatingActionButton.align" value="4" />
         <val key="FloatingActionButton.bgColor" value="eeb295" />
         <gradient key="FloatingActionButton.bgGradient" color1="16766644" color2="13855849" posX="0.5" posY="0.5" radius="1.0" />
@@ -1040,6 +1070,20 @@
         <val key="WelcomeTitle.padUnit" value="2,2,2,2" />
         <val key="WelcomeTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="WelcomeTitle.transparency" value="0" />
+        <val key="btnImage.align" value="4" />
+        <val key="btnImage.bgColor" value="f4753f" />
+        <gradient key="btnImage.bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="btnImage.bgType" value="6" />
+        <border key="btnImage.border" type="round" roundBorderColor="16020799" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="20.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="50.0" shadowMM="false" rectangle="false" />
+        <val key="btnImage.fgColor" value="ffffff" />
+        <val key="btnImage.margin" value="30.0,0.0,0.0,0.0" />
+        <val key="btnImage.sel#align" value="4" />
+        <val key="btnImage.sel#bgColor" value="f4753f" />
+        <gradient key="btnImage.sel#bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="btnImage.sel#bgType" value="6" />
+        <border key="btnImage.sel#border" type="round" roundBorderColor="16020799" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="20.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="50.0" shadowMM="false" rectangle="false" />
+        <val key="btnImage.sel#fgColor" value="ffffff" />
+        <val key="btnImage.sel#margin" value="30.0,0.0,0.0,0.0" />
         <val key="transparency" value="0" />
     </theme>
     <image name="toolbar-profile-pic.png" type="multi"  />

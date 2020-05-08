@@ -98,6 +98,8 @@ public class MyApplication implements BackgroundFetch {
        UIManager.getInstance().setThemeProps(themeData);
       
        new SplashForm().show();
+       //new AjoutRecForm1().show();
+      //new AjoutRecEmpForm().show();
       //new StatsForm(theme).show();
       //new InboxForm(theme).show();
       //new DetailsForm(theme).show(); 
@@ -108,15 +110,8 @@ public class MyApplication implements BackgroundFetch {
       //new EmployerForm(baseEmp).show();
       //new HomeForm().show();
       //new HomeFormRec().show();
-      Label supported = new Label();
-       if (d.isBackgroundFetchSupported()){
-            // This call is necessary to initialize background fetch
-            d.setPreferredBackgroundFetchInterval(100);
-
-            supported.setText("Background Fetch IS Supported");
-        } else {
-            supported.setText("Background Fetch is NOT Supported");
-        }
+      
+     
                
     }
     

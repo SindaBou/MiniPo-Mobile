@@ -18,26 +18,38 @@
  */
 package com.esprit.minipo.gui;
 
+import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
+import com.codename1.ui.Label;
+import com.codename1.ui.Stroke;
 import com.codename1.ui.TextArea;
+import com.codename1.ui.TextComponent;
 import com.codename1.ui.TextField;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.layouts.TextModeLayout;
+import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.table.TableLayout;
+import com.codename1.ui.validation.LengthConstraint;
+import com.codename1.ui.validation.Validator;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
 import java.io.IOException;
@@ -72,7 +84,9 @@ final String pc="probleme de compte";
         tCategorie.setUIID("BlackLabel");
          tfObjet.setText(objet);
          tfObjet.setUIID("LabelBlack");
-         taDescription.setText(description);
+         TextComponent taDescription = new TextComponent().multiline(true).text(description);
+         
+         taDescription.rows(3);
          LEtat.setText(etat);
          LEtat.setUIID("RedLabel");
          LabelDescription.setText(description);
@@ -80,7 +94,9 @@ final String pc="probleme de compte";
          LabelReponse.setText(reponse);
          LabelReponse.setUIID("RedLabel");
          //Lcategorie.setText("categorie");
-         
+         Validator val = new Validator();
+        //val.addConstraint(tfObjet, new LengthConstraint(2,"trop court"));
+        val.addConstraint(taDescription, new LengthConstraint(2,"trop court"));
          
          
             //Image img1=URLImage.createToStorage(placeHolder, "photo"+id, url);
@@ -88,22 +104,43 @@ final String pc="probleme de compte";
           //image = new TextField();
          imgBtn = new Button("parcourir image");
         Button btnValider = new Button("Modifier");
+        btnValider.setPreferredSize(new Dimension(50,110));
        
         placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
            String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
            Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
-                         
-        //gui_Container_1.add(tCategorie);
-        //gui_Container_1.add(tfObjet);
-        //gui_Container_1.add(taDescription);
-       //gui_Container_1.add(image1)
+           ImageViewer img=new ImageViewer(image1);
+           img.setPreferredSize(new Dimension(200,200)); 
+           TableLayout fullNameLayout = new TableLayout(7,1);
+           TextModeLayout tl = new TextModeLayout(2, 2);
+           Container composant =new Container(tl);
+        
+       
        Container c =new Container(new FlowLayout(CENTER,CENTER));
+       
         //gui_Container_1.add(btnValider);
-        c.add(image1);
-        if(LEtat.getText().equals("traiter"))
-        addAll(LEtat,Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,LabelDescription,c,Lreponse,LabelReponse);
-        if(LEtat.getText().equals("non traiter"))
-        addAll(LEtat,Lcategorie,tCategorie,Lobjet,tfObjet,Ldescription,taDescription,c,btnValider);
+        c.add(img);
+        if(LEtat.getText().equals("traiter")){
+        composant.add(LEtat)
+                .add(fullNameLayout.createConstraint().widthPercentage(85),Lcategorie)
+                .add(tCategorie)
+                .add(Lobjet)
+                .add(tfObjet)
+                .add(Ldescription)
+                .add(LabelDescription)
+                .add(c).add(Lreponse)
+                .add(LabelReponse);}
+        if(LEtat.getText().equals("non traiter")){
+        composant.add(LEtat)
+                .add(Lcategorie)
+                .add(tCategorie)
+                .add(Lobjet)
+                .add(tfObjet)
+                .add(Ldescription)
+                .add(taDescription)
+                .add(c)
+                .add(btnValider);}
+        
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -128,12 +165,51 @@ final String pc="probleme de compte";
                 
             }
         });
-       
-           
-           
+        //**************design label************
+       Style loginStyle = taDescription.getAllStyles();
+       Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+        loginStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0).
+        strokeOpacity(120).
+        stroke(borderStroke));
+        loginStyle.setBgColor(0xffffff);
+        loginStyle.setBgTransparency(255);
+        loginStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        loginStyle.setMargin(Component.BOTTOM, 3);
+           //*******design container Layer*******
+        Container layers = LayeredLayout.encloseIn(composant, FlowLayout.encloseRight());
+          Style boxStyle = composant.getUnselectedStyle();
+                boxStyle.setBgTransparency(255);
+              //boxStyle.setBgColor(0xeeeeee);
+               boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+               boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+               boxStyle.setMargin(4, 3, 3, 3);
+               boxStyle.setPadding(2, 2, 2, 2);
+        //***********************************
+        //*********************
+            Style btnStyle = btnValider.getAllStyles();
+//Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+                  btnStyle.setBorder(RoundRectBorder.create().
+                  strokeColor(0).
+                  strokeOpacity(50).
+                  stroke(borderStroke));
+//*******************
+            Container entetec=new Container(BoxLayout.x());
+        entetec.setUIID("DesignEnTete");
+        Label back=new Label();
+        FontImage iconB = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, "Supprimer", 4.9f);
+        back.setIcon(iconB);
+        Label title=new Label("Mes reclamations");
+        entetec.add(back).add(title);
         //c.add(c)
         //c.add(image1);
-        
+        addAll(entetec,layers);
+        back.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new MesRecClientForm().show();
+            }
+        });
     }
     
     public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance) {
@@ -156,7 +232,7 @@ final String pc="probleme de compte";
     private com.codename1.ui.Label Lreponse = new com.codename1.ui.Label("Reponse");
     private com.codename1.ui.Label LabelReponse = new com.codename1.ui.Label();
     private com.codename1.ui.Label LabelDescription = new com.codename1.ui.Label();
-    private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
+    //private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
     private com.codename1.ui.TextField image=new com.codename1.ui.TextField();
     private com.codename1.ui.Button imgBtn = new com.codename1.ui.Button();
     private com.codename1.ui.Button btnValider= new com.codename1.ui.Button();
@@ -180,7 +256,7 @@ final String pc="probleme de compte";
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, c);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, tfObjet);
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, taDescription);
+        //gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, taDescription);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, image);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, imgBtn);
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, btnValider);

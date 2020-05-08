@@ -61,6 +61,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.util.ImageIO;
+import com.codename1.ui.validation.GroupConstraint;
 import com.codename1.ui.validation.LengthConstraint;
 import com.codename1.ui.validation.Validator;
 import com.codename1.util.Base64;
@@ -131,10 +132,12 @@ final String pc="probleme de compte";
          //taDescription= new TextArea(10, 15);
          //taDescription.setHint("Description");
           path = new Label(".");
+         
          imgBtn = new Button();
+         imgBtn.setUIID("btnImage");
          imgBtn.setMaterialIcon(FontImage.MATERIAL_ADD_A_PHOTO);
-         imgBtn.setPreferredSize(new Dimension(10,10));
-         Button cancel = new Button("Cancel");
+        imgBtn.setPreferredSize(new Dimension(150,150));
+         Button cancel = new Button("Cancel"); 
          //fullNameLayout.setWidthPercentage(20);
           containerImage.add(fullNameLayout.createConstraint().widthPercentage(85),path)
                         .add(fullNameLayout.createConstraint().widthPercentage(15),imgBtn);
@@ -144,9 +147,10 @@ final String pc="probleme de compte";
         c.addItem(pc);
         c.addItem(pcmd);
         c.addItem(autre);
+        c.setUIID("ComboBox");
         
         Validator val = new Validator();
-        val.addConstraint(tfObjet, new LengthConstraint(2,"trop court"));
+        val.addConstraint(tfObjet,new GroupConstraint(new LengthConstraint(2,"trop court"),new ServiceRecClient(5,"trop long")));
         val.addConstraint(taDescription, new LengthConstraint(2,"trop court"));
         //val.addConstraint(price, new NumericConstraint(true));
        /* Container box = BoxLayout.encloseY(
@@ -162,15 +166,15 @@ container.add(c).add(tl.createConstraint().widthPercentage(49), tfObjet).
         add(tl.createConstraint().horizontalSpan(50), taDescription)
         .add(containerImage).add(btnValider);
  //************************
- Style btnImageStyle = imgBtn.getAllStyles();
+/* Style btnImageStyle = imgBtn.getAllStyles();
 Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
 btnImageStyle.setBorder(RoundRectBorder.create().
         strokeColor(0).
         strokeOpacity(50).
-        stroke(borderStroke));
+        stroke(borderStroke));*/
 //*********************
 Style btnStyle = btnValider.getAllStyles();
-//Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
 btnStyle.setBorder(RoundRectBorder.create().
         strokeColor(0).
         strokeOpacity(50).
@@ -209,18 +213,19 @@ passwordStyle.setBgColor(0xffffff);
 passwordStyle.setBgTransparency(255);
 
         Button closeButton = new Button();
+        closeButton.setPreferredSize(new Dimension(40,40));
 Style closeStyle = closeButton.getAllStyles();
 closeStyle.setFgColor(0xffffff);
 closeStyle.setBgTransparency(0);
 closeStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
 closeStyle.setPadding(3, 3, 3, 3);
-closeStyle.setBorder(RoundBorder.create().shadowOpacity(100));
-FontImage.setMaterialIcon(closeButton, FontImage.MATERIAL_CLOSE);
+//closeStyle.setBorder(RoundBorder.create().shadowOpacity(100));
+FontImage.setMaterialIcon(closeButton, FontImage.MATERIAL_CANCEL);
 
-Container layers = LayeredLayout.encloseIn(container, FlowLayout.encloseRight(closeButton));
+Container layers = LayeredLayout.encloseIn(container, FlowLayout.encloseRight());
 Style boxStyle = container.getUnselectedStyle();
 boxStyle.setBgTransparency(255);
-boxStyle.setBgColor(0xeeeeee);
+//boxStyle.setBgColor(0xeeeeee);
 boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
 boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
 boxStyle.setMargin(4, 3, 3, 3);
@@ -304,7 +309,21 @@ boxStyle.setPadding(2, 2, 2, 2);
         });
  
         // container.add(tl.createConstraint().widthPercentage(60), tfObjet);
+        Container entetec=new Container(BoxLayout.x());
+        entetec.setUIID("DesignEnTete");
+        Label back=new Label();
+        FontImage iconB = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, "Supprimer", 4.9f);
+        back.setIcon(iconB);
+        Label title=new Label("Reclamation");
+        entetec.add(back).add(title);
+        add(entetec);
         add( layers);
+         back.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new MesRecClientForm().show();
+            }
+        });
         //addComponent(tl.createConstraint().widthPercentage(60), tfObjet);
         //addAll(c,container,containerImage,btnValider);
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
