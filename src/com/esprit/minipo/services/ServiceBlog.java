@@ -44,7 +44,48 @@ public class ServiceBlog {
     }
     
     
+    public ArrayList<Articles> parseBlog(String jsonText){
+        try {
+             tasks=new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String,Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            
+            List<Map<String,Object>> list = (List<Map<String,Object>>)tasksListJson.get("root");
+            for(Map<String,Object> obj : list){
+                
+                Articles t = new Articles();
+                float ida = Float.parseFloat(obj.get("ida").toString());
+                t.setIdA((int)ida);
+                t.setTitre(obj.get("titre").toString());
+                t.setImagename(obj.get("imageName").toString());
+                t.setDescription(obj.get("description").toString());
+              //System.out.println(obj.get("description").toString());
+                System.out.println(t);
+                tasks.add(t);
+            }
+            
+            
+        } catch (IOException ex) {
+            
+        }
+        return tasks;
+    }
     
+    public ArrayList<Articles> getAllBlog(){
+        String url = Statics.BASE_URL+"/mobile/ListBlogClient";
+        req.setUrl(url);
+            System.out.println(req.getUrl());
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                tasks = parseBlog(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return tasks;
+    }
    
     
 }
