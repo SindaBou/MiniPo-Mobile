@@ -19,6 +19,7 @@
 package com.esprit.minipo.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -29,15 +30,18 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.table.TableLayout;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
 import java.util.ArrayList;
@@ -52,6 +56,7 @@ public class MesRecClientForm extends BaseForm {
     ArrayList<ReclamationClient> recClt=new ArrayList<ReclamationClient>();
     private int idRec;
     private int id=45;
+    private EncodedImage placeHolder;
 
     public MesRecClientForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -247,12 +252,16 @@ public class MesRecClientForm extends BaseForm {
             String etat=recClt.get(i).getEtatr();
             String reponse=recClt.get(i).getReponse();
          //creation
-        gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
+        //gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
          gui_Label_1 = new com.codename1.ui.Label();
          gui_Container_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
          gui_Label_4 = new com.codename1.ui.Label();
-         gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+         //gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+         TableLayout fullNameLayout = new TableLayout(1,2);
+         Container container = new Container(fullNameLayout);
+         Container gui_Container_3 = new Container(BoxLayout.y());
+         //ImageViewer img=new ImageViewer(recClt.get(i).getImage());
          gui_Label_3 = new com.codename1.ui.Label();
          gui_Label_2 = new com.codename1.ui.Label();
          gui_Text_Area_1 = new com.codename1.ui.TextArea();
@@ -269,16 +278,34 @@ public class MesRecClientForm extends BaseForm {
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
         setName("InboxForm");
-        addComponent(gui_Container_1);
-
-        gui_Container_1.setName("Container_1");
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
+        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+           ImageViewer img=new ImageViewer(image1);
+           img.setPreferredSize(new Dimension(300,300));
+           
+        container.add(fullNameLayout.createConstraint().widthPercentage(75),gui_Container_3)
+                 .add(img);
+        //************design container layer**************
+        Container layers = LayeredLayout.encloseIn(container, FlowLayout.encloseRight());
+                  Style boxStyle = container.getUnselectedStyle();
+                  boxStyle.setBgTransparency(255);
+//boxStyle.setBgColor(0xeeeeee);
+                boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setMargin(4, 3, 3, 3);
+                boxStyle.setPadding(2, 2, 2, 2);
+//*******************************************************************
+ 
+        addComponent(layers);
+       // gui_Container_1.setName("Container_1");
+        //gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
         gui_Label_1.setText("11:31 AM");
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
+        //gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
         gui_Container_4.setName("Container_4");
         ((com.codename1.ui.layouts.FlowLayout)gui_Container_4.getLayout()).setAlign(com.codename1.ui.Component.CENTER);
         gui_Container_4.addComponent(gui_Label_4);
@@ -297,14 +324,14 @@ public class MesRecClientForm extends BaseForm {
             
         });
         gui_Container_3.setLeadComponent(gui_Label_3);
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
+        //gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
         gui_Container_3.setName("Container_3");
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_9);
         gui_Container_3.addComponent(gui_Label_2);
-        gui_Container_3.addComponent(gui_Text_Area_1);
+        //gui_Container_3.addComponent(gui_Text_Area_1);
         //gui_Container_3.addComponent(gui_Label_8);
-        gui_Container_3.addComponent(gui_Label_6);
+        //gui_Container_3.addComponent(gui_Label_6);
         gui_Container_3.setName("Container_3");
         //addComponent(gui_Label_6);
         //gui_Container_3.addComponent(gui_Label_6);
@@ -320,7 +347,7 @@ public class MesRecClientForm extends BaseForm {
         gui_Label_2.setName("Label_2");
         gui_Label_6.setText("");
 
-        gui_Label_6.setText("------------------------------------------------------------------------------------------");
+        //gui_Label_6.setText("------------------------------------------------------------------------------------------");
         gui_Label_6.setUIID("separator");
         gui_Label_6.setName("Label_6");
         gui_Text_Area_1.setText(String.valueOf(recClt.get(i).getIdR()));

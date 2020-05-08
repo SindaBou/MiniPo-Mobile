@@ -96,8 +96,8 @@ public class MyApplication implements BackgroundFetch {
         Display d = Display.getInstance();
        Hashtable themeData = theme.getTheme("Theme");
        UIManager.getInstance().setThemeProps(themeData);
-      
-       new SplashForm().show();
+         new AjoutRecForm1().show();
+       //new SplashForm().show();
        //new AjoutRecForm1().show();
       //new AjoutRecEmpForm().show();
       //new StatsForm(theme).show();
