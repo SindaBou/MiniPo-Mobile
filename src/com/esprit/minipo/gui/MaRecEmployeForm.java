@@ -133,7 +133,7 @@ public class MaRecEmployeForm extends BaseEmployeForm1  {
            Container composant =new Container(tl);
            Container c =new Container(new FlowLayout(CENTER,CENTER));
         //gui_Container_1.add(btnValider);
-        c.add(image1);
+        c.add(img);
          if(LabelEtat.getText().equals("traiter")){
         composant.add(LabelEtat)
                 .add(fullNameLayout.createConstraint().widthPercentage(85),LabelCategorie)
