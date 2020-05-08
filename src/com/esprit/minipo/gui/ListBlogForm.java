@@ -26,7 +26,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
-import com.esprit.minipo.entites.Blog;
+import com.esprit.minipo.entites.Articles;
 import com.esprit.minipo.services.ServiceBlog;
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @author shai
  */
 public class ListBlogForm extends BaseForm {
-     private ArrayList<Blog> blog=new ArrayList<Blog>();
+     private ArrayList<Articles> blog=new ArrayList<Articles>();
      private Resources theme=UIManager.initFirstTheme("/theme");
      //private Blog blog;
      Form current;

@@ -5,10 +5,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/MyApplication.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/ListBlogForm.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/RegistrationForm.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/SignInForm.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/ForgetPasswordForm.java</file>
             <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/services/ServiceBlog.java</file>
             <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/TestTrendForm.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/minipoMobile/src/com/esprit/minipo/gui/BaseForm.java</file>
         </group>
     </open-files>
 </project-private>

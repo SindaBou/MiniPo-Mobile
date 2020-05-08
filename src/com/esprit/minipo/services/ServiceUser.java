@@ -61,6 +61,7 @@ public class ServiceUser {
         return resultOK;
     }
     
+        
     public ArrayList<User> parseUser(String jsonText){
         try {
             User =new ArrayList<>();
@@ -158,6 +159,24 @@ public class ServiceUser {
    public boolean UpdateUser(User u){
         int idUser = SignInForm.idUser;
         String url = Statics.BASE_URL + "/user/updateuserJson/" +idUser+ "?username=" + u.getUsername() + "&email=" + u.getEmail() + "&password=" +u.getPassword()+ "&tel" + u.getTel() +"&adresse=" +u.getAdresse()+ "&firstname=" + u.getFirstname()+ "&lastname=" + u.getLastname();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>()
+        {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);            }
+            
+        }
+        ); 
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+   
+   
+   public boolean UpdateUserPass(User u){
+        int idUser = SignInForm.idUser;
+        String url = Statics.BASE_URL + "/user/updateuserPassJson/" +idUser+  "?password=" +u.getPassword();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>()
         {

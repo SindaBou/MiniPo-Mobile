@@ -18,6 +18,7 @@
  */
 package com.esprit.minipo.gui;
 
+import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
@@ -38,17 +39,17 @@ import java.util.Hashtable;
  *
  * @author Shai Almog
  */
-public class SignInForm extends com.codename1.ui.Form {
+public class ForgetPasswordForm extends com.codename1.ui.Form {
      public ArrayList<User> users;
      private Resources theme=UIManager.initFirstTheme("/theme");
       public static int idUser ;
 
-    public SignInForm() {
+    public ForgetPasswordForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
            
     }
     
-    public SignInForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public ForgetPasswordForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
         getToolbar().setUIID("Container");
@@ -56,14 +57,13 @@ public class SignInForm extends com.codename1.ui.Form {
         FontImage mat = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "SigninTitle", 3.5f);
          Hashtable themeData = MyApplication.theme.getTheme("Theme");
          UIManager.getInstance().setThemeProps(themeData);
-         //Display.getInstance().getCurrent().refreshTheme();
         getToolbar().addCommandToLeftBar("", mat, e -> new SplashForm().show());
         getContentPane().setUIID("SignInForm");
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
-    private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
+   // private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
     private com.codename1.ui.ComponentGroup gui_Component_Group_1 = new com.codename1.ui.ComponentGroup();
     private com.codename1.ui.TextField gui_Text_Field_2 = new com.codename1.ui.TextField();
     private com.codename1.ui.TextField gui_Text_Field_1 = new com.codename1.ui.TextField();
@@ -77,7 +77,6 @@ public class SignInForm extends com.codename1.ui.Form {
         EventCallbackClass callback = new EventCallbackClass();
         gui_Button_2.addActionListener(callback);
         gui_Button_1.addActionListener(callback);
-        gui_Button_3.addActionListener(callback);
 
     }
 
@@ -96,15 +95,10 @@ public class SignInForm extends com.codename1.ui.Form {
                 sourceComponent = sourceComponent.getParent().getLeadParent();
             }
 
-            if(sourceComponent == gui_Button_2) {
+           /* if(sourceComponent == gui_Button_2) {
                 onButton_2ActionEvent(ev);
-            }
-            if(sourceComponent == gui_Button_1) {
-                onButton_1ActionEvent(ev);
-            }
-            if(sourceComponent == gui_Button_3) {
-                onButton_3ActionEvent(ev);
-            }
+            }*/
+            
         }
 
         public void dataChanged(int type, int index) {
@@ -113,39 +107,33 @@ public class SignInForm extends com.codename1.ui.Form {
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
         guiBuilderBindComponentListeners();
         setLayout(new com.codename1.ui.layouts.BorderLayout());
-        setTitle("Sign In");
-        setName("SignInForm");
+        setTitle("Changer mot de passe ?");
+        setName("ForgetPasswordForm");
         addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_1);
         gui_Container_1.setScrollableY(true);
         gui_Container_1.setName("Container_1");
-        gui_Container_1.addComponent(gui_Label_1);
         gui_Container_1.addComponent(gui_Component_Group_1);
         gui_Component_Group_1.setName("Component_Group_1");
         gui_Component_Group_1.addComponent(gui_Text_Field_2);
         gui_Component_Group_1.addComponent(gui_Text_Field_1);
-        gui_Text_Field_2.setHint("Username");
+        //USERNAME
+        gui_Text_Field_2.setHint("Email");
         gui_Text_Field_2.setName("Text_Field_2");
-        gui_Text_Field_1.setHint("mot de passe");
+        //PASSWORD
+        gui_Text_Field_1.setHint("nouveau mot de passe");
         gui_Text_Field_1.setConstraint(TextField.PASSWORD);
         gui_Text_Field_1.setName("Text_Field_1");
         gui_Container_1.addComponent(gui_Button_2);
         gui_Container_1.addComponent(gui_Button_3);
-        gui_Label_1.setUIID("CenterLabel");
-        gui_Label_1.setName("Label_1");
-        gui_Label_1.setIcon(resourceObjectInstance.getImage("profile_image.png"));
+       
         gui_Component_Group_1.setName("Component_Group_1");
-        gui_Button_2.setText("Sign In");
+        gui_Button_2.setText("Valider");
         gui_Button_2.setName("Button_2");
-        gui_Button_3.setText("Forgot Your Password");
-       gui_Button_3.setUIID("CenterLabelSmall");
-      // gui_Button_3.setUIID("CenterLabel");
-        gui_Button_3.setName("Button_3");
+        
         addComponent(com.codename1.ui.layouts.BorderLayout.SOUTH, gui_Button_1);
         gui_Container_1.setScrollableY(true);
         gui_Container_1.setName("Container_1");
-        gui_Button_1.setText("Create New Account");
-        gui_Button_1.setUIID("CenterLabel");
-        gui_Button_1.setName("Button_1");
+       
         
         
         
@@ -154,18 +142,21 @@ public class SignInForm extends com.codename1.ui.Form {
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
     
-     public void onButton_1ActionEvent(com.codename1.ui.events.ActionEvent ev) {
-         Hashtable themeData = theme.getTheme("Theme");
-         UIManager.getInstance().setThemeProps(themeData);
-         new RegistrationForm().show();
-     }
-     public void onButton_3ActionEvent(com.codename1.ui.events.ActionEvent ev) {
-         Hashtable themeData = theme.getTheme("Theme");
-         UIManager.getInstance().setThemeProps(themeData);
-         new ForgetPasswordForm().show();
-     }
-     
+   
     public void onButton_2ActionEvent(com.codename1.ui.events.ActionEvent ev) {
+      
+    int i =0;
+        if(users.get(i).getEmail().equals(this.gui_Text_Field_2.getText()))
+                { 
+        User u = new User( gui_Text_Field_1.getText());
+        
+        //if( ServiceUser.getInstance().UpdateUser(id, gui_Text_Field_1.getText(),gui_Text_Field_2.getText(),gui_Text_Field_3.getText(),gui_Text_Field_4.getText(),gui_Text_Field_5.getText(),gui_Text_Field_6.getText()))
+        if( ServiceUser.getInstance().UpdateUser(u)) {                   
+        Dialog.show("Success","Connection accepted",new Command("OK"));
+        }else{
+             Dialog.show("ERROR", "Server error", new Command("OK"));}}}
+     
+  /*  public void onButton_2ActionEvent(com.codename1.ui.events.ActionEvent ev) {
         
         users=ServiceUser.getInstance().getAllUsers();
         
@@ -215,54 +206,8 @@ public class SignInForm extends com.codename1.ui.Form {
         
             
      
-        /*if(this.gui_Text_Field_1.getText().equals("123456") && 
-                this.gui_Text_Field_2.getText().equals("client"))
-            
-        { 
-            System.out.println(this.gui_Text_Field_1.getText());
-            
-            Hashtable themeData = theme.getTheme("Theme");
-            UIManager.getInstance().setThemeProps(themeData);
-            //Display.getInstance().getCurrent().refreshTheme();
-            new ClientForm().show();
-            
-        }
+       
         
-         if(this.gui_Text_Field_1.getText().equals("123456") && 
-                this.gui_Text_Field_2.getText().equals("employe"))
-            
-        { 
-            Hashtable themeData = theme.getTheme("BaseEmp");
-            UIManager.getInstance().setThemeProps(themeData);
-            //Display.getInstance().getCurrent().refreshTheme();
-            new EmployeForm().show();
-            
-        }
-         
-        if(this.gui_Text_Field_1.getText().equals("123456") && 
-                this.gui_Text_Field_2.getText().equals("rh"))
-            
-        { 
-            
-            Hashtable themeData = theme.getTheme("BaseEmp");
-            UIManager.getInstance().setThemeProps(themeData);
-            //Display.getInstance().getCurrent().refreshTheme();
-            new AgentRHForm().show();
-            
-        }
-        
-        if(this.gui_Text_Field_1.getText().equals("123456") && 
-                this.gui_Text_Field_2.getText().equals("livreur"))
-            
-        { 
-            
-             Hashtable themeData = theme.getTheme("BaseEmp");
-            UIManager.getInstance().setThemeProps(themeData);
-            //Display.getInstance().getCurrent().refreshTheme();
-            new LivreurForm().show();
-            
-        }*/
-        
-    }
+    }*/
 
 }

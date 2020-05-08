@@ -29,7 +29,7 @@ import java.util.Hashtable;
  */
 public class MyApplication {
 
-    private Form current;
+     Form current;
     public static Resources theme;
     private Resources baseEmp;
 
@@ -84,13 +84,15 @@ public class MyApplication {
        Hashtable themeData = theme.getTheme("Theme");
        UIManager.getInstance().setThemeProps(themeData);
       
- //  new SplashForm().show();
-    new ListBlogForm().show();
+      new SplashForm().show();
+     //new ForgetPasswordForm().show();
+     // new testing(current).show;
+   // new ListBlogForm().show();
       //new StatsForm(theme).show();
       //new InboxForm(theme).show();
       //new DetailsForm(theme).show(); 
       //new WalkthruForm(theme).show();
-      //new TestTrendForm(theme).show();
+     // new TestTrendForm(theme).show();
       //new InboxForm(theme).show();
       //new BaseAgentRHForm11().show();
       //new EmployerForm(baseEmp).show();
