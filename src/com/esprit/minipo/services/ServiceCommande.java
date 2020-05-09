@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.esprit.minipo.entites.Commande;
+import com.esprit.minipo.entites.User;
 import com.esprit.minipo.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,15 +54,26 @@ public class ServiceCommande {
             for(Map<String,Object> obj : list){
                // Task t = new Task();
                 Commande c= new Commande();
+                //User u=new User();
+                //u.setId((int)Float.parseFloat(obj.get("id").toString()));
                 
-                /*float id = Float.parseFloat(obj.get("id").toString());
-                t.setId((int)id);
-                t.setStatus(((int)Float.parseFloat(obj.get("status").toString())));
-                t.setName(obj.get("name").toString());*/
+                float idcmd = Float.parseFloat(obj.get("idcmd").toString());
+                c.setIdcmd((int)idcmd);
                 
-                float id = Float.parseFloat(obj.get("idcmd").toString());
-                c.setIdcmd((int)id);
+                c.setRefC(obj.get("refc").toString());
+                
+                c.setTotal(Float.parseFloat(obj.get("total").toString()));
+                
                 c.setEtatcmd(obj.get("etatc").toString());
+                
+                float id = Float.parseFloat(obj.get("id").toString());
+                c.setId((int)id);
+                
+                c.setNom(obj.get("firstname").toString());
+                c.setPrenom(obj.get("lastname").toString());
+                
+                
+                
                 
                 tasks.add(c);
             }
@@ -74,7 +86,10 @@ public class ServiceCommande {
     }
   
   public ArrayList<Commande> getAllCmd(){
-        String url = Statics.BASE_URL+"/cmd/allcmd";
+        
+        int idUser=45;
+        
+        String url = Statics.BASE_URL+"/mobile/client/MesCommandes/"+idUser;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -88,4 +103,11 @@ public class ServiceCommande {
         System.out.println(tasks);
         return tasks;
     }
+  
+ 
+  
+  
+  
+  
+
 }

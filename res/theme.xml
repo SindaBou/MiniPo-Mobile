@@ -361,6 +361,15 @@
     </theme>
     <image name="bla.jpg"  />
     <image name="bridge.jpg"  />
+    <image name="Button.borderBottom_1.png" type="multi"  />
+    <image name="Button.borderBottomL_1.png" type="multi"  />
+    <image name="Button.borderBottomR_1.png" type="multi"  />
+    <image name="Button.borderCenter_1.png" type="multi"  />
+    <image name="Button.borderLeft_1.png" type="multi"  />
+    <image name="Button.borderRight_1.png" type="multi"  />
+    <image name="Button.borderTop_1.png" type="multi"  />
+    <image name="Button.borderTopL_1.png" type="multi"  />
+    <image name="Button.borderTopR_1.png" type="multi"  />
     <image name="calendar-background.jpg"  />
     <image name="calendar-separator.png" type="multi"  />
     <image name="card.png" type="multi"  />
@@ -416,14 +425,15 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="select" value="Select" />
             <entry key="Calendar.Friday" value="Fri" />
+            <entry key="select" value="Select" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
         </lang>
     </l10n>
     <image name="label_round-selected.png" type="multi"  />
+    <image name="label_round-vert.png"  />
     <image name="label_round.png" type="multi"  />
     <image name="learn-codename-one.jpg"  />
     <image name="logo-M-v1.png"  />
@@ -441,6 +451,33 @@
     <image name="minipo-v1.png"  />
     <image name="minipo.png"  />
     <image name="panier.png"  />
+    <image name="plus.borderBottom_1.png" type="multi"  />
+    <image name="plus.borderBottom_2.png" type="multi"  />
+    <image name="plus.borderBottom_3.png" type="multi"  />
+    <image name="plus.borderBottomL_1.png" type="multi"  />
+    <image name="plus.borderBottomL_2.png" type="multi"  />
+    <image name="plus.borderBottomL_3.png" type="multi"  />
+    <image name="plus.borderBottomR_1.png" type="multi"  />
+    <image name="plus.borderBottomR_2.png" type="multi"  />
+    <image name="plus.borderBottomR_3.png" type="multi"  />
+    <image name="plus.borderCenter_1.png" type="multi"  />
+    <image name="plus.borderCenter_2.png" type="multi"  />
+    <image name="plus.borderCenter_3.png" type="multi"  />
+    <image name="plus.borderLeft_1.png" type="multi"  />
+    <image name="plus.borderLeft_2.png" type="multi"  />
+    <image name="plus.borderLeft_3.png" type="multi"  />
+    <image name="plus.borderRight_1.png" type="multi"  />
+    <image name="plus.borderRight_2.png" type="multi"  />
+    <image name="plus.borderRight_3.png" type="multi"  />
+    <image name="plus.borderTop_1.png" type="multi"  />
+    <image name="plus.borderTop_2.png" type="multi"  />
+    <image name="plus.borderTop_3.png" type="multi"  />
+    <image name="plus.borderTopL_1.png" type="multi"  />
+    <image name="plus.borderTopL_2.png" type="multi"  />
+    <image name="plus.borderTopL_3.png" type="multi"  />
+    <image name="plus.borderTopR_1.png" type="multi"  />
+    <image name="plus.borderTopR_2.png" type="multi"  />
+    <image name="plus.borderTopR_3.png" type="multi"  />
     <image name="profile_image.png" type="multi"  />
     <image name="progress.png" type="multi"  />
     <image name="selection-in-sidemenu.png" type="multi"  />
@@ -462,7 +499,7 @@
         <val key="Button.press#bgType" value="7" />
         <border key="Button.press#border" type="empty" />
         <val key="Button.press#fgColor" value="ffffff" />
-        <font key="Button.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <font key="Button.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="1" actualSize="12.0" />
         <val key="Button.press#marUnit" value="2,2,2,2" />
         <val key="Button.press#margin" value="1.0,1.0,1.0,1.0" />
         <val key="Button.press#padUnit" value="2,2,2,2" />
@@ -471,11 +508,17 @@
         <val key="Button.sel#bgType" value="7" />
         <border key="Button.sel#border" type="empty" />
         <val key="Button.sel#fgColor" value="ffffff" />
-        <font key="Button.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
+        <font key="Button.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="1" actualSize="12.0" />
         <val key="Button.sel#marUnit" value="2,2,2,2" />
         <val key="Button.sel#margin" value="1.0,1.0,1.0,1.0" />
         <val key="Button.sel#padUnit" value="2,2,2,2" />
         <val key="Button.sel#padding" value="4.0,4.0,4.0,4.0" />
+        <val key="ButtonCard.align" value="4" />
+        <gradient key="ButtonCard.bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="ButtonCard.bgType" value="6" />
+        <border key="ButtonCard.border" type="roundRect" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10.0" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" topOnlyMode="false" bottomOnlyMode="false" cornerRadius="2.0" bezierCorners="false" />
+        <val key="ButtonCard.fgColor" value="ffffff" />
+        <val key="ButtonCard.margin" value="0.0,0.0,60.0,20.0" />
         <val key="Calendar.bgImage" value="calendar-background.jpg" />
         <val key="Calendar.bgType" value="33" />
         <val key="Calendar.margin" value="0.0,0.0,0.0,0.0" />
@@ -571,6 +614,13 @@
         <val key="CenterWhite.sel#margin" value="1.0,1.0,1.0,1.0" />
         <val key="CenterWhite.sel#padUnit" value="2,2,2,2" />
         <val key="CenterWhite.sel#padding" value="1.0,1.0,3.0,3.0" />
+        <val key="ContainerCheckout.align" value="1" />
+        <val key="ContainerCheckout.bgImage" value="card.png" />
+        <val key="ContainerCheckout.bgType" value="1" />
+        <val key="ContainerCheckout.margin" value="100.0,0.0,100.0,100.0" />
+        <val key="ContainerInfoProd.align" value="4" />
+        <val key="ContainerInfoProd.margin" value="14.0,0.0,11.0,11.0" />
+        <val key="ContainerInfoProd.padding" value="6.0,0.0,0.0,0.0" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -579,9 +629,40 @@
         <val key="DarkRect.padUnit" value="2,2,0,2" />
         <val key="DarkRect.padding" value="0.0,0.0,5.0,5.0" />
         <val key="DarkRect.transparency" value="0" />
+        <val key="DateLabel.align" value="3" />
+        <val key="DateLabel.fgColor" value="999999" />
+        <font key="DateLabel.font" type="ttf" face="0" style="0" size="8" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="DateLabel.margin" value="0.0,0.0,0.0,47.0" />
+        <val key="DateLabel.padUnit" value="2,2,2,2" />
+        <val key="DateLabel.padding" value="1.0,1.0,1.0,1.0" />
+        <val key="DateLabel.sel#align" value="3" />
+        <val key="DateLabel.sel#fgColor" value="999999" />
+        <font key="DateLabel.sel#font" type="ttf" face="0" style="0" size="8" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="DateLabel.sel#margin" value="0.0,0.0,0.0,47.0" />
+        <val key="DateLabel.sel#padUnit" value="2,2,2,2" />
+        <val key="DateLabel.sel#padding" value="1.0,1.0,1.0,1.0" />
+        <val key="DateLabel.sel#transparency" value="0" />
+        <val key="DateLabel.transparency" value="0" />
+        <val key="DesgLabel.fgColor" value="3c4f5e" />
+        <font key="DesgLabel.font" type="ttf" face="0" style="0" size="16" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="5.0" />
+        <val key="DesgLabel.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DesgLabel.padUnit" value="2,2,2,2" />
+        <val key="DesgLabel.padding" value="1.0,1.0,1.0,1.0" />
+        <val key="DesgLabel.sel#fgColor" value="3c4f5e" />
+        <font key="DesgLabel.sel#font" type="ttf" face="0" style="0" size="16" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="5.0" />
+        <val key="DesgLabel.sel#margin" value="0.0,0.0,0.0,0.0" />
+        <val key="DesgLabel.sel#padUnit" value="2,2,2,2" />
+        <val key="DesgLabel.sel#padding" value="1.0,1.0,1.0,1.0" />
+        <val key="DesgLabel.sel#transparency" value="0" />
+        <val key="DesgLabel.transparency" value="0" />
+        <val key="DesignEnTete.bgColor" value="ffffff" />
+        <gradient key="DesignEnTete.bgGradient" color1="16777215" color2="16777215" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="DesignEnTete.bgType" value="6" />
+        <val key="DesignEnTete.margin" value="0.0,35.0,0.0,0.0" />
+        <val key="DesignEnTete.padding" value="0.0,0.0,0.0,0.0" />
         <val key="FloatingActionButton.align" value="4" />
         <val key="FloatingActionButton.bgColor" value="eeb295" />
-        <gradient key="FloatingActionButton.bgGradient" color1="16766644" color2="13855849" posX="0.5" posY="0.5" radius="1.0" />
+        <gradient key="FloatingActionButton.bgGradient" color1="16766644" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
         <val key="FloatingActionButton.bgType" value="6" />
         <border key="FloatingActionButton.border" type="round" roundBorderColor="15643285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="110" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="false" />
         <val key="FloatingActionButton.press#align" value="4" />
@@ -619,7 +700,7 @@
         <val key="GetStartedButton.sel#transparency" value="0" />
         <val key="GetStartedButton.transparency" value="0" />
         <val key="GetStartedRedArrow.align" value="1" />
-        <val key="GetStartedRedArrow.fgColor" value="e25d59" />
+        <val key="GetStartedRedArrow.fgColor" value="f4753f" />
         <font key="GetStartedRedArrow.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
         <val key="GetStartedRedArrow.press#align" value="1" />
         <val key="GetStartedRedArrow.press#fgColor" value="e25d59" />
@@ -686,7 +767,7 @@
         <val key="InboxNumber.padding" value="1.0,1.0,2.0,2.0" />
         <val key="InboxNumber.transparency" value="0" />
         <val key="Label.fgColor" value="3c4f5e" />
-        <font key="Label.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
+        <font key="Label.font" type="ttf" face="0" style="0" size="16" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="Label.margin" value="0.0,0.0,0.0,0.0" />
         <val key="Label.padUnit" value="2,2,2,2" />
         <val key="Label.padding" value="1.0,1.0,1.0,1.0" />
@@ -710,20 +791,49 @@
         <val key="LargeWhileLabel.padUnit" value="2,2,2,2" />
         <val key="LargeWhileLabel.padding" value="1.0,1.0,1.0,0.0" />
         <val key="LargeWhileLabel.transparency" value="0" />
+        <val key="LayaoutBoxY.align" value="4" />
+        <val key="LayaoutBoxY.bgImage" value="card.png" />
+        <val key="LayaoutBoxY.bgType" value="1" />
+        <val key="LayaoutBoxY.margin" value="0.0,14.0,11.0,11.0" />
+        <val key="LayaoutBoxY.padding" value="6.0,0.0,0.0,0.0" />
         <val key="List.bgColor" value="323c46" />
         <val key="List.sel#bgColor" value="323c46" />
         <val key="List.sel#transparency" value="255" />
         <val key="List.transparency" value="255" />
+        <val key="MarginImage.align" value="1" />
+        <val key="MarginImage.bgColor" value="ffffff" />
+        <val key="MarginImage.margin" value="50.0,50.0,13.0,13.0" />
+        <val key="MarginImage.padding" value="0.0,0.0,75.0,0.0" />
+        <val key="MarginLabelPan.align" value="1" />
+        <val key="MarginLabelPan.padding" value="28.5,26.5,0.0,55.0" />
+        <val key="MarginLabelPan.sel#align" value="1" />
+        <val key="MarginLabelPan.sel#padding" value="28.5,26.5,0.0,55.0" />
+        <val key="MarginQteIB.align" value="3" />
+        <val key="MarginQteIB.bgColor" value="ffffff" />
+        <val key="MarginQteIB.margin" value="50.0,50.0,13.0,100.0" />
+        <val key="MarginTotal.align" value="3" />
+        <val key="MarginTotal.padding" value="0.0,0.0,100.0,100.0" />
         <val key="MenuButton.fgColor" value="ffffff" />
         <font key="MenuButton.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
-        <val key="OrangeLine.fgColor" value="eb8b7f" />
+        <val key="OrangeLine.fgColor" value="f4753f" />
         <font key="OrangeLine.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="1.5" />
         <val key="OrangeLine.transparency" value="0" />
         <val key="Padding2.align" value="4" />
         <val key="Padding2.padUnit" value="2,2,2,2" />
         <val key="Padding2.padding" value="2.0,2.0,2.0,2.0" />
         <val key="Padding2.transparency" value="0" />
-        <val key="RedLabel.fgColor" value="e77c6e" />
+        <val key="PanVide.align" value="4" />
+        <border key="PanVide.border" type="round" roundBorderColor="16777215" opacity="255" strokeColor="16777215" strokeOpacity="1" strokeThickness="12.0" strokeMM="true" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="100.0" shadowMM="false" rectangle="false" />
+        <val key="PanVide.fgColor" value="cccccc" />
+        <val key="PrixLabel.align" value="1" />
+        <val key="PrixLabel.fgColor" value="f4753f" />
+        <font key="PrixLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
+        <val key="PrixLabel.sel#align" value="1" />
+        <val key="PrixLabel.sel#fgColor" value="f4753f" />
+        <font key="PrixLabel.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
+        <val key="PrixLabel.sel#transparency" value="0" />
+        <val key="PrixLabel.transparency" value="0" />
+        <val key="RedLabel.fgColor" value="f4753f" />
         <font key="RedLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="RedLabel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="RedLabel.padUnit" value="0,2,0,2" />
@@ -742,7 +852,7 @@
         <val key="RedLabel.sel#transparency" value="0" />
         <val key="RedLabel.transparency" value="0" />
         <val key="RedLabelRight.align" value="3" />
-        <val key="RedLabelRight.fgColor" value="e77c6e" />
+        <val key="RedLabelRight.fgColor" value="f4753f" />
         <font key="RedLabelRight.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="RedLabelRight.margin" value="0.0,0.0,0.0,0.0" />
         <val key="RedLabelRight.padUnit" value="0,2,0,2" />
@@ -829,7 +939,7 @@
         <val key="SigninTitle.transparency" value="0" />
         <val key="Slider.bgColor" value="262f38" />
         <border key="Slider.border" type="empty" />
-        <val key="Slider.fgColor" value="e87a67" />
+        <val key="Slider.fgColor" value="f4753f" />
         <val key="Slider.sel#bgColor" value="262f38" />
         <border key="Slider.sel#border" type="empty" />
         <val key="Slider.sel#transparency" value="255" />
@@ -912,6 +1022,12 @@
         <val key="StatsLabel.padding" value="1.0,1.0,1.0,1.0" />
         <val key="StatsLabel.transparency" value="0" />
         <val key="StausBar.transparency" value="0" />
+        <val key="TextField.align" value="1" />
+        <val key="TextField.bgColor" value="ffffff" />
+        <border key="TextField.border" type="underline"  millimeters="false" thickness="3.0" color="13421772" />
+        <val key="TextField.sel#align" value="1" />
+        <val key="TextField.sel#bgColor" value="f0f0f0" />
+        <border key="TextField.sel#border" type="underline"  millimeters="false" thickness="3.0" color="0" />
         <val key="TinyBoldLabel.fgColor" value="3c4f5e" />
         <font key="TinyBoldLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="1.5" />
         <val key="TinyBoldLabel.margin" value="0.0,0.0,0.0,0.0" />
@@ -940,6 +1056,13 @@
         <gradient key="Toolbar.bgGradient" color1="16020799" color2="16571854" posX="0.5" posY="0.5" radius="1.0" />
         <val key="Toolbar.bgType" value="7" />
         <border key="Toolbar.border" type="empty" />
+        <val key="TxtQte.align" value="1" />
+        <val key="TxtQte.bgColor" value="f0f0f0" />
+        <border key="TxtQte.border" type="underline"  millimeters="false" thickness="3.0" color="0" />
+        <val key="TxtQte.margin" value="0.0,0.0,10.0,30.0" />
+        <val key="TxtQte.sel#align" value="1" />
+        <val key="TxtQte.sel#bgColor" value="f0f0f0" />
+        <border key="TxtQte.sel#border" type="underline"  millimeters="false" thickness="3.0" color="0" />
         <val key="Welcome.bgImage" value="welcome-background.jpg" />
         <val key="Welcome.bgType" value="33" />
         <val key="Welcome.margin" value="0.0,0.0,0.0,0.0" />
@@ -965,9 +1088,33 @@
         <val key="WelcomeTitle.padUnit" value="2,2,2,2" />
         <val key="WelcomeTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="WelcomeTitle.transparency" value="0" />
+        <val key="des.bgColor" value="f0f0f0" />
+        <border key="des.border" type="underline"  millimeters="false" thickness="3.0" color="0" />
+        <val key="des.margin" value="14.0,14.0,11.0,11.0" />
+        <val key="des.padding" value="14.0,14.0,60.0,20.0" />
+        <val key="des.sel#bgColor" value="f0f0f0" />
+        <border key="des.sel#border" type="underline"  millimeters="false" thickness="3.0" color="0" />
+        <val key="des.sel#margin" value="14.0,14.0,11.0,11.0" />
+        <val key="des.sel#padding" value="14.0,14.0,60.0,20.0" />
+        <val key="plus.align" value="4" />
+        <gradient key="plus.bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="plus.bgType" value="6" />
+        <border key="plus.border" type="round" roundBorderColor="16020799" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="12.0" strokeMM="true" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="100.0" shadowMM="false" rectangle="false" />
+        <val key="plus.dis#align" value="4" />
+        <gradient key="plus.dis#bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="plus.dis#bgType" value="6" />
+        <border key="plus.dis#border" type="round" roundBorderColor="16020799" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="12.0" strokeMM="true" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="100.0" shadowMM="false" rectangle="false" />
+        <val key="plus.dis#fgColor" value="ffffff" />
+        <val key="plus.fgColor" value="ffffff" />
+        <val key="plus.sel#align" value="4" />
+        <gradient key="plus.sel#bgGradient" color1="16571854" color2="16020799" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="plus.sel#bgType" value="6" />
+        <border key="plus.sel#border" type="round" roundBorderColor="16020799" opacity="150" strokeColor="16777215" strokeOpacity="1" strokeThickness="12.0" strokeMM="true" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="100.0" shadowMM="false" rectangle="false" />
+        <val key="plus.sel#fgColor" value="ffffff" />
         <val key="transparency" value="0" />
     </theme>
     <image name="toolbar-profile-pic.png" type="multi"  />
+    <image name="trash_24px.png"  />
     <image name="walthru-radio-selected.png" type="multi"  />
     <image name="walthru-radio-unselected.png" type="multi"  />
     <image name="welcome-background.jpg"  />

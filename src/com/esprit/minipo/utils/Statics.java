@@ -12,7 +12,7 @@ package com.esprit.minipo.utils;
 public class Statics {
     //public static final String BASE_URL="http://41.226.11.252:11300";
     
-    public static final String BASE_URL="http://localhost:82/Minipot/web/app_dev.php";
-
+    //public static final String BASE_URL="http://localhost:82/Minipot/web/app_dev.php";
+    public static final String BASE_URL="http://localhost:82/Minipo/Minipo/web/app_dev.php";
 
 }

@@ -84,7 +84,7 @@ public class MyApplication {
        Hashtable themeData = theme.getTheme("Theme");
        UIManager.getInstance().setThemeProps(themeData);
       
-       new SplashForm().show();
+    //  new SplashForm().show();
       //new StatsForm(theme).show();
       //new InboxForm(theme).show();
       //new DetailsForm(theme).show(); 
@@ -94,8 +94,15 @@ public class MyApplication {
       //new BaseAgentRHForm11().show();
       //new EmployerForm(baseEmp).show();
       //new HomeForm().show();
-         //new PanierForm().show();
-                     
+     // new ClientForm().show();
+        new MesCommandesForm().show();
+       //new MesFacturesForm().show();
+    //new TestForm().show();
+    //new AllProduitsForm().show();
+    //new CheckoutForm().show();
+    //new AboutCmdForm(theme,49).show();
+    //new PanierForm1().show();
+    //new PanierForm().show();
     }
     
     public void stop() {

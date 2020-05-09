@@ -61,11 +61,7 @@ public class BaseLivreurForm11 extends Form {
         
         //getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
-        getToolbar().addCommandToSideMenu("Gestion produit", null, e -> {});
-        getToolbar().addCommandToSideMenu("Demande ", null, e -> {});
-        getToolbar().addCommandToSideMenu("Demande Conge", null, e -> {});
-        getToolbar().addCommandToSideMenu("Reclamation", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Mes Reclamation", trendingImage, e -> new TrendingForm(res).show());
+        
         //getToolbar().addCommandToSideMenu("Blog", null, e -> {});
         
         // spacer

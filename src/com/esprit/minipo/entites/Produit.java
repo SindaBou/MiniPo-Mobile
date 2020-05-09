@@ -20,6 +20,7 @@ public class Produit {
     private String photo;
     private String description;
     private User user;
+    private String nomc ;
     private Categorie categorie ;
    // private Fournisseur fournisseur ;
 
@@ -31,9 +32,43 @@ public class Produit {
         this.categorie = categorie;
     }
 
+    public Produit(int idprod, String designation, int prix, int qtestock, String photo, String description, String nomc) {
+        this.idprod = idprod;
+        this.designation = designation;
+        this.prix = prix;
+        this.qtestock = qtestock;
+        this.photo = photo;
+        this.description = description;
+        this.nomc = nomc;
+    }
     
     
+    
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getNomc() {
+        return nomc;
+    }
+
+    public void setNomc(String nomc) {
+        this.nomc = nomc;
+    }
+
+    
     public Produit() {
     }
 
@@ -77,9 +112,14 @@ public class Produit {
         this.categorie = categorie;
     }
 
-   
+    public String getPhoto() {
+        return photo;
+    }
 
-    
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -97,11 +137,10 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "id Produit= "  + idprod + 
-                "\tdesignation=" + designation + 
-                "\tprix=" + prix +
-                "\tquentité en stock=" + qtestock;
+        return "Produit{" + "idprod=" + idprod + ", designation=" + designation + ", prix=" + prix + ", qtestock=" + qtestock + ", photo=" + photo + ", description=" + description + ", nomc=" + nomc + '}';
     }
+
+    
     
     
     
