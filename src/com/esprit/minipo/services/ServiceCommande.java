@@ -124,6 +124,25 @@ public class ServiceCommande {
         return resultOK;
     }
   
+    public boolean deleteCmd(int idcmd) {
+        
+        int id=45;
+        
+        String url = Statics.BASE_URL + "/mobile/client/DeleteCommande/" +
+                 id + "/" +
+                idcmd ;
+        
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
   
   
   

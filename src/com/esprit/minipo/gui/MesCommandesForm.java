@@ -337,7 +337,7 @@ public class MesCommandesForm extends BaseForm {
                 
                 int idcmd=cmd.get(i).getIdcmd();
                 String etatCmd=cmd.get(i).getEtatc();
-               /* gui_Label_1.addPointerPressedListener(new ActionListener() {
+                gui_Label_1.addPointerPressedListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if(ServiceCommande.getInstance().deleteCmd(idcmd)){
@@ -349,7 +349,7 @@ public class MesCommandesForm extends BaseForm {
                              Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
                     }
-                });*/
+                });
                 
             }
             else if(cmd.get(i).getEtatc().equals("Acceptee")){
