@@ -23,6 +23,8 @@ import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
+import static com.codename1.ui.Component.LEFT;
+import static com.codename1.ui.Component.RIGHT;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -335,7 +337,19 @@ public class MesCommandesForm extends BaseForm {
                 
                 int idcmd=cmd.get(i).getIdcmd();
                 String etatCmd=cmd.get(i).getEtatc();
-               
+               /* gui_Label_1.addPointerPressedListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if(ServiceCommande.getInstance().deleteCmd(idcmd)){
+                            new MesCommandesForm().show();
+                            Dialog.show("Success","Votre Commande à été supprimer\n"
+                                    + "Avec success",new Command("OK"));
+                        }
+                        else{
+                             Dialog.show("ERROR", "Server error", new Command("OK"));
+                        }
+                    }
+                });*/
                 
             }
             else if(cmd.get(i).getEtatc().equals("Acceptee")){

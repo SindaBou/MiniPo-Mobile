@@ -104,7 +104,25 @@ public class ServiceCommande {
         return tasks;
     }
   
- 
+ public boolean validerCmd (String dest) {
+        
+        int id=45;
+        
+        String url = Statics.BASE_URL + "/mobile/client/validerCmd/" +
+                id + "/" +
+                dest ;
+        
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
   
   
   
