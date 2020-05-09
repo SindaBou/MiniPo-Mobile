@@ -7,6 +7,9 @@ package com.esprit.minipo.entites;
 
 //import java.sql.Date;
 
+import java.util.Date;
+
+
 /**
  *
  * @author darra
@@ -19,7 +22,7 @@ public class ReclamationsEmploye {
     private String nom;
     private String objet;
     private String description;
-   // private Date dateRemp;
+    private Date dateRemp;
     private String etatRemp;
     private String firstname;
     private String lastname ;
@@ -180,13 +183,15 @@ public class ReclamationsEmploye {
         this.description = description;
     }
 
-   /* public Date getDateRemp() {
+    public Date getDateRemp() {
         return dateRemp;
     }
 
     public void setDateRemp(Date dateRemp) {
         this.dateRemp = dateRemp;
-    }*/
+    }
+
+   
 
     public String getEtatRemp() {
         return etatRemp;

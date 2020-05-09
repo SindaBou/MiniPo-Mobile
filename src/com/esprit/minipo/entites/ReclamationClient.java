@@ -7,6 +7,9 @@ package com.esprit.minipo.entites;
 
 //import java.sql.Date;
 
+import java.util.Date;
+
+
 /**
  *
  * @author darra
@@ -16,6 +19,7 @@ public class ReclamationClient {
     //private int idcmd;
     private int id;
     private int idcatrec;
+    private int idcmd;
     private String nom;
     private String objet;
     private String description;
@@ -24,7 +28,7 @@ public class ReclamationClient {
     private String lastname;
     private String reponse;
     private String image;
-   // private Date dateR;
+    private Date dateR;
 
     public ReclamationClient(int idR, int id, int idcatrec, String nom, String objet, String description, String etatr, String firstname, String lastname, String reponse/*, Date dateR*/) {
         this.idR = idR;
@@ -80,6 +84,15 @@ public class ReclamationClient {
         this.image=image;
         
     }
+    public ReclamationClient(int idcatrec, String objet, String description, int id,String image,int idcmd) {
+        this.idcatrec =idcatrec;
+        this.objet = objet;
+        this.description = description;
+        this.id=id;
+        this.image=image;
+        this.idcmd=idcmd;
+        
+    }
 
     public ReclamationClient(int idr,String nom, String objet, String description, String etatr, String firstname, String lastname, /*Date dateR,*/ String reponse) {
                  this.idR=idr;
@@ -96,14 +109,30 @@ public class ReclamationClient {
     public ReclamationClient(int idr, String nom, String objet, String description, String etatr, String firstname, String lastname /*Date dateR*/) {
     }
 
-   /*public ReclamationClient(int idr, String nom, String objet, String description, String etatr/*Date dateR) {
-        this.idR=idR;
-        this.nom=nom;
-        this.objet=objet;
-        this.description=description;
-        this.etatr=etatr;
-        //this.dateR=dateR;
+
+    public int getIdcmd() {
+        return idcmd;
+    }
+
+    /*public ReclamationClient(int idr, String nom, String objet, String description, String etatr/*Date dateR) {
+    this.idR=idR;
+    this.nom=nom;
+    this.objet=objet;
+    this.description=description;
+    this.etatr=etatr;
+    //this.dateR=dateR;
     }*/
+    public void setIdcmd(int idcmd) {
+        this.idcmd = idcmd;
+    }
+
+    public Date getDateR() {
+        return dateR;
+    }
+
+    public void setDateR(Date dateR) {
+        this.dateR = dateR;
+    }
 
    
 

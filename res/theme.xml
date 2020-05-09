@@ -516,8 +516,8 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="Calendar.Friday" value="Fri" />
             <entry key="select" value="Select" />
+            <entry key="Calendar.Friday" value="Fri" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
@@ -526,6 +526,7 @@
     <image name="label_round-selected.png" type="multi"  />
     <image name="label_round.png" type="multi"  />
     <image name="learn-codename-one.jpg"  />
+    <image name="load.png"  />
     <image name="logo-M-v1.png"  />
     <image name="logo-M-v2.png"  />
     <image name="logo-M.png"  />
@@ -541,6 +542,7 @@
     <image name="minipo-v1.png"  />
     <image name="minipo.png"  />
     <image name="panier.png"  />
+    <image name="Point_d_interrogation.jpg"  />
     <image name="profile_image.png" type="multi"  />
     <image name="progress.png" type="multi"  />
     <image name="selection-in-sidemenu.png" type="multi"  />
@@ -686,8 +688,8 @@
         <val key="DesignEnTete.margin" value="0.0,35.0,0.0,0.0" />
         <val key="FloatingActionButton.align" value="4" />
         <val key="FloatingActionButton.bgColor" value="eeb295" />
-        <gradient key="FloatingActionButton.bgGradient" color1="16766644" color2="13855849" posX="0.5" posY="0.5" radius="1.0" />
-        <val key="FloatingActionButton.bgType" value="6" />
+        <val key="FloatingActionButton.bgImage" value="8.png" />
+        <val key="FloatingActionButton.bgType" value="1" />
         <border key="FloatingActionButton.border" type="round" roundBorderColor="15643285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="110" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="false" />
         <val key="FloatingActionButton.press#align" value="4" />
         <val key="FloatingActionButton.press#bgColor" value="eeb295" />

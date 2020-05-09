@@ -19,30 +19,36 @@
 package com.esprit.minipo.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.table.TableLayout;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.entites.ReclamationsEmploye;
 import com.esprit.minipo.services.ServiceRecClient;
 import com.esprit.minipo.services.ServiceRecEmploye;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +60,8 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
     ArrayList<ReclamationsEmploye> recEmp=new ArrayList<ReclamationsEmploye>();
     private int idRec;
     private int id=44;
+    private EncodedImage placeHolder;
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
 
     public MesRecEmpForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -80,7 +88,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         installSidemenu(resourceObjectInstance);
         
       // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-      getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();});
+      //getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();});
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         /*gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
@@ -236,7 +244,22 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
-    
+    Container entetec=new Container(BoxLayout.x());
+        entetec.setUIID("DesignEnTete");
+        Label back=new Label();
+        FontImage iconB = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, "Supprimer", 4.9f);
+        back.setIcon(iconB);
+        Label title=new Label("Mes reclamations");
+        entetec.add(back).add(title);
+        //c.add(c)
+        //c.add(image1);
+        addAll(entetec);
+        back.addPointerPressedListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new MesRecEmpForm().show();
+            }
+        });
         
         recEmp=ServiceRecEmploye.getInstance().getAllRecEmploye(id);
         for(int i=0;i<recEmp.size();i++){
@@ -252,13 +275,18 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
             String description=recEmp.get(i).getDescription();
             String etat=recEmp.get(i).getEtatRemp();
             String image=recEmp.get(i).getImage();
+            Date dater=recEmp.get(i).getDateRemp();
          //creation
-        gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
+        //gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
          gui_Label_1 = new com.codename1.ui.Label();
          gui_Container_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
          gui_Label_4 = new com.codename1.ui.Label();
-         gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+         //gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+         TableLayout fullNameLayout = new TableLayout(1,2);
+         Container container = new Container(fullNameLayout);
+         
+         Container gui_Container_3 = new Container(BoxLayout.y());
          gui_Label_3 = new com.codename1.ui.Label();
          gui_Label_2 = new com.codename1.ui.Label();
          gui_Text_Area_1 = new com.codename1.ui.TextArea();
@@ -272,19 +300,42 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
          gui_Text_Area_1_4 = new com.codename1.ui.TextArea();
          gui_Label_5 = new com.codename1.ui.Label();
          //remplisage   
-        setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+       setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
         setName("InboxForm");
-        addComponent(gui_Container_1);
+        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("Point_d_interrogation.jpg"), false); // hethi t7otoha fel default package 
+           String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
+           Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
+           
+           ImageViewer img=new ImageViewer(image1);
+           img.setSwipePlaceholder(Image.createImage(5, 5));
+           img.setPreferredSize(new Dimension(300,300));
+           Label l =new Label(sdf.format(dater));
+           l.setUIID("RedLabel");
+           Container c=new Container(BoxLayout.y());
+           c.add(img);
+        container.add(fullNameLayout.createConstraint().widthPercentage(75),gui_Container_3)
+                 .add(c);
+        //************design container layer**************
+        Container layers = LayeredLayout.encloseIn(container, FlowLayout.encloseRight());
+                  Style boxStyle = container.getUnselectedStyle();
+                  boxStyle.setBgTransparency(255);
+//boxStyle.setBgColor(0xeeeeee);
+                boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setMargin(2, 2, 2, 2);
+                boxStyle.setPadding(2, 2, 2, 2);
+//*******************************************************************
 
-        gui_Container_1.setName("Container_1");
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
+             addComponent(layers);
+        //gui_Container_1.setName("Container_1");
+       // gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
         gui_Label_1.setText("11:31 AM");
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
+       // gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
         gui_Container_4.setName("Container_4");
         ((com.codename1.ui.layouts.FlowLayout)gui_Container_4.getLayout()).setAlign(com.codename1.ui.Component.CENTER);
         gui_Container_4.addComponent(gui_Label_4);
@@ -297,32 +348,41 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
                 public void actionPerformed(ActionEvent evt) {
                 //com.codename1.ui.util.Resources resourceObjectInstance = null;
                     //this
-                    new MaRecEmployeForm(resourceObjectInstance,idremp,Categorie,Objet,description,image,etat,reponse).show();}
+                    new MaRecEmployeForm(resourceObjectInstance,idremp,Categorie,Objet,description,image,etat,reponse,dater).show();}
                 
 
             
         });
         gui_Container_3.setLeadComponent(gui_Label_3);
-        gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
+        //gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
         gui_Container_3.setName("Container_3");
+        gui_Container_3.add(l);        
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_9);
         gui_Container_3.addComponent(gui_Label_2);
-        gui_Container_3.addComponent(gui_Text_Area_1);
+        //gui_Container_3.addComponent(gui_Text_Area_1);
         //gui_Container_3.addComponent(gui_Label_8);
+        
+        
         gui_Container_3.addComponent(gui_Label_6);
         gui_Container_3.setName("Container_3");
         //addComponent(gui_Label_6);
         //gui_Container_3.addComponent(gui_Label_6);
         //gui_Container_3.addComponent(gui_Text_Area_1);
-        
+        //Label l =new Label(sdf.format(dater));
         gui_Label_3.setText(recEmp.get(i).getNom());
         gui_Label_3.setUIID("BlackLabel");
         gui_Label_3.setName("Label_3");
         gui_Label_9.setText(recEmp.get(i).getObjet());
         gui_Label_9.setName("Label_2");
         gui_Label_2.setText(recEmp.get(i).getEtatRemp());
-        gui_Label_2.setUIID("RedLabel");
+        //gui_Label_2.setUIID("RedLabel");
+        gui_Label_2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+        if(etat.equals("traiter")){
+            gui_Label_2.getAllStyles().setFgColor(0x008000);}
+        if(etat.equals("non traiter")){
+            gui_Label_2.getAllStyles().setFgColor(0x3366ff);}
+        //gui_Label_2.set;
         gui_Label_2.setName("Label_2");
         gui_Label_6.setText("");
 
@@ -330,7 +390,7 @@ public class MesRecEmpForm extends BaseEmployeForm1 {
         gui_Label_6.setUIID("separator");
         gui_Label_6.setName("Label_6");
         //gui_Label_6.setConstraint
-        gui_Text_Area_1.setText(String.valueOf(recEmp.get(i).getIdRemp()));
+        //gui_Text_Area_1.setText(String.valueOf(recEmp.get(i).getIdRemp()));
         gui_Text_Area_1.setUIID("SmallFontLabel");
         //gui_Text_Area_1.setUIID("");
         gui_Text_Area_1.setName("Text_Area_1");

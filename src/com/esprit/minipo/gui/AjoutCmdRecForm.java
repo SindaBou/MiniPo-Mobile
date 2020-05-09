@@ -38,6 +38,7 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
@@ -87,22 +88,21 @@ import rest.file.uploader.tn.FileUploader;
  *
  * @author shai
  */
-public class AjoutRecForm1 extends BaseForm {
+public class AjoutCmdRecForm extends BaseForm {
 final String pc="probleme de compte";
         final String pcmd="probleme de commande";
         final String autre="autre";
         public int idcatrec=0;
         public int id=45;
+        public int idcmd=1;
+        String refC="123456";
         String Imagecode ;
         private FileUploader file;
         String fileNameInServer;
         private String imgPath;
-    public AjoutRecForm1() {
-        
-        this(com.codename1.ui.util.Resources.getGlobalResources());
-    }
+   
     
-    public AjoutRecForm1(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public AjoutCmdRecForm(com.codename1.ui.util.Resources resourceObjectInstance,int idcmd,String refC) {
         
         //getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {});
         
@@ -145,12 +145,14 @@ final String pc="probleme de compte";
                         .add(fullNameLayout.createConstraint().widthPercentage(15),imgBtn);
         Button btnValider = new Button("Envoyer");
         btnValider.setPreferredSize(new Dimension(50,110)); 
-        ComboBox c= new ComboBox("Categorie");
-        c.addItem(pc);
-        c.addItem(pcmd);
-        c.addItem(autre);
-        c.setUIID("ComboBox");
-        
+        tCategorie.setText("Probleme de commande ");
+        LabelCategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+        tCategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+        tCategorie.getAllStyles().setFgColor(0x000000);
+        tRefc.setText(refC);
+        LabelRefC.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+        tRefc.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+        tRefc.getAllStyles().setFgColor(0x000000);
         Validator val = new Validator();
         val.addConstraint(tfObjet,new GroupConstraint(new LengthConstraint(2,"trop court"),new ServiceRecClient(5,"trop long")));
         val.addConstraint(taDescription, new LengthConstraint(2,"trop court"));
@@ -163,7 +165,7 @@ final String pc="probleme de compte";
         imgBtn,
             GridLayout.encloseIn(2, cancel, btnValider));*/
       
-container.add(c).add(tl.createConstraint().widthPercentage(49), tfObjet).
+container.add(LabelCategorie).add(tCategorie).add(LabelRefC).add(tRefc).add(tl.createConstraint().widthPercentage(49), tfObjet).
         add(tl.createConstraint().widthPercentage(1), createSeparator()).
         add(tl.createConstraint().horizontalSpan(50), taDescription)
         .add(containerImage).add(btnValider);
@@ -268,19 +270,9 @@ boxStyle.setPadding(2, 2, 2, 2);
                 else
                 {
                     
-                         switch (c.getSelectedItem().toString()) {
-                    case pc:
-                        idcatrec=1;
-                         break;
-                    case pcmd:
-                        idcatrec=2;
-                        break;
-                    case autre:
-                        idcatrec=3;
-                         break;}
                         
-                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),id,fileNameInServer);
-                        if( ServiceRecClient.getInstance().addRec(r)){
+                        ReclamationClient r = new ReclamationClient(idcatrec, tfObjet.getText(),taDescription.getText(),id,fileNameInServer,idcmd);
+                        if( ServiceRecClient.getInstance().addRecCmd(r)){
                             Dialog.show("Success","Reclamation envoyee avec succés",new Command("OK"));
                             
                          /*String myURL = "https://rest.nexmo.com/sms/json?api_key=4f3be2fc&api_secret=9ipalAypbzNudeVl&to=21698327784" + "&from=Minipo&text=Reclamation Envoyee avec succés";
@@ -337,6 +329,10 @@ boxStyle.setPadding(2, 2, 2, 2);
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
+    private com.codename1.ui.Label LabelCategorie = new com.codename1.ui.Label("Categorie : ");
+    private com.codename1.ui.Label tCategorie = new com.codename1.ui.Label();
+    private com.codename1.ui.Label LabelRefC = new com.codename1.ui.Label("Reference:");
+    private com.codename1.ui.Label tRefc = new com.codename1.ui.Label();
     private com.codename1.ui.TextField tfObjet = new com.codename1.ui.TextField();
     private com.codename1.ui.TextArea taDescription = new com.codename1.ui.TextArea();
     private com.codename1.ui.Label path=new com.codename1.ui.Label();

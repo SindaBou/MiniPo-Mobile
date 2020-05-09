@@ -29,6 +29,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -53,6 +54,7 @@ import com.codename1.ui.validation.Validator;
 import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * GUI builder created Form
@@ -66,7 +68,8 @@ final String pc="probleme de compte";
         public int idcatrec=0;
         public int id=45;
         private EncodedImage placeHolder;
-    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String objet,String description,String image,String etat,String reponse) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+    public MaRecClientForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idr,String categorie,String objet,String description,String image,String etat,String reponse,Date dater) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -75,24 +78,46 @@ final String pc="probleme de compte";
         System.out.println(description);
         System.out.println(objet);
         System.out.println(image);
+        System.out.println(dater);
         installSidemenu(resourceObjectInstance);
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm().show();}); 
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());
+         TableLayout table = new TableLayout(2, 2);
+        Label l =new Label(sdf.format(dater));
+        l.getAllStyles().setAlignment(RIGHT);
+        Container x= new Container(table);
+        x.add(table.createConstraint().widthPercentage(65),LEtat).add(l);
+        
         tCategorie.setText(categorie);
-        tCategorie.setUIID("BlackLabel");
+        //tCategorie.setUIID("BlackLabel");
          tfObjet.setText(objet);
-         tfObjet.setUIID("LabelBlack");
+         //tfObjet.setUIID("LabelBlack");
          TextComponent taDescription = new TextComponent().multiline(true).text(description);
          
          taDescription.rows(3);
          LEtat.setText(etat);
-         LEtat.setUIID("RedLabel");
+         LEtat.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+         Lcategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         tCategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         Lobjet.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         tfObjet.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         Ldescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         LabelDescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         taDescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         Lreponse.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         LabelReponse.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         LabelReponse.getAllStyles().setFgColor(0x008000);
+         tCategorie.getAllStyles().setFgColor(0x000000);
+         tfObjet.getAllStyles().setFgColor(0x000000);
+         LabelDescription.getAllStyles().setFgColor(0x000000);
+         
+         //LEtat.setUIID("RedLabel");
          LabelDescription.setText(description);
-         LabelDescription.setUIID("LabelBlack");
+         //LabelDescription.setUIID("LabelBlack");
          LabelReponse.setText(reponse);
-         LabelReponse.setUIID("RedLabel");
+         //LabelReponse.setUIID("RedLabel");
          //Lcategorie.setText("categorie");
          Validator val = new Validator();
         //val.addConstraint(tfObjet, new LengthConstraint(2,"trop court"));
@@ -106,11 +131,12 @@ final String pc="probleme de compte";
         Button btnValider = new Button("Modifier");
         btnValider.setPreferredSize(new Dimension(50,110));
        
-        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("panier.png"), false); // hethi t7otoha fel default package 
+        placeHolder = EncodedImage.createFromImage(resourceObjectInstance.getImage("Point_d_interrogation.jpg"), false); // hethi t7otoha fel default package 
            String url="http://localhost:82/MiniPo-web/web/uploads/post/"+image;
            Image image1=URLImage.createToStorage(placeHolder, url, url,URLImage.RESIZE_SCALE);
            ImageViewer img=new ImageViewer(image1);
-           img.setPreferredSize(new Dimension(200,200)); 
+           //img.setSwipePlaceholder(Image.createImage(400, 400));
+           img.setPreferredSize(new Dimension(400,400)); 
            TableLayout fullNameLayout = new TableLayout(7,1);
            TextModeLayout tl = new TextModeLayout(2, 2);
            Container composant =new Container(tl);
@@ -121,25 +147,28 @@ final String pc="probleme de compte";
         //gui_Container_1.add(btnValider);
         c.add(img);
         if(LEtat.getText().equals("traiter")){
-        composant.add(LEtat)
-                .add(fullNameLayout.createConstraint().widthPercentage(85),Lcategorie)
-                .add(tCategorie)
-                .add(Lobjet)
-                .add(tfObjet)
-                .add(Ldescription)
-                .add(LabelDescription)
-                .add(c).add(Lreponse)
-                .add(LabelReponse);}
+            LEtat.getAllStyles().setFgColor(0x008000);
+        composant.add(x)
+                 .add(fullNameLayout.createConstraint().widthPercentage(85),Lcategorie)
+                 .add(tCategorie)
+                 .add(Lobjet)
+                 .add(tfObjet)
+                 .add(Ldescription)
+                 .add(LabelDescription)
+                 .add(c)
+                 .add(Lreponse)
+                 .add(LabelReponse);}
         if(LEtat.getText().equals("non traiter")){
-        composant.add(LEtat)
-                .add(Lcategorie)
-                .add(tCategorie)
-                .add(Lobjet)
-                .add(tfObjet)
-                .add(Ldescription)
-                .add(taDescription)
-                .add(c)
-                .add(btnValider);}
+            LEtat.getAllStyles().setFgColor(0xf4753f);
+        composant.add(x)
+                 .add(Lcategorie)
+                 .add(tCategorie)
+                 .add(Lobjet)
+                 .add(tfObjet)
+                 .add(Ldescription)
+                 .add(taDescription)
+                 .add(c)
+                 .add(btnValider);}
         
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -223,9 +252,9 @@ final String pc="probleme de compte";
     private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
     private com.codename1.components.MultiButton gui_Multi_Button_1 = new com.codename1.components.MultiButton();
     private com.codename1.ui.ComboBox c = new com.codename1.ui.ComboBox();
-     private com.codename1.ui.Label Lcategorie = new com.codename1.ui.Label("categorie");
-      private com.codename1.ui.Label Lobjet = new com.codename1.ui.Label("objet");
-       private com.codename1.ui.Label Ldescription = new com.codename1.ui.Label("description");
+     private com.codename1.ui.Label Lcategorie = new com.codename1.ui.Label("Categorie:");
+      private com.codename1.ui.Label Lobjet = new com.codename1.ui.Label("Objet");
+       private com.codename1.ui.Label Ldescription = new com.codename1.ui.Label("Description:");
     private com.codename1.ui.Label tCategorie = new com.codename1.ui.Label();
     private com.codename1.ui.Label tfObjet = new com.codename1.ui.Label();
     private com.codename1.ui.Label LEtat = new com.codename1.ui.Label();

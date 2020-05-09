@@ -17,6 +17,7 @@ import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +77,7 @@ public class ServiceRecClient implements Constraint {
                 c.setReponse(obj.get("reponse").toString());
                 c.setEtatr(obj.get("etatr").toString());
                 c.setImage(obj.get("image").toString());
-                
+                c.setDateR(new Date((((Double) ((Map<String, Object>) obj.get("dater")).get("timestamp")).longValue() * 1000)));
                 tasks.add(c);
             }
             
@@ -88,6 +89,19 @@ public class ServiceRecClient implements Constraint {
     }
    public boolean addRec(ReclamationClient r ) {
         String url = Statics.BASE_URL + "rec?idcatrec=" + r.getIdcatrec() + "&objet=" + r.getObjet()+ "&description=" + r.getDescription() + "&id=" + r.getId()+"&image="+r.getImage();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+     public boolean addRecCmd(ReclamationClient r ) {
+        String url = Statics.BASE_URL + "rec?idcatrec=" + r.getIdcatrec() + "&objet=" + r.getObjet()+ "&description=" + r.getDescription() + "&id=" + r.getId()+"&image="+r.getImage()+"&idcmd="+r.getIdcmd();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

@@ -39,6 +39,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -64,6 +65,7 @@ import com.esprit.minipo.entites.ReclamationClient;
 import com.esprit.minipo.services.ServiceRecClient;
 import com.esprit.minipo.services.ServiceRecEmploye;
 import java.io.IOException;
+import java.util.Date;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -81,7 +83,8 @@ public class MaRecEmployeForm extends BaseEmployeForm1  {
         public int id=44;
         String notif="demo-notification";
         private EncodedImage placeHolder;
-    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idremp,String categorie,String objet,String description,String image,String etat,String reponse) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+    public MaRecEmployeForm(com.codename1.ui.util.Resources resourceObjectInstance ,int idremp,String categorie,String objet,String description,String image,String etat,String reponse,Date dater) {
         this(com.codename1.ui.util.Resources.getGlobalResources());
         
         
@@ -95,25 +98,45 @@ public class MaRecEmployeForm extends BaseEmployeForm1  {
          getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         setTitle("Ma Reclamation");
         setLayout(BoxLayout.y());
+         
         LabelEtat.setText(etat);
         LabelEtat.setUIID("RedLabel");
         LabelEtat.setHeight(30);
         LabelEtat.setWidth(100);
+        TableLayout table = new TableLayout(2, 2);
+        Label l =new Label(sdf.format(dater));
+        l.getAllStyles().setAlignment(RIGHT);
+        Container x= new Container(table);
+        x.add(table.createConstraint().widthPercentage(65),LabelEtat).add(l);
+         LabelEtat.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+         LabelCategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         tCategorie.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         LabelObjet.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         tfObjet.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         LabelDescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         Ldescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         taDescription.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         LabelReponse.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM));
+         LReponse.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL));
+         LReponse.getAllStyles().setFgColor(0x008000);
+         tCategorie.getAllStyles().setFgColor(0x000000);
+         tfObjet.getAllStyles().setFgColor(0x000000);
+         Ldescription.getAllStyles().setFgColor(0x000000);
         LabelCategorie.setText("Categorie");
         LabelDescription.setText("Description");
         LabelObjet.setText("Objet");
         tCategorie.setText(categorie);
-        tCategorie.setUIID("BlackLabel");
+        //tCategorie.setUIID("BlackLabel");
          tfObjet.setText(objet);
-         tfObjet.setUIID("BlackLabel");
+         //tfObjet.setUIID("BlackLabel");
          TextComponent taDescription = new TextComponent().multiline(true).text(description);
          taDescription.rows(3);
-         taDescription.setUIID("BlackLabel");
+         //taDescription.setUIID("BlackLabel");
          //taDescription.setText(description);
          Ldescription.setText(description);
-         Ldescription.setUIID("BlackLabel");
+         //Ldescription.setUIID("BlackLabel");
          LReponse.setText(reponse);
-         LReponse.setUIID("RedLabel");
+         //LReponse.setUIID("RedLabel");
          Validator val = new Validator();
         //val.addConstraint(tfObjet, new LengthConstraint(2,"trop court"));
         val.addConstraint(taDescription, new LengthConstraint(2,"trop court"));
@@ -135,7 +158,8 @@ public class MaRecEmployeForm extends BaseEmployeForm1  {
         //gui_Container_1.add(btnValider);
         c.add(img);
          if(LabelEtat.getText().equals("traiter")){
-        composant.add(LabelEtat)
+             LabelEtat.getAllStyles().setFgColor(0x008000);
+        composant.add(x)
                 .add(fullNameLayout.createConstraint().widthPercentage(85),LabelCategorie)
                 .add(tCategorie)
                 .add(LabelObjet)
@@ -146,7 +170,8 @@ public class MaRecEmployeForm extends BaseEmployeForm1  {
                 .add(LabelReponse)
                 .add(LReponse);}
           if(LabelEtat.getText().equals("non traiter")){
-        composant.add(LabelEtat)
+              LabelEtat.getAllStyles().setFgColor(0x3366ff);
+        composant.add(x)
                 .add(LabelCategorie)
                 .add(tCategorie)
                 .add(LabelObjet)

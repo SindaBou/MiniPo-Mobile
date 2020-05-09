@@ -16,6 +16,7 @@ import com.esprit.minipo.entites.ReclamationsEmploye;
 import com.esprit.minipo.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class ServiceRecEmploye {
                 c.setReponse(obj.get("reponse").toString());
                 c.setEtatRemp(obj.get("etatremp").toString());
                 c.setImage(obj.get("image").toString());
-                
+                c.setDateRemp(new Date((((Double) ((Map<String, Object>) obj.get("dateremp")).get("timestamp")).longValue() * 1000)));
                 tasks.add(c);
             }
             
