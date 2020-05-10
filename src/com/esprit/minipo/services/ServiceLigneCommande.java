@@ -215,7 +215,7 @@ public boolean deleteLc(int idLc) {
         return resultOK;
     }
 
-/* public boolean updateLc(int idLc,int qted) {
+ public boolean updateLc(int idLc,int qted) {
         
         int id=45;
         
@@ -234,7 +234,7 @@ public boolean deleteLc(int idLc) {
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
-    }*/
+    }
   
   
   
