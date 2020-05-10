@@ -104,7 +104,7 @@ public class ServiceCommande {
         return tasks;
     }
   
- public boolean validerCmd (String dest) {
+  public boolean validerCmd (String dest) {
         
         int id=45;
         
@@ -124,7 +124,8 @@ public class ServiceCommande {
         return resultOK;
     }
   
-    public boolean deleteCmd(int idcmd) {
+  
+  public boolean deleteCmd(int idcmd) {
         
         int id=45;
         
@@ -143,6 +144,7 @@ public class ServiceCommande {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+  
   
   
   

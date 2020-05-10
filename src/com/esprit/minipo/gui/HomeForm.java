@@ -6,6 +6,7 @@
 package com.esprit.minipo.gui;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
@@ -29,6 +30,9 @@ Form current;
         //btnListTasks.addActionListener(e-> new ListTasksForm(current).show());
         btnListTasks.addActionListener(e-> new ListCmdForm(current).show());
         addAll(btnAddTask,btnListTasks);
+        
+        Dialog.show("sssssss","ccccccccccccccccc", "ok","Cancel");
+        
         
         
     }
