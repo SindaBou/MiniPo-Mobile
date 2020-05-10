@@ -82,7 +82,8 @@ public class ServiceConge {
         return tasks;
     }
     public boolean addConge(Conge e) {
-        String url = Statics.BASE_URL + "/ajoutConge?type="+ e.getType()+ "&date_debut=" + e.getDatedebut()+ "&date_fin=" + e.getDatefin()+ "&nbrjrs=" + e.getNbrjrs()+ "&info_comp="+e.getDescription() ;
+        int id = 44;
+        String url = Statics.BASE_URL + "/ajoutConge?type="+ e.getType()+ "&date_debut=" + e.getDatedebut()+ "&date_fin=" + e.getDatefin()+ "&nbrjrs=" + e.getNbrjrs()+ "&info_comp="+e.getDescription()+ "&id="+id ;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -97,6 +98,21 @@ public class ServiceConge {
   
   public ArrayList<Conge> getAllConge(){
         String url = Statics.BASE_URL+"/con/conge";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                tasks = parseTasks(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return tasks;
+    }
+  public ArrayList<Conge> getEmpConge(int id){
+        String url = Statics.BASE_URL+"/Emp/EmpConge/"+id;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {

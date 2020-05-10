@@ -15,30 +15,29 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
-import com.codename1.ui.TextComponent;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.events.DataChangedListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.validation.LengthConstraint;
-import com.codename1.ui.validation.NumericConstraint;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
+import com.esprit.minipo.entites.Conge;
 import com.esprit.minipo.entites.Employe;
+import com.esprit.minipo.services.ServiceConge;
 import com.esprit.minipo.services.ServiceEmploye;
-
 
 /**
  *
  * @author hafed
  */
-public class AjouterEmpForm extends Form {
-
-    public AjouterEmpForm(Form previous) {
-        
-        Form val = new Form("Ajouter Employe");
+public class AjouterEmTest extends Form {
+     public AjouterEmTest(Form previous) {
+    Form val = new Form("Demande Conge");
     TableLayout tl;
     int spanButton = 2;
     if(Display.getInstance().isTablet()) {
@@ -50,40 +49,31 @@ public class AjouterEmpForm extends Form {
     tl.setGrowHorizontally(true);
     val.setLayout(tl);
 
-    val.addComponent(new Label("Nom"));
-    TextField firstName = new TextField();
-    val.addComponent(firstName);
+    val.addComponent(new Label("Type"));
+    TextField tftype = new TextField();
+    val.addComponent(tftype);
 
-    val.addComponent(new Label("Prenom"));
-    TextField surname = new TextField();
-    val.addComponent(surname);
-    
-    val.addComponent(new Label("Adresse"));
-    TextField adresse = new TextField();
-    val.addComponent(adresse);
-
-    val.addComponent(new Label("E-Mail"));
-    TextField email = new TextField();
-    email.setConstraint(TextArea.EMAILADDR);
-    val.addComponent(email);
-
-    val.addComponent(new Label("Telephone"));
-    TextField phone = new TextField();
-    phone.setConstraint(TextArea.PHONENUMBER);
-    val.addComponent(phone);
-    
-//    val.addComponent(new Label("Salaire"));
-//    TextField salaire = new TextField();
-//    salaire.setConstraint(TextArea.NUMERIC);
-//    val.addComponent(salaire);
-
-    val.addComponent(new Label("Salaire"));
+    val.addComponent(new Label("Nombre de jours"));
 
     Container creditCardContainer = new Container(new GridLayout(1, 4));
-    TextField salaire = new TextField();
-    salaire.setConstraint(TextArea.NUMERIC);
-    creditCardContainer.addComponent(salaire);
+    TextField tfnbr = new TextField();
+    tfnbr.setConstraint(TextArea.NUMERIC);
+    creditCardContainer.addComponent(tfnbr);
     val.addComponent(creditCardContainer);
+    
+    
+    val.addComponent(new Label("Date de debut"));
+    Picker datedebut = new Picker();
+    datedebut.setType(Display.PICKER_TYPE_DATE);
+    val.addComponent(datedebut);
+    
+    val.addComponent(new Label("Date de fin"));
+    Picker datedfin = new Picker();
+    val.addComponent(datedfin);
+    
+    val.addComponent(new Label("Adresse"));
+    TextField tfinfo = new TextField();
+    val.addComponent(tfinfo);
 
     Button submit = new Button("Enregistrer");
     TableLayout.Constraint cn = tl.createConstraint();
@@ -91,37 +81,27 @@ public class AjouterEmpForm extends Form {
     cn.setHorizontalAlign(Component.RIGHT);
     val.addComponent(cn, submit);
 
-    String phoneConstraint = "^[0-9]{8}";
-    String isString = "^[a-zA-Z]+$";
-    String adress = "^[A-Z a-z 0-9]+$";
-    String salair = "^[0-9]";
     Validator v = new Validator();
-            v.addConstraint(firstName,new RegexConstraint(isString, "enter a valid nom")).
-            addConstraint(surname, new RegexConstraint(isString, "enter a valid prenom")).
-            addConstraint(adresse,new RegexConstraint(adress, "enter a valid adresse")).
-            addConstraint(email, RegexConstraint.validEmail()).
-            addConstraint(phone, new RegexConstraint(phoneConstraint, "Please enter a valid phone number")).
-            addConstraint(salaire, new RegexConstraint(salair, "enter a valid salaire"));
+            v.addConstraint(tftype, new LengthConstraint(2)).
+            addConstraint(tfnbr, new LengthConstraint(2)).
+            addConstraint(tfinfo, new LengthConstraint(2));
 
 
 
     v.addSubmitButtons(submit);
            
-    
     submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((firstName.getText().length()==0)||(surname.getText().length()==0)||(adresse.getText().length()==0)||!(phone.getText().length()==8)||(email.getText().length()==0)||(salaire.getText().length()==0)
-                        
-                        )
+                if ((tftype.getText().length()==0)||(tfnbr.getText().length()==0)||(tfinfo.getText().length()==0)||(datedebut.getText().length()==0)||(datedfin.getText().length()==0))
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-                
                 else
                 {
                     try {
-                        Employe t = new Employe(firstName.getText(),surname.getText(),adresse.getText(),phone.getText(),email.getText(),salaire.getText());
-                        if( ServiceEmploye.getInstance().addEmploye(t))
-                            Dialog.show("Success",firstName.getText()+" a été ajouté avec succès",new Command("OK"));
+                        Conge t = new Conge(tftype.getText(),datedebut.getText(),datedfin.getText(),Integer.parseInt(tfnbr.getText()),tfinfo.getText());
+                        
+                        if( ServiceConge.getInstance().addConge(t))
+                            Dialog.show("Success"," a été ajouté avec succès",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -134,11 +114,24 @@ public class AjouterEmpForm extends Form {
             }
         });
     
+    
         
         
         addAll(val);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new AgentRHForm().showBack());
                 
     }
-    
+     private void automoveToNext(final TextField current, final TextField next) {
+    current.addDataChangeListener(new DataChangedListener() {
+        public void dataChanged(int type, int index) {
+            if(current.getText().length() == 5) {
+                Display.getInstance().stopEditing(current);
+                String val = current.getText();
+                current.setText(val.substring(0, 4));
+                next.setText(val.substring(4));
+                Display.getInstance().editString(next, 5, current.getConstraint(), next.getText());
+            }
+        }
+    });        
+}
 }

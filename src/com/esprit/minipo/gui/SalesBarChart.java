@@ -62,7 +62,7 @@ public class SalesBarChart extends AbstractDemoChart {
     }
 
     public Component execute() {
-        String[] titles = new String[]{"2007", "2008"};
+        String[] titles = new String[]{"", ""};
         List<double[]> values = new ArrayList<double[]>();
         
         
@@ -98,8 +98,6 @@ public class SalesBarChart extends AbstractDemoChart {
         renderer.addXTextLabel(7, "Jul");
         renderer.addXTextLabel(10, "Oct");
         renderer.addXTextLabel(12, "Dec");
-        renderer.addXTextLabel(6, "Dec");
-        renderer.addXTextLabel(11, "Dec");
         initRendererer(renderer);
         int length = renderer.getSeriesRendererCount();
         for (int i = 0; i < length; i++) {
