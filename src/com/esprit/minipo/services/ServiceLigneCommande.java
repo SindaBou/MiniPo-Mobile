@@ -195,7 +195,46 @@ public class ServiceLigneCommande {
         return cmd;
     }
   
-  
+public boolean deleteLc(int idLc) {
+        
+        int id=45;
+        
+        String url = Statics.BASE_URL + "/mobile/client/deleteLC/" +
+                 idLc + "/" +
+                id ;
+        
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+
+/* public boolean updateLc(int idLc,int qted) {
+        
+        int id=45;
+        
+        String url = Statics.BASE_URL + "/mobile/client/updateLC/" +
+                idLc + "/" +
+                id +"/" +
+                qted ;
+        
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }*/
   
   
   

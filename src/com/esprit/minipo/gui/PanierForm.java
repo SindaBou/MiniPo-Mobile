@@ -85,7 +85,7 @@ public class PanierForm extends BaseForm{
         
         if(pan.size()==0){
              
-            setLayout(new FlowLayout(CENTER));
+           /* setLayout(new FlowLayout(CENTER));
             Container container_c=new Container(BoxLayout.y());
             Container container_cc=new Container(new FlowLayout(CENTER));
             container_cc.setUIID("PanVide");
@@ -128,7 +128,7 @@ public class PanierForm extends BaseForm{
             public void actionPerformed(ActionEvent evt) {
                 new AllProduitsForm(resourceObjectInstance).show();
             }
-        });
+        });*/
         }
         else{
         
@@ -240,7 +240,7 @@ public class PanierForm extends BaseForm{
             
            int idLc=pan.get(i).getIdLc();
             
-           /* sup.addPointerPressedListener(new ActionListener() {
+            sup.addPointerPressedListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                    
@@ -295,7 +295,7 @@ public class PanierForm extends BaseForm{
                         }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                 }
-            });*/
+            });
           
         }
         Container entetec=new Container(BoxLayout.x());
