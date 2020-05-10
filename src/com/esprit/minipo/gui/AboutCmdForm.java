@@ -76,7 +76,7 @@ public class AboutCmdForm extends BaseForm{
     
      private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, int idcmd) {
 
-        //pan=ServiceLigneCommande.getInstance().aboutCmd(idcmd);
+        pan=ServiceLigneCommande.getInstance().aboutCmd(idcmd);
 
         Container globc=new Container(BoxLayout.yCenter());
         Container panc=new Container(BoxLayout.y());

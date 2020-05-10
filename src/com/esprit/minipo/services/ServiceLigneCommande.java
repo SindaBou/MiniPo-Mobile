@@ -134,6 +134,66 @@ public class ServiceLigneCommande {
     }
 
 
+  public ArrayList<AboutCmd> parseCmds(String jsonText){
+        try {
+            cmd=new ArrayList<AboutCmd>();
+            JSONParser j = new JSONParser();
+            Map<String,Object> tasksListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            
+            List<Map<String,Object>> list = (List<Map<String,Object>>)tasksListJson.get("root");
+            for(Map<String,Object> obj : list){
+               // Task t = new Task();
+                AboutCmd pan=new AboutCmd();
+                
+                float idlc = Float.parseFloat(obj.get("idlc").toString());
+                pan.setIdLc((int)idlc);
+                pan.setPhoto(obj.get("photo").toString());
+                pan.setDesignation(obj.get("designation").toString());
+                float prix = Float.parseFloat(obj.get("prix").toString());
+                pan.setPrix(prix);
+                float qte = Float.parseFloat(obj.get("qte").toString());
+                pan.setQte((int)qte);
+                pan.setSubtotal(Float.parseFloat(obj.get("subtotal").toString()));
+                pan.setTotal(Float.parseFloat(obj.get("total").toString()));
+                float idcmd = Float.parseFloat(obj.get("idcmd").toString());
+                pan.setIdLc((int)idcmd);
+                pan.setRefc(obj.get("refc").toString());
+                pan.setEtatc(obj.get("etatc").toString());
+                
+                String pattern = "dd/MM/yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                String date = simpleDateFormat.format(new Date((((Double)((Map<String, Object>)obj.get("datec")).get("timestamp")).longValue()*1000)));
+                
+                pan.setDatec(date);
+                System.out.println();
+                cmd.add(pan);
+            }
+            
+            
+        } catch (IOException ex) {
+            
+        }
+        return cmd;
+    }
+  
+  public ArrayList<AboutCmd> aboutCmd(int idcmd){
+        
+        //int idUser=45;
+        
+        String url = Statics.BASE_URL+"/mobile/client/aboutCmd/"+idcmd;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                cmd = parseCmds(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(cmd);
+        return cmd;
+    }
   
   
   
