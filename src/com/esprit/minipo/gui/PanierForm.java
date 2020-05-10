@@ -85,7 +85,7 @@ public class PanierForm extends BaseForm{
         
         if(pan.size()==0){
              
-           /* setLayout(new FlowLayout(CENTER));
+            setLayout(new FlowLayout(CENTER));
             Container container_c=new Container(BoxLayout.y());
             Container container_cc=new Container(new FlowLayout(CENTER));
             container_cc.setUIID("PanVide");
@@ -128,7 +128,7 @@ public class PanierForm extends BaseForm{
             public void actionPerformed(ActionEvent evt) {
                 new AllProduitsForm(resourceObjectInstance).show();
             }
-        });*/
+        });
         }
         else{
         
