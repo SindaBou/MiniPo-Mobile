@@ -26,7 +26,7 @@ public class ModifierEquipeForm extends Form{
     
     public ModifierEquipeForm(Form previous,int id, String nom, int nbr) {
         
-        setTitle("Ajouter Equipe");
+        setTitle("Modifier Equipe");
         setLayout(BoxLayout.y());
         
         TextField tfnom = new TextField(nom,"Nom equipe");

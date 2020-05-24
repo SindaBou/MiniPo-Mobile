@@ -71,12 +71,15 @@ public class SalesBarChart extends AbstractDemoChart {
         emp=ServiceConge.getInstance().getAllConge();
         int j=0;
         double[] val = new double[emp.size()];
-        
+         values.add(new double[]{}); 
+        int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.CYAN};
+        XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
     
     
            
            for (Conge c : emp) {
-                val[j++]=c.getNbrjrs();      
+                val[j++]=c.getNbrjrs();
+                renderer.addXTextLabel(j,c.getType());
     }
            
         values.add(val);
@@ -84,20 +87,13 @@ public class SalesBarChart extends AbstractDemoChart {
         
        /* values.add(new double[]{5230, 7300, 9240, 10540, 7900, 9200, 12030, 11200, 9500, 10500,
             11600, 13500});*/ 
-        values.add(new double[]{}); 
-        int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.CYAN};
-        XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
+       
         renderer.setOrientation(Orientation.HORIZONTAL);
-        setChartSettings(renderer, "nombre de jours conge selon le type", "Type", "Nombre de jours", 0.5,
+        setChartSettings(renderer, "nombre de jours conge selon le type", "", "Nombre de jours", 0.5,
                 12.5, 0,40, ColorUtil.GRAY, ColorUtil.LTGRAY);
         renderer.setXLabels(1);
         renderer.setYLabels(10);
-        renderer.addXTextLabel(1, "Jan");
-        renderer.addXTextLabel(3, "Mar");
-        renderer.addXTextLabel(5, "May");
-        renderer.addXTextLabel(7, "Jul");
-        renderer.addXTextLabel(10, "Oct");
-        renderer.addXTextLabel(12, "Dec");
+       renderer.setXLabelsAngle(90);
         initRendererer(renderer);
         int length = renderer.getSeriesRendererCount();
         for (int i = 0; i < length; i++) {

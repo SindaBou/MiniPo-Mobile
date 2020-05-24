@@ -24,6 +24,7 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
@@ -37,9 +38,12 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.esprit.minipo.MyApplication;
 import com.esprit.minipo.entites.Employe;
 import com.esprit.minipo.services.ServiceEmploye;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -82,7 +86,10 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         installSidemenu(resourceObjectInstance);
         
        // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
+         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {
+                                             Hashtable themeData = MyApplication.theme.getTheme("Theme");
+                                             UIManager.getInstance().setThemeProps(themeData);    
+                                              new SignInForm().show();});
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);
@@ -239,7 +246,7 @@ public class AgentRHForm extends BaseAgentRHForm11 {
             String salaire=emp.get(i).getSalaire();
             
          //creation
-          gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
+         gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
          gui_Label_1 = new com.codename1.ui.Label();
          gui_Container_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -263,13 +270,25 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         setTitle("InboxForm");
         setName("InboxForm");
         addComponent(gui_Container_1);
-
+        
+         //************design container **************
+       
+                  Style boxStyle = gui_Container_1.getAllStyles();
+                  boxStyle.setBgTransparency(255);
+//boxStyle.setBgColor(0xeeeeee);
+                boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setMargin(2, 2, 2, 2);
+                boxStyle.setPadding(2, 2, 2, 2);
+//*******************************************************************
+        
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
         gui_Label_1.setText(emp.get(i).getSalaire()+"TND");
         gui_Label_1.setUIID("SmallFontLabel");
+        gui_Label_1.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
         gui_Container_4.setName("Container_4");
@@ -286,8 +305,11 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         gui_Container_3.addComponent(gui_Text_Area_1);
         gui_Label_3.setText(emp.get(i).getNom()+" "+ emp.get(i).getPrenom());
         gui_Label_3.setName("Label_3");
+        gui_Label_3.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_MEDIUM));
         gui_Label_2.setText(emp.get(i).getTel());
+        
         gui_Label_2.setUIID("RedLabel");
+        gui_Label_2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
         gui_Label_2.setName("Label_2");
        int id = emp.get(i).getIdemp();
 //        Button myBtn = new Button();
@@ -311,10 +333,12 @@ public class AgentRHForm extends BaseAgentRHForm11 {
         gui_Container_3.setLeadComponent(gui_Label_3);
         gui_Label_20.setText(emp.get(i).getEmail());
         gui_Label_20.setUIID("RedLabel");
+        gui_Label_20.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
         gui_Label_20.setName("Label_2");
         
         gui_Text_Area_1.setText(emp.get(i).getAdresse());
         gui_Text_Area_1.setUIID("SmallFontLabel");
+        gui_Text_Area_1.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
         gui_Container_4.setName("Container_4");

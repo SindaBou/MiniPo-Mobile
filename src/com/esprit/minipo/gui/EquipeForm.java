@@ -13,11 +13,15 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.RoundBorder;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.esprit.minipo.MyApplication;
 import com.esprit.minipo.entites.Employe;
 import com.esprit.minipo.entites.Equipe;
 import com.esprit.minipo.services.ServiceEmploye;
 import com.esprit.minipo.services.ServiceEquipe;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -56,7 +60,10 @@ public class EquipeForm extends BaseAgentRHForm11 {
         installSidemenu(resourceObjectInstance);
         
        // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
+        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {
+                                             Hashtable themeData = MyApplication.theme.getTheme("Theme");
+                                             UIManager.getInstance().setThemeProps(themeData);    
+                                              new SignInForm().show();});
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);
@@ -236,6 +243,16 @@ public class EquipeForm extends BaseAgentRHForm11 {
         addComponent(gui_Container_1);
 
         gui_Container_1.setName("Container_1");
+         //************design container **************
+       
+                  Style boxStyle = gui_Container_1.getAllStyles();
+                  boxStyle.setBgTransparency(255);
+//boxStyle.setBgColor(0xeeeeee);
+                boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+                boxStyle.setMargin(2, 2, 2, 2);
+                boxStyle.setPadding(2, 2, 2, 2);
+//*******************************************************************
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);

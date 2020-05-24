@@ -26,7 +26,7 @@ public class ModifierEmployeForm extends Form{
     
     public ModifierEmployeForm(Form previous,int id, String nom, String prenom, String Adresse, String phone, String email , String salaire) {
         
-        setTitle("Ajouter un nouveau employe");
+        setTitle("Modification");
         setLayout(BoxLayout.y());
 //        ArrayList<Employe> emp=new ArrayList<Employe>();
 //        emp=ServiceEmploye.getInstance().getEmpID(id);
@@ -49,8 +49,8 @@ public class ModifierEmployeForm extends Form{
                 else
                 {
                     try {
-                        
-                        if( ServiceEmploye.getInstance().updateEmploye(id ,tfnom.getText(),tfprenom.getText(),tftel.getText() , tfadresse.getText(),tfemail.getText(),tftel.getText(),tfsalaire.getText() ))
+                       
+                        if( ServiceEmploye.getInstance().updateEmploye(id ,tfnom.getText(),tfprenom.getText(), tfadresse.getText(),tftel.getText(),tfemail.getText(),tfsalaire.getText() ))
                             Dialog.show("Success","La modification a été effectuée avec succès",new Command("OK"));
                             
                         else

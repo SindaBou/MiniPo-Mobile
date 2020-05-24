@@ -34,9 +34,13 @@ import java.util.Date;
  *
  * @author hafed
  */
-public class AjouterDemandeConge extends Form{
+public class AjouterDemandeConge extends BaseEmployeForm1{
+    
+   Form current;
+    
     public AjouterDemandeConge(Form previous) {
-        
+     
+        current=this;
 //        setTitle("Demande Conge");
 //        setLayout(BoxLayout.y());
 //        
@@ -74,7 +78,9 @@ public class AjouterDemandeConge extends Form{
 //        
 //        addAll(tftype,datedebut,datedfin,tfnbr,tfinfo,btnValider);
 //        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new EmployeForm().showBack());
- Form val = new Form("Demande Conge");
+    setTitle("Demande Conge");
+    setLayout(BoxLayout.y());
+    
     TableLayout tl;
     int spanButton = 2;
     if(Display.getInstance().isTablet()) {
@@ -84,16 +90,16 @@ public class AjouterDemandeConge extends Form{
         spanButton = 1;
     }
     tl.setGrowHorizontally(true);
-    val.setLayout(tl);
+    setLayout(tl);
 
-    val.addComponent(new Label("Type"));
+    addComponent(new Label("Type"));
     TextField tftype = new TextField();
-    val.addComponent(tftype);
+    addComponent(tftype);
 
     
     
     
-    val.addComponent(new Label("Date de debut"));
+    addComponent(new Label("Date de debut"));
     Picker datedebut = new Picker();
     String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     
@@ -101,28 +107,28 @@ public class AjouterDemandeConge extends Form{
         System.out.println(today);
      //   System.out.println(datepicked);
     
-    val.addComponent(datedebut);
+    addComponent(datedebut);
     
     
     
     
-    val.addComponent(new Label("Date de fin"));
+    addComponent(new Label("Date de fin"));
     Picker datedfin = new Picker();
-    val.addComponent(datedfin);
+    addComponent(datedfin);
     
     
     int nb = daysBetween(datedebut.getDate(),datedfin.getDate());
         System.out.println(nb);
     
-    val.addComponent(new Label("Description"));
+    addComponent(new Label("Description"));
     TextField tfinfo = new TextField();
-    val.addComponent(tfinfo);
+    addComponent(tfinfo);
     
     datedfin.addActionListener(new ActionListener() {
      @Override
      public void actionPerformed(ActionEvent evt) {
          int diffnb = daysBetween(datedebut.getDate(),datedfin.getDate());
-         val.addComponent(new Label(diffnb+" jours"));
+         addComponent(new Label(diffnb+" jours"));
          Dialog.show("Alert", "vous avez choisi "+diffnb+" jours", new Command("OK"));
      }
     });
@@ -139,7 +145,7 @@ public class AjouterDemandeConge extends Form{
     TableLayout.Constraint cn = tl.createConstraint();
     cn.setHorizontalSpan(spanButton);
     cn.setHorizontalAlign(Component.RIGHT);
-    val.addComponent(cn, submit);
+    addComponent(cn, submit);
 
     String isString = "^[a-zA-Z]+$";
     String Number = "^[0-9]";
@@ -191,8 +197,8 @@ public class AjouterDemandeConge extends Form{
     
         
         
-        addAll(val);
-         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new EmployeForm().showBack());
+        
+         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new EmployeRhForm().showBack());
                 
     }
     public int daysBetween(Date d1, Date d2){

@@ -1,34 +1,58 @@
+/*
+ * Copyright (c) 2016, Codename One
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+ * of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+ */
 package com.esprit.minipo.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.ui.Button;
+import com.codename1.ui.Component;
+import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.animations.CommonTransitions;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Rectangle;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
-import com.codename1.ui.plaf.UIManager;
-import com.esprit.minipo.MyApplication;
-import com.esprit.minipo.entites.Affectation;
-import com.esprit.minipo.entites.Equipe;
-import com.esprit.minipo.services.ServiceAffectation;
-import com.esprit.minipo.services.ServiceEquipe;
+import com.esprit.minipo.entites.Conge;
+import com.esprit.minipo.entites.Employe;
+import com.esprit.minipo.services.ServiceConge;
+import com.esprit.minipo.services.ServiceEmploye;
 import java.util.ArrayList;
-import java.util.Hashtable;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.util.List;
 
 /**
+ * GUI builder created Form
  *
- * @author hafed
+ * @author shai
  */
-public class AffectationForm extends BaseAgentRHForm11{
+public class EmployeRhForm extends BaseEmployeForm1 {
     Form current;
-    public AffectationForm() {
+    public EmployeRhForm() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
 
@@ -38,30 +62,21 @@ public class AffectationForm extends BaseAgentRHForm11{
     }
     
     
-    //constructeur contenu
-    public AffectationForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+    
+    public EmployeRhForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         
-        ArrayList<Affectation> emp=new ArrayList<Affectation>();
-        emp=ServiceAffectation.getInstance().getAllAff();
-        int sum= 0;
-        for(int i=0;i<emp.size();i++){
-            sum++;
-        }
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Affectation", "Title"),
-                        new Label(sum+"", "InboxNumber")
+                        new Label("Espace Employe", "Title"),
+                        new Label("19", "InboxNumber")
                 )
         );
         
         installSidemenu(resourceObjectInstance);
         
        // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-       getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {
-                                             Hashtable themeData = MyApplication.theme.getTheme("Theme");
-                                             UIManager.getInstance().setThemeProps(themeData);    
-                                              new SignInForm().show();});
+        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);
@@ -89,7 +104,7 @@ public class AffectationForm extends BaseAgentRHForm11{
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
         fab.addActionListener(e -> {
-            new AffecterEquipeForm(current).show();
+            new AjouterDemandeConge(current).show();
 //            fab.setUIID("FloatingActionButtonClose");
 //            Image oldImage = fab.getIcon();
 //            FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
@@ -141,28 +156,29 @@ public class AffectationForm extends BaseAgentRHForm11{
 //            popup.setTransitionInAnimator(CommonTransitions.createEmpty());
 //            popup.setTransitionOutAnimator(CommonTransitions.createEmpty());
 //            popup.setDisposeWhenPointerOutOfBounds(true);
-//            int t = AgentRHForm.this.getTintColor();
-//            AgentRHForm.this.setTintColor(0);
-//            popup.showPopupDialog(new Rectangle(AgentRHForm.this.getWidth() - 10, AgentRHForm.this.getHeight() - 10, 10, 10));
-//            AgentRHForm.this.setTintColor(t);
+//            int t = EmployeForm.this.getTintColor();
+//            EmployeForm.this.setTintColor(0);
+//            popup.showPopupDialog(new Rectangle(EmployeForm.this.getWidth() - 10, EmployeForm.this.getHeight() - 10, 10, 10));
+//            EmployeForm.this.setTintColor(t);
 //            fab.setUIID("FloatingActionButton");
 //            fab.setIcon(oldImage);
         });
     }
 
 //-- DON'T EDIT BELOW THIS LINE!!!
-    private com.codename1.ui.Container gui_Container_1 ;
-    private com.codename1.ui.Container gui_Container_2 ;
-    private com.codename1.ui.Label gui_Label_1 ;
-    private com.codename1.ui.Container gui_Container_4 ;
-    private com.codename1.ui.Label gui_Label_4 ;
-    private com.codename1.ui.Container gui_Container_3 ;
-    private com.codename1.ui.Label gui_Label_3;
-    private com.codename1.ui.Label gui_Label_2 ;
+    private com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
+    private com.codename1.ui.Container gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
+    private com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
+    private com.codename1.ui.Container gui_Container_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
+    private com.codename1.ui.Label gui_Label_4 = new com.codename1.ui.Label();
+    private com.codename1.ui.Container gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+    private com.codename1.ui.Label gui_Label_3 = new com.codename1.ui.Label();
+    private com.codename1.ui.Label gui_Label_2 = new com.codename1.ui.Label();
     private com.codename1.ui.Label gui_Label_20 ;
-    private com.codename1.ui.TextArea gui_Text_Area_1 ;
-    private com.codename1.ui.Label gui_Label_6 ;
-    //private com.codename1.ui.Container gui_Container_1_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
+    private com.codename1.ui.TextArea gui_Text_Area_1 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.TextArea gui_Text_Area_2 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.Label gui_Label_6 = new com.codename1.ui.Label();
+//    private com.codename1.ui.Container gui_Container_1_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
 //    private com.codename1.ui.Container gui_Container_2_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
 //    private com.codename1.ui.Label gui_Label_1_1 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Container gui_Container_4_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
@@ -170,8 +186,8 @@ public class AffectationForm extends BaseAgentRHForm11{
 //    private com.codename1.ui.Container gui_Container_3_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
 //    private com.codename1.ui.Label gui_Label_3_1 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Label gui_Label_2_1 = new com.codename1.ui.Label();
-    private com.codename1.ui.TextArea gui_Text_Area_1_1;
-    private com.codename1.ui.Label gui_Label_7 ;
+    private com.codename1.ui.TextArea gui_Text_Area_1_1 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.Label gui_Label_7 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Container gui_Container_1_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
 //    private com.codename1.ui.Container gui_Container_2_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
 //    private com.codename1.ui.Label gui_Label_1_2 = new com.codename1.ui.Label();
@@ -180,8 +196,8 @@ public class AffectationForm extends BaseAgentRHForm11{
 //    private com.codename1.ui.Container gui_Container_3_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
 //    private com.codename1.ui.Label gui_Label_3_2 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Label gui_Label_2_2 = new com.codename1.ui.Label();
-    private com.codename1.ui.TextArea gui_Text_Area_1_2 ;
-    private com.codename1.ui.Label gui_Label_8 ;
+    private com.codename1.ui.TextArea gui_Text_Area_1_2 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.Label gui_Label_8 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Container gui_Container_1_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
 //    private com.codename1.ui.Container gui_Container_2_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
 //    private com.codename1.ui.Label gui_Label_1_3 = new com.codename1.ui.Label();
@@ -190,8 +206,8 @@ public class AffectationForm extends BaseAgentRHForm11{
 //    private com.codename1.ui.Container gui_Container_3_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
 //    private com.codename1.ui.Label gui_Label_3_3 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Label gui_Label_2_3 = new com.codename1.ui.Label();
-    private com.codename1.ui.TextArea gui_Text_Area_1_3 ;
-    private com.codename1.ui.Label gui_Label_9;
+    private com.codename1.ui.TextArea gui_Text_Area_1_3 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.Label gui_Label_9 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Container gui_Container_1_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
 //    private com.codename1.ui.Container gui_Container_2_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
 //    private com.codename1.ui.Label gui_Label_1_4 = new com.codename1.ui.Label();
@@ -200,15 +216,17 @@ public class AffectationForm extends BaseAgentRHForm11{
 //    private com.codename1.ui.Container gui_Container_3_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
 //    private com.codename1.ui.Label gui_Label_3_4 = new com.codename1.ui.Label();
 //    private com.codename1.ui.Label gui_Label_2_4 = new com.codename1.ui.Label();
-    private com.codename1.ui.TextArea gui_Text_Area_1_4;
-    private com.codename1.ui.Label gui_Label_5 ;
+    private com.codename1.ui.TextArea gui_Text_Area_1_4 = new com.codename1.ui.TextArea();
+    private com.codename1.ui.Label gui_Label_5 = new com.codename1.ui.Label();
 
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance) {
-        ArrayList<Affectation> emp=new ArrayList<Affectation>();
-        emp=ServiceAffectation.getInstance().getAllAff();
+        ArrayList<Conge> emp=new ArrayList<Conge>();
+        int $id = 44;
+        emp=ServiceConge.getInstance().getEmpConge($id);
         for(int i=0;i<emp.size();i++){
+            
             
          //creation
           gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
@@ -221,6 +239,7 @@ public class AffectationForm extends BaseAgentRHForm11{
          gui_Label_2 = new com.codename1.ui.Label();
          gui_Label_20 = new com.codename1.ui.Label();
          gui_Text_Area_1 = new com.codename1.ui.TextArea();
+         gui_Text_Area_2 = new com.codename1.ui.TextArea();
          gui_Label_6 = new com.codename1.ui.Label();
          gui_Text_Area_1_1 = new com.codename1.ui.TextArea();
          gui_Label_7 = new com.codename1.ui.Label();
@@ -235,23 +254,26 @@ public class AffectationForm extends BaseAgentRHForm11{
         setTitle("InboxForm");
         setName("InboxForm");
         addComponent(gui_Container_1);
-
-        gui_Container_1.setName("Container_1");
+        
          //************design container **************
        
                   Style boxStyle = gui_Container_1.getAllStyles();
                   boxStyle.setBgTransparency(255);
-//boxStyle.setBgColor(0xeeeeee);
+    //boxStyle.setBgColor(0xeeeeee);
                 boxStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
                 boxStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
                 boxStyle.setMargin(2, 2, 2, 2);
                 boxStyle.setPadding(2, 2, 2, 2);
-//*******************************************************************
+    //*******************************************************************
+
+        gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText("");
+        gui_Label_1.setText(emp.get(i).getNbrjrs()+"j");
+        
         gui_Label_1.setUIID("SmallFontLabel");
+        gui_Label_1.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
         gui_Container_4.setName("Container_4");
@@ -266,18 +288,30 @@ public class AffectationForm extends BaseAgentRHForm11{
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Label_20);
         gui_Container_3.addComponent(gui_Text_Area_1);
-        gui_Label_3.setText(emp.get(i).getNom());
+        gui_Container_3.addComponent(gui_Text_Area_2);
+        gui_Label_3.setText(emp.get(i).getFirstname()+" "+ emp.get(i).getLastname());
         gui_Label_3.setName("Label_3");
-        gui_Label_2.setText("");
+        gui_Label_2.setText("Date de debut : "+emp.get(i).getDatedebut());
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
-        
-        gui_Label_20.setText(emp.get(i).getNomEq());
+        gui_Label_3.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_MEDIUM));
+        gui_Label_2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
+       
+        gui_Container_3.setLeadComponent(gui_Label_3);
+        gui_Label_20.setText("Date de fin : " + emp.get(i).getDatefin());
         gui_Label_20.setUIID("RedLabel");
         gui_Label_20.setName("Label_2");
-        
-        gui_Text_Area_1.setText("");
+         gui_Label_20.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
+        gui_Text_Area_1.setText(emp.get(i).getDescription());
+        if (emp.get(i).getEtatc() == "true"){
+        gui_Text_Area_2.setText("Accepté");}
+        if (emp.get(i).getEtatc() == "false"){
+        gui_Text_Area_2.setText("En cours");}
+        gui_Text_Area_2.setUIID("SmallFontLabel");
         gui_Text_Area_1.setUIID("SmallFontLabel");
+         gui_Text_Area_1.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
+         gui_Text_Area_2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE,Font.STYLE_PLAIN , Font.SIZE_SMALL));
+        gui_Text_Area_2.setName("Text_Area_1");
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
         gui_Container_4.setName("Container_4");
@@ -286,8 +320,9 @@ public class AffectationForm extends BaseAgentRHForm11{
          addComponent(gui_Label_6);
         
         }
-//      
-//       addComponent(gui_Container_1_1);
+
+
+//        addComponent(gui_Container_1_1);
 //        gui_Container_1_1.setName("Container_1_1");
 //        gui_Container_1_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2_1);
 //        gui_Container_2_1.setName("Container_2_1");
@@ -442,5 +477,4 @@ public class AffectationForm extends BaseAgentRHForm11{
     }// </editor-fold>
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
-    
 }

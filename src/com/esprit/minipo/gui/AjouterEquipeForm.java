@@ -32,7 +32,7 @@ public class AjouterEquipeForm extends Form{
         TextField tfnom = new TextField("","Nom equipe");
         TextField tfnombre = new TextField("","nombre");
         
-        Button btnValider = new Button("Add task");
+        Button btnValider = new Button("Enregistrer");
         
         btnValider.addActionListener(new ActionListener() {
             @Override

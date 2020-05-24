@@ -34,11 +34,15 @@ import com.esprit.minipo.services.ServiceEmploye;
  *
  * @author hafed
  */
-public class AjouterEmpForm extends Form {
+public class AjouterEmpForm extends BaseAgentRHForm11 {
 
+    Form current;
+            
     public AjouterEmpForm(Form previous) {
-        
-        Form val = new Form("Ajouter Employe");
+    
+        current=this;
+        setTitle("Ajouter Employe");
+    //Form val = new Form("Ajouter Employe");
     TableLayout tl;
     int spanButton = 2;
     if(Display.getInstance().isTablet()) {
@@ -48,48 +52,48 @@ public class AjouterEmpForm extends Form {
         spanButton = 1;
     }
     tl.setGrowHorizontally(true);
-    val.setLayout(tl);
+    setLayout(tl);
 
-    val.addComponent(new Label("Nom"));
+    addComponent(new Label("Nom"));
     TextField firstName = new TextField();
-    val.addComponent(firstName);
+    addComponent(firstName);
 
-    val.addComponent(new Label("Prenom"));
+    addComponent(new Label("Prenom"));
     TextField surname = new TextField();
-    val.addComponent(surname);
+    addComponent(surname);
     
-    val.addComponent(new Label("Adresse"));
+    addComponent(new Label("Adresse"));
     TextField adresse = new TextField();
-    val.addComponent(adresse);
+    addComponent(adresse);
 
-    val.addComponent(new Label("E-Mail"));
+    addComponent(new Label("E-Mail"));
     TextField email = new TextField();
     email.setConstraint(TextArea.EMAILADDR);
-    val.addComponent(email);
+    addComponent(email);
 
-    val.addComponent(new Label("Telephone"));
+    addComponent(new Label("Telephone"));
     TextField phone = new TextField();
     phone.setConstraint(TextArea.PHONENUMBER);
-    val.addComponent(phone);
+    addComponent(phone);
     
 //    val.addComponent(new Label("Salaire"));
 //    TextField salaire = new TextField();
 //    salaire.setConstraint(TextArea.NUMERIC);
 //    val.addComponent(salaire);
 
-    val.addComponent(new Label("Salaire"));
+    addComponent(new Label("Salaire"));
 
     Container creditCardContainer = new Container(new GridLayout(1, 4));
     TextField salaire = new TextField();
     salaire.setConstraint(TextArea.NUMERIC);
     creditCardContainer.addComponent(salaire);
-    val.addComponent(creditCardContainer);
+    addComponent(creditCardContainer);
 
     Button submit = new Button("Enregistrer");
     TableLayout.Constraint cn = tl.createConstraint();
     cn.setHorizontalSpan(spanButton);
     cn.setHorizontalAlign(Component.RIGHT);
-    val.addComponent(cn, submit);
+    addComponent(cn, submit);
 
     String phoneConstraint = "^[0-9]{8}";
     String isString = "^[a-zA-Z]+$";
@@ -136,7 +140,7 @@ public class AjouterEmpForm extends Form {
     
         
         
-        addAll(val);
+        
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new AgentRHForm().showBack());
                 
     }

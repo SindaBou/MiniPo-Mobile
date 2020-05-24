@@ -53,8 +53,8 @@ public class ServiceEmploye {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
-    public boolean updateEmploye(int id, String nomemp , String prenomemp , String adresseemp , String adresse ,String email , String tel , String salaire) {
-        String url = Statics.BASE_URL + "/updateEmp/" + id + "?nom="+ nomemp + "&prenom=" + prenomemp + "&adresse=" + adresseemp + "&email=" + email + "&tel=" + tel + "&salaire=" + salaire ;
+    public boolean updateEmploye(int id, String nomemp , String prenomemp , String adresse , String tel,String email  , String salaire) {
+        String url = Statics.BASE_URL + "/updateEmp/" + id + "?nom="+ nomemp + "&prenom=" + prenomemp + "&adresse=" + adresse + "&email=" + email + "&tel=" + tel + "&salaire=" + salaire ;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
