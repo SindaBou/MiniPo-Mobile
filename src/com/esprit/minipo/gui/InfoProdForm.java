@@ -38,12 +38,8 @@ import com.codename1.ui.validation.GroupConstraint;
 import com.codename1.ui.validation.LengthConstraint;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
-import com.esprit.minipo.entites.Panier;
-import com.esprit.minipo.services.ServiceCommande;
-import com.esprit.minipo.services.ServiceLigneCommande;
-import com.esprit.minipo.services.ServiceRecClient;
+
 import java.util.ArrayList;
-import javafx.scene.image.ImageView;
 
 /**
  *
@@ -68,9 +64,9 @@ public class InfoProdForm extends BaseForm{
     
         InfoProdForm.backForm=f;
         
-        installSidemenu(resourceObjectInstance);
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm(resourceObjectInstance, current).show();}); 
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
+        //installSidemenu(resourceObjectInstance);
+        //getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("panier.png"), e -> {new PanierForm(resourceObjectInstance, current).show();}); 
+        //getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         
         current=this;
         setTitle("Detail Produit");
@@ -227,9 +223,9 @@ public class InfoProdForm extends BaseForm{
                     try {
                         qted=Integer.parseInt(Txt_qte.getText());
                         if(Integer.parseInt(Txt_qte.getText()) < qte || Integer.parseInt(Txt_qte.getText()) == qte){
-                            if( ServiceLigneCommande.getInstance().addLc(idProd,qted)){
-                                new PanierForm(resourceObjectInstance, backForm).show();
-                            }
+                           // if( ServiceLigneCommande.getInstance().addLc(idProd,qted)){
+                              //  new PanierForm(resourceObjectInstance, backForm).show();
+                            //}
                         }
                         else{
                             Dialog.show("Erreur","Quantité en stock est insufisante",new Command("OK"));
@@ -255,7 +251,7 @@ public class InfoProdForm extends BaseForm{
         back.addPointerPressedListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                new AllProduitsForm().showBack();
+                new ListProduitClientForm().showBack();
             }
         });
         

@@ -28,7 +28,7 @@ Form current;
         
         //btnAddTask.addActionListener(e-> new AddTaskForm(current).show());
         //btnListTasks.addActionListener(e-> new ListTasksForm(current).show());
-        btnListTasks.addActionListener(e-> new ListCmdForm(current).show());
+        //btnListTasks.addActionListener(e-> new ListCmdForm(current).show());
         addAll(btnAddTask,btnListTasks);
         
         Dialog.show("sssssss","ccccccccccccccccc", "ok","Cancel");

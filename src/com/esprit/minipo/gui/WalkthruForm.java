@@ -348,7 +348,6 @@ public class WalkthruForm extends com.codename1.ui.Form {
             Hashtable themeData = MyApplication.theme.getTheme("Theme");
             UIManager.getInstance().setThemeProps(themeData);
             Display.getInstance().getCurrent().refreshTheme();
-            new SignInForm(MyApplication.theme).show();
     }
 
 }

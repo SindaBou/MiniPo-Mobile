@@ -82,7 +82,7 @@ public class InboxForm extends BaseForm {
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {
                                              Hashtable themeData = MyApplication.theme.getTheme("Theme");
                                              UIManager.getInstance().setThemeProps(themeData);    
-                                              new SignInForm().show();});
+                                              });
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);
@@ -191,7 +191,6 @@ public class InboxForm extends BaseForm {
         installSidemenu(resourceObjectInstance);
         
        // getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout6.png"), e -> {new SignInForm().show();});
         gui_Label_5.setShowEvenIfBlank(true);
         gui_Label_6.setShowEvenIfBlank(true);
         gui_Label_7.setShowEvenIfBlank(true);

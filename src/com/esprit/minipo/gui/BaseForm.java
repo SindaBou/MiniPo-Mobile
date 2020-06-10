@@ -29,8 +29,8 @@ import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import static com.esprit.minipo.MyApplication.theme;
-import com.esprit.minipo.entites.Produit;
-import com.esprit.minipo.services.ServiceProduit;
+import com.esprit.minipo.entites.ProduitClient;
+import com.esprit.minipo.services.ServiceProduitClient;
 import java.util.ArrayList;
 
 /**
@@ -89,8 +89,8 @@ public class BaseForm extends Form {
         Image statsImage = null;
         if(isCurrentStats()) statsImage = selection;
         
-        ArrayList<Produit> prod=new ArrayList<Produit>();
-        prod=ServiceProduit.getInstance().getAllProds();
+        ArrayList<ProduitClient> prod=new ArrayList<ProduitClient>();
+        prod=ServiceProduitClient.getInstance().getAllProducts();
         
         Button inboxButton = new Button("Produits", inboxImage);
         inboxButton.setUIID("SideCommand");
@@ -99,26 +99,19 @@ public class BaseForm extends Form {
         new Label(String.valueOf(prod.size()), "SideCommandNumber"));
         inbox.setLeadComponent(inboxButton);
         inbox.setUIID("SideCommand");
-        inboxButton.addActionListener(e -> new AllProduitsForm(res,this).show());
+        inboxButton.addActionListener(e -> new ListProduitClientForm(res,this).show());
         getToolbar().addComponentToSideMenu(inbox);
         
-        getToolbar().addCommandToSideMenu("Edit Profil",null, e -> new EditProfil(res,this).show());
-        //getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
-        //getToolbar().addCommandToSideMenu("Produits", null, e -> {new AllProduitsForm(res,this).show();});
-        getToolbar().addCommandToSideMenu("Commandes", null, e -> {new MesCommandesForm(res,this).show();});
-        getToolbar().addCommandToSideMenu("Factures", null, e -> {new MesFacturesForm(res,this).show();});
-        getToolbar().addCommandToSideMenu("Reclamation",null, e -> {new AjoutRecForm1(res,this).show();});
-        getToolbar().addCommandToSideMenu("Mes Reclamations",null, e -> {new MesRecClientForm(res,this).show();});
-        getToolbar().addCommandToSideMenu("Blog", null, e -> new TestTrendForm(res,this).show());
+       
         
         // spacer
         
        //Image imageuser= URLImage.createToStorage(this.img,this.nameuser, this.url, null);
         //Image img1 = URLImage.createToStorage(img, url, url, URLImage.RESIZE_SCALE);
-        Image imageuser= URLImage.createToStorage(img,url,url,URLImage.RESIZE_SCALE);
-        getToolbar().addComponentToSideMenu(new Label(imageuser, "SideCommand"));
+       // Image imageuser= URLImage.createToStorage(img,url,url,URLImage.RESIZE_SCALE);
+        //getToolbar().addComponentToSideMenu(new Label(imageuser, "SideCommand"));
         //getToolbar().addComponentToSideMenu(new Label("shut up ", "Container"));
-        getToolbar().addComponentToSideMenu(new Label(this.nameuser, "SideCommandNoPad"));
+       // getToolbar().addComponentToSideMenu(new Label(this.nameuser, "SideCommandNoPad"));
         //getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
     }
 
